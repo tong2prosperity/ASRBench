@@ -1,0 +1,30 @@
+bench:
+  dataset: test           # test / dev / both
+  concurrency: 10
+  output_dir: results
+
+providers:
+  volcengine:
+    enabled: true
+    app_key: "YOUR_VOLCENGINE_APP_KEY"
+    access_key: "YOUR_VOLCENGINE_ACCESS_KEY"
+    resource_id: "volc.bigasr.sauc.duration"
+    ws_url: "wss://openspeech.bytedance.com/api/v3/sauc/bigmodel_nostream"
+  funasr:
+    enabled: true
+    api_key: "YOUR_DASHSCOPE_API_KEY"
+    model: fun-asr-realtime
+  qwen_asr:
+    enabled: true
+    api_key: "YOUR_DASHSCOPE_API_KEY"
+    model: qwen3-asr-flash-realtime
+  paraformer:
+    enabled: true
+    api_key: "YOUR_DASHSCOPE_API_KEY"
+    model: paraformer-realtime-v2
+  tencent:
+    enabled: true
+    app_id: "YOUR_TENCENT_APP_ID"
+    secret_id: "YOUR_TENCENT_SECRET_ID"
+    secret_key: "YOUR_TENCENT_SECRET_KEY"
+    engine_model_type: "16k_zh_en"

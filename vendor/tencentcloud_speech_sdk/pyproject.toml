@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tencentcloud-speech-sdk-python"
+version = "0.1.0"
+description = "Vendored editable install of Tencent Cloud Speech SDK (github source only, not on PyPI)"
+requires-python = ">=3.10"
+dependencies = [
+    "websocket-client>=1.0",
+]
+
+# The SDK's internal imports are `from common import credential`, `from asr import speech_recognizer`,
+# i.e. it ships its sub-packages as top-level modules. We install them as-is so those imports resolve.
+# Only the ones actually needed by the ASR provider are exposed.
+[tool.hatch.build.targets.wheel]
+packages = ["asr", "common"]
