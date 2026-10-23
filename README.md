@@ -51,7 +51,7 @@ JSONL 每行一条，例如以下人工示例：
 
 ## 模型配置
 
-`config.yaml.example` 包含以下供应商配置：火山、FunASR、Qwen ASR、Paraformer、腾讯标准引擎、腾讯大模型 2.0。
+`config.yaml.example` 包含以下供应商配置：火山、FunASR、Qwen ASR、Paraformer、腾讯大模型 2.0（`16k_zh_en_2.0`，替代默认 1.0）。
 
 每套配置有独立的 `profile_id`；复制一项并修改 `profile_id`、名称及模型参数，即可比较同一供应商的多个版本。`enabled: false` 可隐藏不使用的配置。
 
@@ -70,7 +70,7 @@ models:
 
 `.env` 从配置文件所在目录加载，不覆盖已设置的环境变量。仅执行所选模型时才解析其凭据。报告、网页和数据库配置快照会隐藏凭据值，模型请求的原始错误内容不直接写入报告。
 
-旧版 `providers:` 配置仍可使用。阿里模型使用 `api_key`，腾讯使用 `app_id/secret_id/secret_key`，火山使用 `app_key/access_key`。模型是否开通、地址与资源权限需和客户账户匹配。
+旧版 `providers:` 配置仍可使用，`tencent` provider 名称作为兼容别名保留，默认也使用 2.0。阿里模型使用 `api_key`，腾讯使用 `app_id/secret_id/secret_key`，火山使用 `app_key/access_key`。模型是否开通、地址与资源权限需和客户账户匹配。
 
 ## 命令行
 
@@ -80,14 +80,14 @@ uv run asrbench validate /path/to/eval.jsonl --audio-root /path/to/wavs
 
 # 一次选择多个配置；先导入再运行
 uv run asrbench run --manifest /path/to/eval.jsonl --audio-root /path/to/wavs \
-  --models tencent_standard tencent_large_v2 --mode batch --concurrency 3
+  --models tencent_v2 qwen_asr --mode batch --concurrency 3
 
 # 使用已导入的数据集
 uv run asrbench run --dataset-id ds_XXXXXXXX --models funasr paraformer --limit 10
 
-# 实时回放：并发固定 1，只支持腾讯两套适配器
+# 实时回放：并发固定 1，只支持腾讯适配器
 uv run asrbench run --dataset-id ds_XXXXXXXX \
-  --models tencent_standard tencent_large_v2 --mode stream
+  --models tencent_v2 --mode stream
 
 # 恢复未完成／取消的样本；不会重跑成功样本或自动重试失败请求
 uv run asrbench resume run_XXXXXXXX

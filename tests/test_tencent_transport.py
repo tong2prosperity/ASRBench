@@ -64,3 +64,20 @@ def test_batch_transport_handshake_frames_duplicates_end(monkeypatch, provider_c
             assert len(packets) == 2
 
     asyncio.run(scenario())
+
+
+def test_all_tencent_defaults_are_v2():
+    from pathlib import Path
+    from asrbench.config import load_config
+
+    credentials = {
+        "app_id": "synthetic",
+        "secret_id": "synthetic",
+        "secret_key": "synthetic",
+    }
+    assert TencentProvider(credentials).engine_model_type == "16k_zh_en_2.0"
+    assert TencentV2Provider(credentials).engine_model_type == "16k_zh_en_2.0"
+    cfg = load_config(Path(__file__).resolve().parents[1] / "config.yaml.example")
+    profiles = [p for p in cfg["models"] if p["provider"] in ("tencent", "tencent_v2")]
+    assert len(profiles) == 1
+    assert profiles[0]["params"]["engine_model_type"] == "16k_zh_en_2.0"

@@ -1,16 +1,7 @@
 # Copy to config.yaml. Keep credentials in .env, never in a shared report.
-# Each profile is independently selectable; duplicate a profile to compare models.
+# Each profile is independently selectable. Tencent defaults to ASR 2.0.
 models:
-  - profile_id: tencent_standard
-    name: 腾讯标准引擎
-    provider: tencent
-    params:
-      app_id: "${TENCENT_APP_ID}"
-      secret_id: "${TENCENT_SECRET_ID}"
-      secret_key: "${TENCENT_SECRET_KEY}"
-      engine_model_type: 16k_zh_en
-      filter_modal: 0
-  - profile_id: tencent_large_v2
+  - profile_id: tencent_v2
     name: 腾讯大模型 2.0
     provider: tencent_v2
     params:

@@ -193,7 +193,7 @@ async def recognize_stream(provider_name, params, pcm, emit):
     config = dict(params)
     config.setdefault(
         "engine_model_type",
-        "16k_zh_en" if provider_name == "tencent" else "16k_zh_en_2.0",
+        "16k_zh_en_2.0",
     )
     provider = TencentV2Provider(config)
     async with websockets.connect(
