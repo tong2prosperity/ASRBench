@@ -3,7 +3,6 @@ import os
 import tempfile
 import time
 
-import dashscope
 from dashscope.audio.asr import Recognition
 from http import HTTPStatus
 
@@ -16,13 +15,21 @@ class FunASRProvider(ASRProvider):
 
     def __init__(self, config: dict):
         self.model = config.get("model", "fun-asr-realtime")
-        self.api_key = config.get("api_key", "") or os.environ.get("DASHSCOPE_API_KEY", "")
+        self.api_key = config.get("api_key", "") or os.environ.get(
+            "DASHSCOPE_API_KEY", ""
+        )
 
-    async def recognize(self, audio_data: bytes, audio_format: str, sample_rate: int) -> ASRResult:
+    async def recognize(
+        self, audio_data: bytes, audio_format: str, sample_rate: int
+    ) -> ASRResult:
         loop = asyncio.get_event_loop()
-        return await loop.run_in_executor(None, self._sync_recognize, audio_data, audio_format, sample_rate)
+        return await loop.run_in_executor(
+            None, self._sync_recognize, audio_data, audio_format, sample_rate
+        )
 
-    def _sync_recognize(self, audio_data: bytes, audio_format: str, sample_rate: int) -> ASRResult:
+    def _sync_recognize(
+        self, audio_data: bytes, audio_format: str, sample_rate: int
+    ) -> ASRResult:
         ext = {"mp3": ".mp3", "wav": ".wav", "pcm": ".pcm"}.get(audio_format, ".wav")
         with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as tmp:
             tmp.write(audio_data)
@@ -40,16 +47,22 @@ class FunASRProvider(ASRProvider):
             if result.status_code == HTTPStatus.OK:
                 sentences = result.get_sentence()
                 text = _extract_sentences(sentences)
-                return ASRResult(text=text, duration_ms=elapsed, raw_response={"sentence": sentences})
-            return ASRResult(text="", duration_ms=elapsed, raw_response={"error": result.message})
+                return ASRResult(
+                    text=text, duration_ms=elapsed, raw_response={"sentence": sentences}
+                )
+            return ASRResult(
+                text="", duration_ms=elapsed, raw_response={"error": result.message}
+            )
         finally:
             os.unlink(tmp_path)
 
 
 def _extract_sentences(sentences) -> str:
     """Extract text from Recognition result, handling single dict or list."""
+    if sentences is None:
+        return ""
     if isinstance(sentences, dict):
-        return sentences.get("text", "")
+        return sentences.get("text") or ""
     if isinstance(sentences, list):
-        return "".join(s.get("text", "") for s in sentences if isinstance(s, dict))
+        return "".join(s.get("text") or "" for s in sentences if isinstance(s, dict))
     return str(sentences) if sentences else ""

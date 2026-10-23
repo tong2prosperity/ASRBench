@@ -6,7 +6,7 @@ Hypotheses are classified as:
   other  : any other text (hallucinated words)
 
 Usage:
-  python scripts/run_nonspeech_fp.py --config config_tencent_v2_zh.yaml \
+  python scripts/legacy/run_nonspeech_fp.py --config config_tencent_v2_zh.yaml \
       --variant 16k_zh_en:0 --variant 16k_zh_en_2.0:0 --variant 16k_zh_en_2.0:2
 (variant = engine_model_type:filter_modal)
 """

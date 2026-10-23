@@ -12,7 +12,7 @@ import numpy as np
 from benchmark_vibevoice_streaming_st_cmds import edit_distance, normalize
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "results"
 MANIFEST = Path.home() / "Resources/audio/ST-CMDS-20170001_1-OS-test-500/manifest.tsv"
 

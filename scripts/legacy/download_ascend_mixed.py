@@ -9,7 +9,7 @@ Output structure:
             <id>.wav      (one file per sample)
 
 Usage:
-    uv run python scripts/download_ascend_mixed.py
+    uv run python scripts/legacy/download_ascend_mixed.py
 """
 
 import csv
@@ -19,7 +19,7 @@ import os
 from datasets import load_dataset
 
 REPO_ID = "WTForbes/ASCEND_MIXED"
-OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "corpus", "ascend-mixed")
+OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "corpus", "ascend-mixed")
 SPLITS = {"test": "test.tsv", "validation": "dev.tsv"}
 
 

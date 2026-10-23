@@ -1,8 +1,2 @@
-dashscope>=1.25.6
-websockets>=14.0
-tencentcloud-sdk-python>=3.0
-pydub>=0.25
-jiwer>=3.0
-jieba>=0.42
-rich>=13.0
-pyyaml>=6.0
+# Preferred installation: uv sync --locked
+-e .

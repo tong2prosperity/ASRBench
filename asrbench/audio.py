@@ -24,15 +24,21 @@ def get_audio_duration_ms(audio_data: bytes, audio_format: str) -> float:
         return 0.0
 
 
-def convert_to_pcm(audio_data: bytes, src_format: str, target_sample_rate: int = 16000) -> bytes:
+def convert_to_pcm(
+    audio_data: bytes, src_format: str, target_sample_rate: int = 16000
+) -> bytes:
     """Convert audio bytes to 16-bit mono PCM at the target sample rate."""
     seg = AudioSegment.from_file(io.BytesIO(audio_data), format=src_format)
     seg = seg.set_frame_rate(target_sample_rate).set_channels(1).set_sample_width(2)
     return seg.raw_data
 
 
-def ensure_format(audio_data: bytes, src_format: str, supported_formats: frozenset[str],
-                  sample_rate: int = 16000) -> tuple[bytes, str]:
+def ensure_format(
+    audio_data: bytes,
+    src_format: str,
+    supported_formats: frozenset[str],
+    sample_rate: int = 16000,
+) -> tuple[bytes, str]:
     """Return audio in a format the provider supports, converting if needed."""
     if src_format in supported_formats:
         return audio_data, src_format
@@ -46,6 +52,7 @@ def ensure_format(audio_data: bytes, src_format: str, supported_formats: frozens
 
 def _pcm_to_wav(pcm_data: bytes, sample_rate: int) -> bytes:
     import wave
+
     buf = io.BytesIO()
     with wave.open(buf, "wb") as wf:
         wf.setnchannels(1)
@@ -53,3 +60,15 @@ def _pcm_to_wav(pcm_data: bytes, sample_rate: int) -> bytes:
         wf.setframerate(sample_rate)
         wf.writeframes(pcm_data)
     return buf.getvalue()
+
+
+def prepare_pcm(path: str) -> tuple[bytes, float]:
+    """Always normalize, even for WAV inputs already accepted by a provider."""
+    source = AudioSegment.from_file(path)
+    target_bytes = round(source.frame_count() * 16000 / source.frame_rate) * 2
+    seg = source.set_frame_rate(16000).set_channels(1).set_sample_width(2)
+    pcm = seg.raw_data[:target_bytes]
+    # audioop may omit the last interpolated frame; preserve the source duration.
+    if len(pcm) < target_bytes:
+        pcm += (pcm[-2:] or b"\0\0") * ((target_bytes - len(pcm)) // 2)
+    return pcm, len(pcm) / 32.0

@@ -5,6 +5,7 @@ Docs: https://www.volcengine.com/docs/6561/1354869
 Uses the `bigmodel_nostream` endpoint (streaming input, single recognition result)
 which is best suited for short offline clips like Common Voice samples.
 """
+
 import asyncio
 import gzip
 import json
@@ -24,7 +25,7 @@ _SERVER_ACK = 0b1011
 _SERVER_ERROR_RESPONSE = 0b1111
 
 # Message type specific flags
-_POS_SEQUENCE = 0b0001       # carries positive sequence number
+_POS_SEQUENCE = 0b0001  # carries positive sequence number
 _NEG_WITH_SEQUENCE = 0b0011  # last packet, carries negative sequence number
 
 # Serialization + compression
@@ -33,7 +34,9 @@ _GZIP = 0b0001
 _NONE = 0b0000
 
 
-def _header(message_type: int, flags: int, serial: int = _JSON, compression: int = _GZIP) -> bytearray:
+def _header(
+    message_type: int, flags: int, serial: int = _JSON, compression: int = _GZIP
+) -> bytearray:
     h = bytearray(4)
     h[0] = (0b0001 << 4) | 0b0001  # version=1, header_size=1 (4 bytes)
     h[1] = (message_type << 4) | flags
@@ -48,7 +51,7 @@ def _parse_response(data: bytes) -> dict:
     flags = data[1] & 0x0F
     serial = data[2] >> 4
     compression = data[2] & 0x0F
-    payload = data[header_size * 4:]
+    payload = data[header_size * 4 :]
 
     result: dict = {"is_last": False}
     if flags & 0x01:
@@ -60,15 +63,15 @@ def _parse_response(data: bytes) -> dict:
     payload_msg = None
     if message_type == _FULL_SERVER_RESPONSE:
         size = struct.unpack(">I", payload[:4])[0]
-        payload_msg = payload[4:4 + size] if size else payload[4:]
+        payload_msg = payload[4 : 4 + size] if size else payload[4:]
     elif message_type == _SERVER_ACK:
         if len(payload) >= 8:
             size = struct.unpack(">I", payload[4:8])[0]
-            payload_msg = payload[8:8 + size] if size else payload[8:]
+            payload_msg = payload[8 : 8 + size] if size else payload[8:]
     elif message_type == _SERVER_ERROR_RESPONSE:
         result["code"] = struct.unpack(">I", payload[:4])[0]
         size = struct.unpack(">I", payload[4:8])[0]
-        payload_msg = payload[8:8 + size] if size else payload[8:]
+        payload_msg = payload[8 : 8 + size] if size else payload[8:]
 
     if payload_msg:
         if compression == _GZIP:
@@ -128,7 +131,9 @@ class VolcEngineProvider(ASRProvider):
             },
         }
 
-    async def recognize(self, audio_data: bytes, audio_format: str, sample_rate: int) -> ASRResult:
+    async def recognize(
+        self, audio_data: bytes, audio_format: str, sample_rate: int
+    ) -> ASRResult:
         t0 = time.monotonic()
         headers = {
             "X-Api-App-Key": self.app_key,
@@ -156,19 +161,29 @@ class VolcEngineProvider(ASRProvider):
         last_message = None
         try:
             async with websockets.connect(
-                self.ws_url, additional_headers=headers, max_size=10_000_000
+                self.ws_url,
+                additional_headers=headers,
+                open_timeout=10,
+                max_size=10_000_000,
             ) as ws:
                 await ws.send(bytes(full_req))
                 resp = _parse_response(await ws.recv())
                 last_message = resp
                 if "code" in resp:
                     elapsed = (time.monotonic() - t0) * 1000
-                    return ASRResult(text="", duration_ms=elapsed, raw_response=resp)
+                    return ASRResult(
+                        text="",
+                        duration_ms=elapsed,
+                        raw_response={
+                            "error": "provider error",
+                            "code": resp.get("code"),
+                        },
+                    )
 
                 offset = 0
                 total = len(audio_data)
                 while offset < total:
-                    chunk = audio_data[offset:offset + chunk_size]
+                    chunk = audio_data[offset : offset + chunk_size]
                     offset += chunk_size
                     is_last = offset >= total
                     sequence += 1
@@ -192,14 +207,24 @@ class VolcEngineProvider(ASRProvider):
                 # Drain any remaining messages until server signals last.
                 while not last_message.get("is_last") and "code" not in last_message:
                     try:
-                        resp = _parse_response(await asyncio.wait_for(ws.recv(), timeout=5))
+                        resp = _parse_response(
+                            await asyncio.wait_for(ws.recv(), timeout=5)
+                        )
                         last_message = resp
                     except asyncio.TimeoutError:
-                        break
+                        raise TimeoutError(
+                            "VolcEngine final response timed out"
+                        ) from None
         except Exception as e:
             elapsed = (time.monotonic() - t0) * 1000
-            return ASRResult(text="", duration_ms=elapsed, raw_response={"error": str(e)})
+            return ASRResult(
+                text="", duration_ms=elapsed, raw_response={"error": str(e)}
+            )
 
         elapsed = (time.monotonic() - t0) * 1000
+        if last_message and "code" in last_message:
+            raise RuntimeError("VolcEngine recognition failed")
         text = _extract_text(last_message.get("message") if last_message else None)
-        return ASRResult(text=text, duration_ms=elapsed, raw_response=last_message or {})
+        return ASRResult(
+            text=text, duration_ms=elapsed, raw_response=last_message or {}
+        )

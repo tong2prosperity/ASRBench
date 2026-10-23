@@ -6,7 +6,7 @@ The report combines:
 - New local Qwen3-ASR 1.7B F16/Q6_K/Q4_K_M JSON results under results/ascend-mixed-local.
 
 Run from the ASRBench repo root:
-    uv run python scripts/compare_qwen3_1_7b_local.py
+    uv run python scripts/legacy/compare_qwen3_1_7b_local.py
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ from typing import Any
 from asrbench.metrics import compute_cer, compute_corpus_metrics, compute_wer, normalize_text
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 HIST_DIR = ROOT / "results" / "ascend-mixed"
 LOCAL_DIR = ROOT / "results" / "ascend-mixed-local"
 OUT_DIR = ROOT / "results" / "ascend-mixed-qwen3-1.7b-comparison"

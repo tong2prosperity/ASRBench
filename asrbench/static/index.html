@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ASRBench · 语音识别评测</title>
+    <style>
+      :root {
+        font:
+          15px/1.6 system-ui,
+          sans-serif;
+        color: #1c293b;
+        background: #f5f7fa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      header {
+        background: #13253a;
+        color: white;
+        padding: 22px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      h1 {
+        font-size: 24px;
+        margin: 0;
+      }
+      header span {
+        color: #bed0e1;
+        font-size: 13px;
+      }
+      nav {
+        display: flex;
+        gap: 10px;
+        padding: 18px 5% 0;
+      }
+      button,
+      .link {
+        cursor: pointer;
+        border: 1px solid #cbd4e0;
+        border-radius: 7px;
+        background: white;
+        padding: 9px 15px;
+        color: #24384d;
+        font: inherit;
+        text-decoration: none;
+      }
+      button.primary,
+      nav button.active {
+        background: #205bc7;
+        border-color: #205bc7;
+        color: white;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      main {
+        max-width: 1360px;
+        margin: auto;
+        padding: 22px 4% 60px;
+      }
+      .panel {
+        background: white;
+        padding: 25px;
+        border: 1px solid #e1e7ee;
+        border-radius: 12px;
+        margin-bottom: 20px;
+      }
+      h2 {
+        margin: 0 0 15px;
+        font-size: 20px;
+      }
+      h3 {
+        margin: 20px 0 8px;
+        font-size: 16px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin: 13px 0 5px;
+      }
+      input,
+      select {
+        border: 1px solid #cbd4e0;
+        border-radius: 6px;
+        padding: 10px;
+        font: inherit;
+        max-width: 100%;
+        width: 100%;
+        background: white;
+      }
+      input[type="checkbox"] {
+        width: auto;
+        margin-right: 8px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+      .muted {
+        color: #657589;
+        font-size: 13px;
+      }
+      .notice {
+        padding: 12px 16px;
+        background: #eaf2ff;
+        border-radius: 7px;
+      }
+      .error {
+        color: #b42318;
+        white-space: pre-wrap;
+      }
+      .success {
+        color: #14754a;
+      }
+      .scroll {
+        overflow: auto;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        white-space: nowrap;
+        font-size: 13px;
+      }
+      th,
+      td {
+        padding: 12px 10px;
+        text-align: left;
+        border-bottom: 1px solid #e7ecf2;
+      }
+      th {
+        color: #52657a;
+        background: #f8fafc;
+      }
+      td.wrap {
+        white-space: normal;
+        min-width: 220px;
+      }
+      .badges {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 10px 0;
+      }
+      .badge {
+        padding: 4px 11px;
+        background: #eaf0f7;
+        border-radius: 20px;
+        font-size: 13px;
+      }
+      .model {
+        border: 1px solid #e2e8ef;
+        padding: 12px;
+        margin: 9px 0;
+        border-radius: 7px;
+        font-weight: 400;
+        cursor: pointer;
+      }
+      .toolbar {
+        display: flex;
+        gap: 9px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 15px 0;
+      }
+      progress {
+        width: 100%;
+        height: 14px;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        background: #f5f7fa;
+        padding: 12px;
+        max-height: 350px;
+        overflow: auto;
+      }
+      ins {
+        background: #d4f5e1;
+        text-decoration: none;
+      }
+      del {
+        background: #ffe1df;
+      }
+      audio {
+        height: 32px;
+        max-width: 220px;
+      }
+      details {
+        margin: 12px 0;
+      }
+      .hidden {
+        display: none !important;
+      }
+      #toast {
+        position: fixed;
+        bottom: 20px;
+        right: 25px;
+        max-width: 520px;
+        background: #b42318;
+        color: white;
+        padding: 16px;
+        border-radius: 8px;
+        z-index: 2;
+      }
+      a {
+        color: #205bc7;
+      }
+      @media (max-width: 750px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        header {
+          display: block;
+        }
+        main {
+          padding: 16px;
+        }
+        nav {
+          overflow: auto;
+        }
+        .panel {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>ASRBench <span>语音识别评测</span></h1>
+      <span>本机运行 · 客户数据保存在本地</span>
+    </header>
+    <nav>
+      <button data-page="datasets" class="active">1 · 数据集</button
+      ><button data-page="new">2 · 新建评测</button
+      ><button data-page="runs">3 · 任务与报告</button>
+    </nav>
+    <main>
+      <section id="datasets">
+        <div class="panel">
+          <h2>导入数据集</h2>
+          <p class="muted">
+            支持客户 JSONL：sample_id、audio_uri、gold_text。storage://
+            路径按文件名映射到本机 wav 目录。
+          </p>
+          <div class="grid">
+            <div>
+              <label for="manifest">选择 JSONL 文件</label
+              ><input id="manifest" type="file" accept=".jsonl" /><label
+                for="manifestPath"
+                >或填写本机清单绝对路径</label
+              ><input id="manifestPath" placeholder="/path/to/dataset.jsonl" />
+            </div>
+            <div>
+              <label for="audioRoot">本机 wav 根目录</label
+              ><input id="audioRoot" placeholder="/path/to/wavs" />
+              <p class="muted">
+                填写运行服务的计算机上的目录。音频不复制到项目中。浏览器上传的清单如含相对音频路径，必须填写此目录。
+              </p>
+            </div>
+          </div>
+          <div class="toolbar">
+            <button id="importBtn" class="primary">导入并校验</button
+            ><span id="importStatus" role="status"></span>
+          </div>
+          <div id="validation"></div>
+        </div>
+        <div class="panel">
+          <h2>已导入的数据集</h2>
+          <div id="datasetList"></div>
+        </div>
+      </section>
+      <section id="new" class="hidden">
+        <div class="panel">
+          <h2>新建评测</h2>
+          <div class="grid">
+            <div>
+              <label for="datasetSelect">数据集</label
+              ><select id="datasetSelect"></select
+              ><label for="mode">评测模式</label
+              ><select id="mode">
+                <option value="batch">准确率批测 · 所有云端模型</option>
+                <option value="stream">实时回放 · 腾讯 ASR final 延迟</option>
+              </select>
+              <p id="modeHelp" class="notice"></p>
+              <div class="grid">
+                <div>
+                  <label for="concurrency">每模型并发数</label
+                  ><input
+                    id="concurrency"
+                    type="number"
+                    min="1"
+                    max="32"
+                    value="3"
+                  />
+                </div>
+                <div>
+                  <label for="limit">样本上限（留空为全部）</label
+                  ><input id="limit" type="number" min="1" />
+                </div>
+              </div>
+            </div>
+            <div>
+              <label>选择模型配置</label>
+              <div id="models"></div>
+              <p class="muted">
+                模型和凭据在 config.yaml / .env 配置。相同供应商可以添加多个
+                profile_id，模型依次执行。
+              </p>
+            </div>
+          </div>
+          <button id="startBtn" class="primary">启动评测</button>
+        </div>
+      </section>
+      <section id="runs" class="hidden">
+        <div class="panel">
+          <div class="toolbar">
+            <h2 style="margin: 0">任务列表</h2>
+            <button id="refreshRuns">刷新</button>
+          </div>
+          <div id="runList" class="scroll"></div>
+        </div>
+        <div id="detail" class="hidden">
+          <div class="panel">
+            <h2 id="runTitle"></h2>
+            <div id="runBadges" class="badges"></div>
+            <progress id="progress" value="0" max="1"></progress>
+            <div class="toolbar">
+              <button id="stopBtn">停止</button
+              ><button id="resumeBtn">恢复未完成样本</button
+              ><button id="retryBtn">重试失败样本</button
+              ><a id="jsonExport" class="link">JSON</a
+              ><a id="csvExport" class="link">CSV</a
+              ><a id="mdExport" class="link">Markdown</a>
+            </div>
+            <p class="muted">
+              请求失败不计入自身
+              CER/WER；横向比较请使用共同成功样本指标并检查覆盖率。流式请求时长包含
+              10 秒观察窗口。
+            </p>
+            <div id="summary" class="scroll"></div>
+            <details>
+              <summary>运行参数（脱敏）</summary>
+              <pre id="runSpec"></pre>
+            </details>
+          </div>
+          <div class="panel">
+            <h2>逐条结果与差异</h2>
+            <p class="muted">
+              红色删除，绿色插入；差异显示原文，计分使用统一规范化后的文本。
+            </p>
+            <div id="sampleResults" class="scroll"></div>
+            <div class="toolbar">
+              <button id="prevPage">上一页</button><span id="pageInfo"></span
+              ><button id="nextPage">下一页</button
+              ><label style="margin: 0"
+                ><input id="history" type="checkbox" />显示所有重试记录</label
+              >
+            </div>
+          </div>
+          <div class="panel">
+            <h2>事件时间线</h2>
+            <p class="muted">
+              展示最近 80 条事件；刷新后从已保存记录恢复，完整事件可通过 API
+              查询。
+            </p>
+            <pre id="timeline"></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div id="toast" class="hidden" role="alert"></div>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      let datasetItems = [],
+        models = [],
+        selectedRun = null,
+        source = null,
+        offset = 0,
+        timer = null,
+        events = [];
+      const esc = (s) =>
+        String(s ?? "").replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      function error(e) {
+        $("toast").textContent = e.message || String(e);
+        $("toast").classList.remove("hidden");
+        setTimeout(() => $("toast").classList.add("hidden"), 7000);
+      }
+      async function api(path, body) {
+        const r = await fetch(
+          "/api/" + path,
+          body === undefined
+            ? {}
+            : {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+              },
+        );
+        if (!r.ok) {
+          const e = await r.json();
+          throw Error(
+            typeof e.detail === "string" ? e.detail : JSON.stringify(e.detail),
+          );
+        }
+        return r.json();
+      }
+      function page(name) {
+        for (const el of document.querySelectorAll("main>section"))
+          el.classList.toggle("hidden", el.id !== name);
+        for (const b of document.querySelectorAll("nav button"))
+          b.classList.toggle("active", b.dataset.page === name);
+        if (name === "runs") refreshRuns().catch(error);
+      }
+      document
+        .querySelectorAll("nav button")
+        .forEach((b) => (b.onclick = () => page(b.dataset.page)));
+      async function refreshDatasets() {
+        datasetItems = await api("datasets");
+        $("datasetList").innerHTML = datasetItems.length
+          ? datasetItems
+              .map(
+                (d) =>
+                  `<div class="toolbar"><b>${esc(d.id)}</b><span>${d.count} 条</span><span class="${d.errors.length ? "error" : "success"}">${d.errors.length ? "校验未通过" : "可评测"}</span><span class="muted">${esc(d.manifest)}</span></div>`,
+              )
+              .join("")
+          : '<p class="muted">尚未导入数据集</p>';
+        $("datasetSelect").innerHTML = datasetItems
+          .filter((d) => !d.errors.length)
+          .map(
+            (d) =>
+              `<option value="${esc(d.id)}">${esc(d.id)} · ${d.count} 条</option>`,
+          )
+          .join("");
+      }
+      $("importBtn").onclick = async () => {
+        const button = $("importBtn");
+        button.disabled = true;
+        $("importStatus").textContent = "校验音频中…";
+        try {
+          const file = $("manifest").files[0],
+            path = $("manifestPath").value.trim();
+          if (!file && !path) throw Error("请选择 JSONL 或填写清单路径");
+          if (file && path) throw Error("请选择文件或路径其中一种");
+          const body = { audio_root: $("audioRoot").value.trim() || null };
+          if (file) body.manifest_text = await file.text();
+          else body.manifest_path = path;
+          const d = await api("datasets", body);
+          $("validation").innerHTML =
+            `<p class="${d.errors.length ? "error" : "success"}">${d.count} 条音频可读取；${d.errors.length} 项错误；${d.warnings.length} 项提示</p><pre>${esc(JSON.stringify({ errors: d.errors, warnings: d.warnings }, null, 2))}</pre><details><summary>样本预览</summary><pre>${esc(JSON.stringify(d.samples.slice(0, 3), null, 2))}</pre></details>`;
+          await refreshDatasets();
+          if (!d.errors.length) $("datasetSelect").value = d.id;
+        } catch (e) {
+          error(e);
+        } finally {
+          button.disabled = false;
+          $("importStatus").textContent = "";
+        }
+      };
+      function modeChanged() {
+        const stream = $("mode").value === "stream";
+        $("concurrency").value = stream ? 1 : 3;
+        $("concurrency").disabled = stream;
+        $("modeHelp").textContent = stream
+          ? "按 1:1 速度回放，音频后补 10 秒静音。只测 ASR final 延迟；不评估语义断句。"
+          : "比较 CER/WER、请求耗时及 RTF。所有模型使用相同音频规范与文本计分规则。";
+        $("models").innerHTML = models
+          .map(
+            (m) =>
+              `<label class="model"><input type="checkbox" name="model" value="${esc(m.profile_id)}" ${stream && !m.modes.includes("stream") ? "disabled" : ""}>${esc(m.name)} <span class="muted">${esc(m.provider)} · ${esc(m.params?.model || m.params?.engine_model_type || m.model || m.engine_model_type || "默认引擎")}${stream && !m.modes.includes("stream") ? " · 暂无自然 final 指标" : ""}</span></label>`,
+          )
+          .join("");
+      }
+      $("mode").onchange = modeChanged;
+      $("startBtn").onclick = async () => {
+        const b = $("startBtn");
+        b.disabled = true;
+        try {
+          const profile_ids = [
+            ...document.querySelectorAll("input[name=model]:checked"),
+          ].map((i) => i.value);
+          const run = await api("runs", {
+            dataset_id: $("datasetSelect").value,
+            profile_ids,
+            mode: $("mode").value,
+            concurrency: Number($("concurrency").value),
+            limit: $("limit").value ? Number($("limit").value) : null,
+          });
+          page("runs");
+          await openRun(run.id);
+        } catch (e) {
+          error(e);
+        } finally {
+          b.disabled = false;
+        }
+      };
+      async function refreshRuns() {
+        const runs = await api("runs");
+        $("runList").innerHTML = runs.length
+          ? `<table><thead><tr><th>任务</th><th>状态</th><th>模式</th><th>模型</th><th>创建时间</th><th></th></tr></thead><tbody>${runs.map((r) => `<tr><td>${esc(r.id)}</td><td>${esc(stateName(r.state))}</td><td>${esc(r.mode)}</td><td>${esc(r.models.join(" / "))}</td><td>${esc(new Date(r.created * 1000).toLocaleString())}</td><td><button data-run="${esc(r.id)}">查看</button></td></tr>`).join("")}</tbody></table>`
+          : '<p class="muted">暂无任务</p>';
+        $("runList")
+          .querySelectorAll("[data-run]")
+          .forEach(
+            (b) => (b.onclick = () => openRun(b.dataset.run).catch(error)),
+          );
+      }
+      $("refreshRuns").onclick = () => refreshRuns().catch(error);
+      async function openRun(id) {
+        selectedRun = id;
+        offset = 0;
+        events = [];
+        if (source) source.close();
+        $("detail").classList.remove("hidden");
+        $("runTitle").textContent = id;
+        for (const fmt of ["json", "csv", "md"])
+          $(fmt + "Export").href =
+            `/api/runs/${encodeURIComponent(id)}/export/${fmt}`;
+        await refreshDetail();
+        source = new EventSource(`/api/runs/${encodeURIComponent(id)}/events`);
+        source.onmessage = (e) => {
+          const ev = JSON.parse(e.data);
+          events.push(ev);
+          events = events.slice(-80);
+          $("timeline").textContent = events
+            .map((x) => JSON.stringify(x))
+            .join("\n");
+          clearTimeout(timer);
+          timer = setTimeout(() => refreshDetail().catch(error), 400);
+        };
+        source.addEventListener("done", () => {
+          source.close();
+          refreshDetail().catch(error);
+          refreshRuns().catch(error);
+        });
+      }
+      const stateName = (s) =>
+        ({
+          queued: "排队中",
+          running: "执行中",
+          stopping: "停止中",
+          completed: "已完成",
+          cancelled: "已停止",
+          interrupted: "已中断",
+          failed: "失败",
+          success: "成功",
+          timeout: "超时",
+        })[s] || s;
+      const num = (v, pct = false) =>
+        v === null || v === undefined
+          ? "—"
+          : pct
+            ? (v * 100).toFixed(2) + "%"
+            : v.toFixed(2);
+      async function refreshDetail() {
+        if (!selectedRun) return;
+        const id = selectedRun;
+        const r = await api(`runs/${id}/report`);
+        if (id !== selectedRun) return;
+        const total = r.profiles.reduce((n, p) => n + p.total, 0),
+          done = r.profiles.reduce((n, p) => n + p.completed, 0);
+        $("runBadges").innerHTML = [
+          stateName(r.state),
+          r.mode === "batch" ? "准确率批测" : "实时回放",
+          `${done}/${total} 已有结果`,
+          `共同成功 ${r.common_count} 条 · ${num(r.common_coverage, true)}`,
+        ]
+          .map((x) => `<span class="badge">${esc(x)}</span>`)
+          .join("");
+        $("progress").max = total || 1;
+        $("progress").value = done;
+        const active = ["running", "queued", "stopping"].includes(r.state);
+        $("stopBtn").disabled = !active;
+        $("resumeBtn").disabled =
+          active ||
+          !r.profiles.some((p) => p.completed < p.total || p.cancelled > 0);
+        $("retryBtn").disabled =
+          active || !r.profiles.some((p) => p.failures > 0);
+        $("runSpec").textContent = JSON.stringify(r.spec, null, 2);
+        $("summary").innerHTML =
+          `<table><thead><tr><th>模型</th><th>成功/总数</th><th>失败率</th><th>CER</th><th>WER</th><th>共同 CER</th><th>共同 WER</th><th>请求均值 ms</th><th>请求 P50 / P95 ms</th><th>RTF</th><th>final 均值 ms</th><th>final P50 / P95 ms</th><th>final 覆盖率</th></tr></thead><tbody>${r.profiles.map((p) => `<tr><td>${esc(p.name)}</td><td>${p.success}/${p.total}</td><td>${num(p.failure_rate, true)}</td><td>${num(p.accuracy.cer, true)}</td><td>${num(p.accuracy.wer, true)}</td><td>${num(p.common_accuracy.cer, true)}</td><td>${num(p.common_accuracy.wer, true)}</td><td>${num(p.request_elapsed_ms.mean)}</td><td>${num(p.request_elapsed_ms.p50)} / ${num(p.request_elapsed_ms.p95)}</td><td>${num(p.rtf)}</td><td>${num(p.final_latency_ms.mean)}</td><td>${num(p.final_latency_ms.p50)} / ${num(p.final_latency_ms.p95)}</td><td>${num(p.final_coverage, true)}</td></tr>`).join("")}</tbody></table>`;
+        await refreshResults();
+      }
+      async function refreshResults() {
+        if (!selectedRun) return;
+        const id = selectedRun;
+        const data = await api(
+          `runs/${id}/results?offset=${offset}&limit=20&history=${$("history").checked}`,
+        );
+        if (id !== selectedRun) return;
+        $("sampleResults").innerHTML =
+          `<table><thead><tr><th>模型 / 样本 / 尝试</th><th>状态</th><th>参考文本</th><th>识别文本与差异</th><th>CER / WER</th><th>final 延迟</th><th>原音频</th></tr></thead><tbody>${data.rows.map((r) => `<tr><td>${esc(r.profile_id)}<br>${esc(r.sample_id)} / #${r.attempt_id}</td><td class="wrap">${esc(stateName(r.status))}<br><span class="error">${esc(r.error || "")}</span></td><td class="wrap">${esc(r.reference_text)}</td><td class="wrap">${r.diff.map((d) => (d.op === "equal" ? esc(d.hypothesis) : d.op === "delete" ? `<del>${esc(d.reference)}</del>` : d.op === "insert" ? `<ins>${esc(d.hypothesis)}</ins>` : `<del>${esc(d.reference)}</del><ins>${esc(d.hypothesis)}</ins>`)).join("")}</td><td>${num(r.cer, true)} / ${num(r.wer, true)}</td><td class="wrap">${num(r.final_latency_ms)} ms<br><span class="muted">${esc(r.final_reason || "")}</span></td><td><audio controls preload="none" src="/api/runs/${encodeURIComponent(id)}/audio/${encodeURIComponent(r.sample_id)}"></audio></td></tr>`).join("")}</tbody></table>`;
+        $("pageInfo").textContent =
+          `${data.total ? offset + 1 : 0}–${Math.min(offset + 20, data.total)} / ${data.total}`;
+        $("prevPage").disabled = offset === 0;
+        $("nextPage").disabled = offset + 20 >= data.total;
+      }
+      for (const action of ["stop", "resume", "retry"])
+        $(action + "Btn").onclick = async () => {
+          try {
+            await api(`runs/${selectedRun}/${action}`, {});
+            if (action === "stop") await refreshDetail();
+            else await openRun(selectedRun);
+          } catch (e) {
+            error(e);
+          }
+        };
+      $("prevPage").onclick = () => {
+        offset = Math.max(0, offset - 20);
+        refreshResults().catch(error);
+      };
+      $("nextPage").onclick = () => {
+        offset += 20;
+        refreshResults().catch(error);
+      };
+      $("history").onchange = () => {
+        offset = 0;
+        refreshResults().catch(error);
+      };
+      (async () => {
+        await refreshDatasets();
+        models = await api("models");
+        modeChanged();
+      })().catch(error);
+    </script>
+  </body>
+</html>

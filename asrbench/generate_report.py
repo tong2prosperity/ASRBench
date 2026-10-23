@@ -7,13 +7,14 @@ dependent on whatever aggregation the runner used), and writes
 
 Run via: `uv run python -m asrbench.generate_report [--results-dir results]`
 """
+
 import argparse
 import json
 import os
 import statistics
 from datetime import datetime
 
-from .metrics import compute_corpus_metrics, normalize_text
+from .metrics import compute_corpus_metrics
 
 
 def load_provider_results(results_dir: str) -> dict[str, dict]:
@@ -44,6 +45,12 @@ def summarize_provider(data: dict) -> dict:
     refs = [s["ground_truth"] for s in valid]
     hyps = [s["hypothesis"] for s in valid]
     corpus = compute_corpus_metrics(refs, hyps)
+
+    # Legacy reports use 0 only for formatting an empty historical result;
+    # new task reports always preserve N/A via summary.py.
+    corpus = {
+        k: (0.0 if k in ("cer", "wer") and v is None else v) for k, v in corpus.items()
+    }
 
     # Latency / RTF
     rtfs = []
@@ -104,33 +111,45 @@ def format_markdown(summaries: dict[str, dict]) -> str:
 
     lines.append("## Metric definitions")
     lines.append("")
-    lines.append("- **CER** — corpus-level Character Error Rate. Computed as "
-                 "`total_edits / total_reference_chars` via `jiwer.wer` over "
-                 "character sequences of the entire normalized corpus. "
-                 "This is the standard academic aggregate and weights long "
-                 "samples more than short ones.")
-    lines.append("- **WER** — corpus-level Word Error Rate. Identical to CER "
-                 "but using `jieba.lcut` word segmentation instead of "
-                 "character split.")
-    lines.append("- **Mean CER/WER** — arithmetic mean of per-sample scores. "
-                 "Included for comparison; not the standard metric.")
-    lines.append("- **Normalization** — NFKC + strip Chinese/ASCII "
-                 "punctuation + strip whitespace + lowercase. Applied to "
-                 "both reference and hypothesis before scoring.")
-    lines.append("- **RTF** — Real-Time Factor = "
-                 "`provider_elapsed_ms / audio_duration_ms`. Lower is faster.")
+    lines.append(
+        "- **CER** — corpus-level Character Error Rate. Computed as "
+        "`total_edits / total_reference_chars` via `jiwer.wer` over "
+        "character sequences of the entire normalized corpus. "
+        "This is the standard academic aggregate and weights long "
+        "samples more than short ones."
+    )
+    lines.append(
+        "- **WER** — corpus-level Word Error Rate. Identical to CER "
+        "but using `jieba.lcut` word segmentation instead of "
+        "character split."
+    )
+    lines.append(
+        "- **Mean CER/WER** — arithmetic mean of per-sample scores. "
+        "Included for comparison; not the standard metric."
+    )
+    lines.append(
+        "- **Normalization** — NFKC + strip Chinese/ASCII "
+        "punctuation + strip whitespace + lowercase. Applied to "
+        "both reference and hypothesis before scoring."
+    )
+    lines.append(
+        "- **RTF** — Real-Time Factor = "
+        "`provider_elapsed_ms / audio_duration_ms`. Lower is faster."
+    )
     lines.append("")
 
     # Main ranking table — sorted by corpus CER
     lines.append("## Results (sorted by CER)")
     lines.append("")
-    lines.append("| Rank | Provider | CER % | WER % | Mean CER % | Mean WER % | Avg RTF | P50 Latency | P95 Latency | Valid | Errors |")
+    lines.append(
+        "| Rank | Provider | CER % | WER % | Mean CER % | Mean WER % | Avg RTF | P50 Latency | P95 Latency | Valid | Errors |"
+    )
     lines.append("|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|")
     ranked = sorted(summaries.items(), key=lambda kv: kv[1]["cer"])
     for rank, (pname, s) in enumerate(ranked, 1):
         lines.append(
-            f"| {rank} | **{pname}** | {s['cer']*100:.2f} | {s['wer']*100:.2f} | "
-            f"{s['mean_cer']*100:.2f} | {s['mean_wer']*100:.2f} | "
+            f"| {rank} | **{pname}** | {s['cer'] * 100:.2f} | {s['wer'] * 100:.2f} | "
+            f"{s['mean_cer'] * 100:.2f} | {s['mean_wer'] * 100:.2f} | "
             f"{s['avg_rtf']:.3f} | {s['p50_latency_ms']:.0f}ms | "
             f"{s['p95_latency_ms']:.0f}ms | {s['valid']} | {s['errors']} |"
         )
@@ -143,8 +162,8 @@ def format_markdown(summaries: dict[str, dict]) -> str:
     lines.append("|---|---:|---:|---:|")
     for pname, s in ranked:
         lines.append(
-            f"| {pname} | {s['perfect_rate']*100:.2f}% | "
-            f"{s['median_cer']*100:.2f}% | {s['median_rtf']:.3f} |"
+            f"| {pname} | {s['perfect_rate'] * 100:.2f}% | "
+            f"{s['median_cer'] * 100:.2f}% | {s['median_rtf']:.3f} |"
         )
     lines.append("")
 
@@ -169,7 +188,7 @@ def format_markdown(summaries: dict[str, dict]) -> str:
             for w in s["worst"]:
                 gt = (w.get("ground_truth") or "").replace("|", "\\|")
                 hyp = (w.get("hypothesis") or "").replace("|", "\\|")
-                lines.append(f"| {w.get('cer', 0)*100:.1f}% | {gt} | {hyp} |")
+                lines.append(f"| {w.get('cer', 0) * 100:.1f}% | {gt} | {hyp} |")
             lines.append("")
 
     return "\n".join(lines)
@@ -177,8 +196,16 @@ def format_markdown(summaries: dict[str, dict]) -> str:
 
 def main():
     parser = argparse.ArgumentParser(description="Generate ASRBench markdown report")
-    parser.add_argument("--results-dir", default="results", help="Directory with per-provider JSON files")
-    parser.add_argument("--output", default=None, help="Output markdown path (default: <results-dir>/benchmark_report.md)")
+    parser.add_argument(
+        "--results-dir",
+        default="results",
+        help="Directory with per-provider JSON files",
+    )
+    parser.add_argument(
+        "--output",
+        default=None,
+        help="Output markdown path (default: <results-dir>/benchmark_report.md)",
+    )
     args = parser.parse_args()
 
     results_dir = os.path.abspath(args.results_dir)

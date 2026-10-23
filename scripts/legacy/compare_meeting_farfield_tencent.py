@@ -16,7 +16,7 @@ import jiwer
 
 from asrbench.metrics import normalize_text
 
-ROOT = Path(__file__).resolve().parents[1] / "results/meeting-farfield-500"
+ROOT = Path(__file__).resolve().parents[2] / "results/meeting-farfield-500"
 CORPORA = {
     "far": Path.home() / "Resources/audio/meeting-farfield-500",
     "near": Path.home() / "Resources/audio/meeting-farfield-500-alimeeting-near",

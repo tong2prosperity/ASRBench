@@ -1,4 +1,4 @@
-from .base import ASRProvider, ASRResult
+from .base import ASRProvider, ASRResult as ASRResult
 from .volcengine import VolcEngineProvider
 from .funasr import FunASRProvider
 from .qwen_asr import QwenASRProvider

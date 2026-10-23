@@ -1,72 +1,97 @@
-import re
+"""Versioned text rules shared by CLI, web, and exports."""
+
 import unicodedata
-import jiwer
 import jieba
+import jiwer
+
+METRIC_VERSION = "nfkc-unicode-punct-jieba-v1"
 
 
-# Strip Chinese + ASCII punctuation after NFKC normalization. NFKC folds
-# full-width ASCII (， ！ ？ etc.) to ASCII but leaves 。「」『』… as-is,
-# so the regex has to cover both ranges.
-_PUNCT_RE = re.compile(
-    r"[，。！？、；：“”‘’（）《》【】「」『』〈〉〔〕·．…—\-–~～"
-    r",.!?;:\"'\(\)\[\]\{\}<>\-\s]"
-)
+def _normalized_text(text: str) -> str:
+    return "".join(
+        c
+        for c in unicodedata.normalize("NFKC", text).lower()
+        if not unicodedata.category(c).startswith("P")
+    ).strip()
 
 
 def normalize_text(text: str) -> str:
-    """Normalize text for CER/WER: NFKC, strip punctuation + whitespace, lowercase."""
-    text = unicodedata.normalize("NFKC", text)
-    text = _PUNCT_RE.sub("", text)
-    return text.lower().strip()
+    """Character normalization; retains the original helper's whitespace contract."""
+    return "".join(_normalized_text(text).split())
 
 
-def _char_seq(text: str) -> str:
-    return " ".join(list(text))
+def sequences(text):
+    normalized = _normalized_text(text)
+    chars = "".join(normalized.split())
+    words = [w for w in jieba.lcut(normalized) if w.strip()]
+    return " ".join(chars), " ".join(words)
 
 
-def _word_seq(text: str) -> str:
-    return " ".join(jieba.lcut(text))
+def score_pair(reference, hypothesis):
+    rc, rw = sequences(reference)
+    hc, hw = sequences(hypothesis)
+
+    def score(r, h):
+        if not r:
+            return {"rate": None, "S": 0, "D": 0, "I": len(h.split()), "N": 0}
+        result = jiwer.process_words(r, h)
+        return {
+            "rate": result.wer,
+            "S": result.substitutions,
+            "D": result.deletions,
+            "I": result.insertions,
+            "N": len(r.split()),
+        }
+
+    c, w = score(rc, hc), score(rw, hw)
+    return {"cer": c["rate"], "wer": w["rate"], "char_edits": c, "word_edits": w}
 
 
-def compute_cer(reference: str, hypothesis: str) -> float:
-    """Per-sample Character Error Rate."""
-    ref = normalize_text(reference)
-    hyp = normalize_text(hypothesis)
-    if not ref:
-        return 0.0 if not hyp else 1.0
-    return jiwer.wer(_char_seq(ref), _char_seq(hyp))
+def compute_cer(reference, hypothesis):
+    return score_pair(reference, hypothesis)["cer"]
 
 
-def compute_wer(reference: str, hypothesis: str) -> float:
-    """Per-sample Word Error Rate using jieba segmentation."""
-    ref = normalize_text(reference)
-    hyp = normalize_text(hypothesis)
-    if not ref:
-        return 0.0 if not hyp else 1.0
-    return jiwer.wer(_word_seq(ref), _word_seq(hyp))
+def compute_wer(reference, hypothesis):
+    return score_pair(reference, hypothesis)["wer"]
 
 
-def compute_corpus_metrics(references: list[str], hypotheses: list[str]) -> dict:
-    """Corpus-level CER/WER: total edits / total reference tokens.
+def compute_corpus_metrics(references, hypotheses):
+    if len(references) != len(hypotheses):
+        raise ValueError("ref/hyp length mismatch")
+    scores = [score_pair(r, h) for r, h in zip(references, hypotheses)]
 
-    This is the standard academic aggregate and differs from the arithmetic
-    mean of per-sample scores — long samples weigh more than short ones, as
-    they should. Empty references are skipped (jiwer errors on them).
-    """
-    assert len(references) == len(hypotheses), "ref/hyp length mismatch"
-    refs_norm = [normalize_text(r) for r in references]
-    hyps_norm = [normalize_text(h) for h in hypotheses]
-    pairs = [(r, h) for r, h in zip(refs_norm, hyps_norm) if r]
-    if not pairs:
-        return {"cer": 0.0, "wer": 0.0, "count": 0}
+    def aggregate(key):
+        counts = {k: sum(s[key][k] for s in scores) for k in ("S", "D", "I", "N")}
+        return counts, (
+            sum(counts[k] for k in ("S", "D", "I")) / counts["N"]
+            if counts["N"]
+            else None
+        )
 
-    ref_chars = [_char_seq(r) for r, _ in pairs]
-    hyp_chars = [_char_seq(h) for _, h in pairs]
-    ref_words = [_word_seq(r) for r, _ in pairs]
-    hyp_words = [_word_seq(h) for _, h in pairs]
-
+    c, cer = aggregate("char_edits")
+    w, wer = aggregate("word_edits")
     return {
-        "cer": jiwer.wer(ref_chars, hyp_chars),
-        "wer": jiwer.wer(ref_words, hyp_words),
-        "count": len(pairs),
+        "cer": cer,
+        "wer": wer,
+        "count": len(scores),
+        "char_edits": c,
+        "word_edits": w,
+    }
+
+
+def percentile(values, q):
+    if not values:
+        return None
+    values = sorted(values)
+    k = (len(values) - 1) * q / 100
+    lo = int(k)
+    return values[lo] + (values[min(lo + 1, len(values) - 1)] - values[lo]) * (k - lo)
+
+
+def distribution(values):
+    return {
+        "count": len(values),
+        "mean": sum(values) / len(values) if values else None,
+        "p50": percentile(values, 50),
+        "p95": percentile(values, 95),
     }

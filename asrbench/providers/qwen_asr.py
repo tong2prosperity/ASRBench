@@ -4,8 +4,11 @@ import os
 import time
 import threading
 
-import dashscope
-from dashscope.audio.qwen_omni import OmniRealtimeConversation, OmniRealtimeCallback, MultiModality
+from dashscope.audio.qwen_omni import (
+    OmniRealtimeConversation,
+    OmniRealtimeCallback,
+    MultiModality,
+)
 from dashscope.audio.qwen_omni.omni_realtime import TranscriptionParams
 
 from .base import ASRProvider, ASRResult
@@ -20,6 +23,7 @@ class _QwenCallback(OmniRealtimeCallback):
         self.done_event = threading.Event()
         self.error = None
         self.raw = {}
+        self.completed = False
 
     def on_event(self, response):
         self.raw = response
@@ -27,6 +31,7 @@ class _QwenCallback(OmniRealtimeCallback):
             return
         evt_type = response.get("type", "")
         if evt_type == _COMPLETED_EVENT:
+            self.completed = True
             transcript = response.get("transcript", "")
             if transcript:
                 self.final_transcripts.append(transcript)
@@ -40,6 +45,8 @@ class _QwenCallback(OmniRealtimeCallback):
         pass
 
     def on_close(self, close_status_code, close_msg):
+        if not self.completed and not self.error:
+            self.error = "connection closed before completed transcription"
         self.done_event.set()
 
 
@@ -49,24 +56,40 @@ class QwenASRProvider(ASRProvider):
 
     def __init__(self, config: dict):
         self.model = config.get("model", "qwen3-asr-flash-realtime")
-        self.api_key = config.get("api_key", "") or os.environ.get("DASHSCOPE_API_KEY", "")
+        self.api_key = config.get("api_key", "") or os.environ.get(
+            "DASHSCOPE_API_KEY", ""
+        )
 
-    async def recognize(self, audio_data: bytes, audio_format: str, sample_rate: int) -> ASRResult:
+    async def recognize(
+        self, audio_data: bytes, audio_format: str, sample_rate: int
+    ) -> ASRResult:
         loop = asyncio.get_event_loop()
-        return await loop.run_in_executor(None, self._sync_recognize, audio_data, audio_format, sample_rate)
+        return await loop.run_in_executor(
+            None, self._sync_recognize, audio_data, audio_format, sample_rate
+        )
 
-    def _sync_recognize(self, audio_data: bytes, audio_format: str, sample_rate: int) -> ASRResult:
+    async def close(self):
+        callback = getattr(self, "_callback", None)
+        if callback:
+            callback.done_event.set()
+        conversation = getattr(self, "_conversation", None)
+        if conversation:
+            await asyncio.to_thread(conversation.close)
+
+    def _sync_recognize(
+        self, audio_data: bytes, audio_format: str, sample_rate: int
+    ) -> ASRResult:
         t0 = time.monotonic()
         callback = _QwenCallback()
-
-        if self.api_key:
-            dashscope.api_key = self.api_key
 
         conversation = OmniRealtimeConversation(
             model=self.model,
             callback=callback,
+            api_key=self.api_key,
         )
 
+        self._conversation = conversation
+        self._callback = callback
         try:
             conversation.connect()
             conversation.update_session(
@@ -82,13 +105,14 @@ class QwenASRProvider(ASRProvider):
             chunk_size = sample_rate * 2 // 10  # 100ms chunks of 16-bit mono
             offset = 0
             while offset < len(audio_data):
-                chunk = audio_data[offset:offset + chunk_size]
+                chunk = audio_data[offset : offset + chunk_size]
                 encoded = base64.b64encode(chunk).decode("utf-8")
                 conversation.append_audio(encoded)
                 offset += chunk_size
 
             conversation.commit()
-            callback.done_event.wait(timeout=30)
+            if not callback.done_event.wait(timeout=30):
+                raise TimeoutError("Qwen completed transcription timed out")
         finally:
             try:
                 conversation.close()
@@ -97,6 +121,8 @@ class QwenASRProvider(ASRProvider):
 
         elapsed = (time.monotonic() - t0) * 1000
         if callback.error:
-            return ASRResult(text="", duration_ms=elapsed, raw_response={"error": callback.error})
+            return ASRResult(
+                text="", duration_ms=elapsed, raw_response={"error": callback.error}
+            )
         text = "".join(callback.final_transcripts)
         return ASRResult(text=text, duration_ms=elapsed, raw_response=callback.raw)

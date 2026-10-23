@@ -57,3 +57,21 @@ config*.yaml
 !*.yaml.example
 .pytest_cache/
 .coverage
+
+.ruff_cache/
+
+# Audio, recordings, root-level imported tables, and local lock files
+*.wav
+*.pcm
+*.mp3
+*.flac
+*.m4a
+*.ogg
+*.opus
+*.flv
+/*.tsv
+/*.csv
+*.log
+*.db.lock
+*.sqlite.lock
+*.sqlite3.lock
