@@ -32,3 +32,28 @@ result/
 
 # Sample audio files
 deg/
+
+config_*.yaml
+
+# Customer inputs and local runtime state
+/data/
+/datasets/
+/runtime/
+/exports/
+/logs/
+/*.jsonl
+/task.md
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+*.sqlite*-wal
+*.sqlite*-shm
+.env
+.env.*
+!.env.example
+config*.yaml
+!*.yaml.example
+.pytest_cache/
+.coverage

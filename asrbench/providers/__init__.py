@@ -4,6 +4,7 @@ from .funasr import FunASRProvider
 from .qwen_asr import QwenASRProvider
 from .paraformer import ParaformerProvider
 from .tencent import TencentProvider
+from .tencent_v2 import TencentV2Provider
 
 PROVIDER_REGISTRY: dict[str, type[ASRProvider]] = {
     "volcengine": VolcEngineProvider,
@@ -11,4 +12,5 @@ PROVIDER_REGISTRY: dict[str, type[ASRProvider]] = {
     "qwen_asr": QwenASRProvider,
     "paraformer": ParaformerProvider,
     "tencent": TencentProvider,
+    "tencent_v2": TencentV2Provider,
 }
