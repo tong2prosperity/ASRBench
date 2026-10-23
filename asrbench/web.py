@@ -22,6 +22,7 @@ from .summary import export_report
 
 
 class ImportRequest(BaseModel):
+    kind: str = "asr"
     manifest_path: str | None = None
     manifest_text: str | None = None
     audio_root: str | None = None
@@ -33,6 +34,9 @@ class RunRequest(BaseModel):
     mode: str = "batch"
     concurrency: int | None = Field(default=None, ge=1, le=32)
     limit: int | None = Field(default=None, ge=1)
+    prompt_template: str | None = None
+    system_prompt: str | None = None
+    label_policy: str | None = None
 
 
 def create_app(config=None, db="runtime/asrbench.sqlite3", service=None):
@@ -74,6 +78,7 @@ def create_app(config=None, db="runtime/asrbench.sqlite3", service=None):
         return [
             dict(
                 id=d["id"],
+                kind=d.get("kind", "asr"),
                 count=d["count"],
                 manifest=d["manifest"],
                 errors=d["errors"],
@@ -98,7 +103,15 @@ def create_app(config=None, db="runtime/asrbench.sqlite3", service=None):
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_text(body.manifest_text, encoding="utf-8")
             path = str(dest)
-        return await service.import_dataset(path, body.audio_root)
+        return await service.import_dataset(path, body.audio_root, body.kind)
+
+    @app.get("/api/eot/defaults")
+    async def eot_defaults():
+        return service.eot_defaults()
+
+    @app.post("/api/datasets/builtin-eot")
+    async def builtin_eot():
+        return await service.import_builtin_eot()
 
     @app.get("/api/datasets/{did}")
     async def dataset(did: str):
@@ -139,14 +152,29 @@ def create_app(config=None, db="runtime/asrbench.sqlite3", service=None):
 
     @app.get("/api/runs/{rid}/results")
     async def results(
-        rid: str, offset: int = 0, limit: int = 50, history: bool = False
+        rid: str,
+        offset: int = 0,
+        limit: int = 50,
+        history: bool = False,
+        errors_only: bool = False,
     ):
-        service.store.run(rid)
+        run = service.store.run(rid)
         if offset < 0 or not 1 <= limit <= 200:
             raise ValueError("无效分页参数")
         all_rows = service.store.attempts(rid, latest=not history)
+        if errors_only:
+            all_rows = [
+                r
+                for r in all_rows
+                if r["status"] != "success"
+                or (
+                    not r.get("correct")
+                    if run["spec"]["mode"] == "eot"
+                    else r.get("cer") not in (0, None)
+                )
+            ]
         rows = all_rows[offset : offset + limit]
-        for row in rows:
+        for row in rows if run["spec"]["mode"] != "eot" else []:
             row["diff"] = [
                 {
                     "op": op,
@@ -180,7 +208,10 @@ def create_app(config=None, db="runtime/asrbench.sqlite3", service=None):
 
     @app.get("/api/runs/{rid}/audio/{sid:path}")
     async def audio(rid: str, sid: str):
-        samples = service.store.run(rid)["spec"]["samples"]
+        run = service.store.run(rid)
+        if run["spec"]["mode"] == "eot":
+            raise ValueError("EOT 文本评测没有音频")
+        samples = run["spec"]["samples"]
         sample = next((s for s in samples if s["id"] == sid), None)
         if sample is None:
             raise ValueError("样本不存在")

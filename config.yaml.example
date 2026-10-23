@@ -36,3 +36,16 @@ models:
     params:
       api_key: "${DASHSCOPE_API_KEY}"
       model: paraformer-realtime-v2
+  - profile_id: eot_llm
+    name: 语义 EOT 模型
+    provider: eot_chat
+    params:
+      base_url: "${EOT_BASE_URL}"  # e.g. http://localhost:8000/v1
+      model: "${EOT_MODEL}"
+      api_key: "${EOT_API_KEY}"    # Remove this field for an unauthenticated local endpoint
+      max_tokens: 4
+      temperature: 0
+      timeout: 30
+      # For a model requiring thinking to be disabled:
+      # extra_body:
+      #   chat_template_kwargs: {enable_thinking: false}

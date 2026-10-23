@@ -2,7 +2,7 @@
 
 客户自有数据集上的多模型 ASR 对比工具。提供中文本地网页及命令行，评测 CER、WER、请求耗时和 RTF；腾讯适配器额外支持实时回放下的 ASR final 延迟。
 
-一期不评估语义 EOT、断句正确率或“正确／错误断句耗时”。
+同时支持基于 Chat Completions 的语义 EOT 文本二分类评测。尚不评估音频上的断句正确率或“正确／错误断句耗时”。
 
 ## 安装和启动
 
@@ -24,7 +24,9 @@ uv run asrbench serve
 uv run asrbench serve --config config.yaml.example
 ```
 
-依次完成：导入 JSONL 和 wav 根目录 → 多选模型 → 选择批测或实时回放 → 启动 → 查看报告、原音频和逐条差异 → 导出 CSV/JSON/Markdown。
+ASR 流程：导入 JSONL 和 wav 根目录 → 多选模型 → 选择批测或实时回放 → 启动 → 查看报告、原音频和逐条差异 → 导出 CSV/JSON/Markdown。
+
+EOT 流程：点击“载入内置 EOT 基础集”或导入自己的文本标签 → 选择 EOT 模型 → 编辑 prompt 和标签口径 → 启动 → 查看分类指标及误判样本。
 
 音频会发送到所选模型的云端服务；清单、任务和评测结果保存在本机。默认不自动重试请求，避免重复调用。
 
@@ -133,20 +135,82 @@ uv run asrbench report run_XXXXXXXX --format json --output exports/report.json
 
 腾讯批测同样按其协议要求以 1:1 速度发送，随后主动结束输入；批测耗时不能当作自然 final 延迟。协议依据：[腾讯实时识别](https://cloud.tencent.com/document/product/1093/48982)、[腾讯 V2 实时识别](https://cloud.tencent.com/document/api/1093/131127)。
 
-### EOT 边界
+## EOT 文本评测
 
-ASR final 只表示识别器确认了句段。语义 EOT 是独立模型判断用户是否说完，一期不调用该模型、不计算其准确率和断句耗时。
+已将旧 eot-bench 的基础数据与默认 prompt 迁入当前项目；没有迁入历史评测结果。内置集位于 `asrbench/resources/eot/base.jsonl`，随源码和安装包分发，不依赖旧项目路径。
 
-未来可把已有 EOT 文本评测接到独立任务类型，通过 Chat Completions 配置模型与 prompt；文本分类数据不能代替音频语义结束点标注。现有 ASR 原文、事件和时间信息可以作为后续分析输入。
+共 **1,134 条**，原始标签为 508 条完成、626 条未完成，覆盖 7 类。格式为：
+
+```json
+{"text":"你好，我想咨询一下订单状态","label":1,"category":"customer_service"}
+{"text":"因为","label":0,"category":"conversation"}
+```
+
+可选 `sample_id`；缺省按清单行号分配稳定 ID。`label` 必须是整数 0 或 1，`text` 不能为空。EOT 数据不需要 wav。
+
+### 配置模型与 prompt
+
+在 `config.yaml` 中添加 `provider: eot_chat`，支持任何兼容 Chat Completions 的服务。复制模型配置并分配不同 `profile_id` 可对比多个模型或 prompt。
+
+```yaml
+models:
+  - profile_id: eot_llm
+    name: 语义 EOT 模型
+    provider: eot_chat
+    params:
+      base_url: "${EOT_BASE_URL}"  # 如 http://localhost:8000/v1
+      model: "${EOT_MODEL}"
+      api_key: "${EOT_API_KEY}"
+      temperature: 0
+      max_tokens: 4
+      timeout: 30
+      # extra_body:
+      #   chat_template_kwargs: {enable_thinking: false}
+```
+
+在 `.env` 填写这三个 EOT 环境变量。无认证本地服务可删除 `api_key` 配置。`base_url` 可填 API 根地址或完整的 `/chat/completions` 地址，不会自动加入 `/v1`。该适配器仅请求模型明确指定的地址，不自动重试。
+
+默认用户 prompt 保留旧项目内容，可在网页直接编辑，或使用 CLI 的 `--prompt-file`。模板必须含一个 `%s` 或 `{text}` 占位符。系统 prompt 可选。配置优先级：模型 `params` 内的独立 prompt > 当前任务网页/CLI prompt > 配置顶层 `eot.prompt_template/system_prompt` > 随包默认 prompt。任务保存实际配置快照，恢复时继续使用该轮的 prompt。
+
+仅接受模型严格输出 `0` 或 `1`（允许前后空白）。旧脚本会从任意文本中提取首个数字；当前工具把解释性、矛盾或空输出记为“无法解析”，与请求失败分开统计，避免误把格式错误计为有效判断。需要更多输出 token 或关闭模型 thinking 时，通过模型参数配置。
+
+### 标签口径和指标
+
+内置集含 200 条 `silence_request`，原标签全部为 0。默认 `original` 保留原标签；可明确选择 `stop_is_complete`，只在该轮把停止类有效标签设为 1。源数据不改写，每条结果保留 `source_label` 与有效 `label`。
+
+报告提供准确率、精确率、召回率、FPR、TP/FP/FN/TN、类别细分，以及排除停止类后的核心指标（基础集共 934 条）。分类指标分母为成功返回有效 0/1 的样本；同时展示共同有效覆盖率、请求失败数和无法解析数。无分母时显示 N/A。
+
+请求耗时包含完整 HTTP 请求及响应，不含排队、分类统计和写库。报告同时提供所有成功 HTTP 输出（包括无法解析输出）及有效分类输出的耗时分布。错误筛选可定位误判、无法解析和失败；重试只重新执行请求失败、超时和无法解析的样本，不自动重跑已成功分类的误判样本。
+
+```bash
+# 校验并载入内置基础集
+uv run asrbench validate --builtin-eot
+
+# 使用内置数据测试指定 EOT 模型；--limit 可先做小批量验证
+uv run asrbench run --builtin-eot --mode eot --models eot_llm --limit 20
+
+# 全量对比多个配置
+uv run asrbench run --builtin-eot --mode eot --models eot_llm eot_other
+
+# 导入自有文本标签
+uv run asrbench validate /path/to/eot.jsonl --kind eot
+uv run asrbench run --manifest /path/to/eot.jsonl --mode eot --models eot_llm \
+  --prompt-file /path/to/prompt.txt --label-policy original
+```
+
+停止、恢复、重试和报告导出命令与 ASR 共用。ASR 与 EOT 的数据和模型不能混在同一任务。EOT 使用独立分类报告，不计算 CER/WER、RTF 或 ASR final 延迟。
+
+文本数据没有音频语义结束点标注。EOT 请求耗时不能当作“正确断句耗时”；音频端到端的 EOT 断句评测仍需另行采集和标注。
 
 ## 数据和 API
 
 - SQLite：`runtime/asrbench.sqlite3`；上传清单：`runtime/imports/`。
 - 客户可自行保留音频目录；导入不搬移音频。
 - `GET /api/models`、`POST/GET /api/datasets`：配置查询、数据校验与样本预览。
-- `POST/GET /api/runs`：创建任务和任务列表。
+- `GET /api/eot/defaults`、`POST /api/datasets/builtin-eot`：默认 prompt 和内置基础集导入。
+- `POST/GET /api/runs`：创建任务和任务列表，mode 支持 batch、stream、eot。
 - `POST /api/runs/{id}/stop|resume|retry`：生命周期操作。
-- `GET /api/runs/{id}/results?offset=0&limit=50&history=false`：分页结果与文本差异。
+- `GET /api/runs/{id}/results?offset=0&limit=50&history=false`：分页结果与文本差异，支持 `errors_only=true` 筛选误判／失败。
 - `GET /api/runs/{id}/report`、`export/json|csv|md`：同一计分源的报告与导出。
 - `GET /api/runs/{id}/events?after=0`：持久化 SSE 事件，支持 `Last-Event-ID` 恢复订阅。
 - 本机启动后可访问 `/docs` 查看接口参数。
@@ -176,6 +240,6 @@ uv build
 
 ## Git 与隐私
 
-仓库只提交代码、脱敏配置模板、人工测试夹具和文档。`.env`、私人配置、根目录真实 JSONL、客户需求原文、音频数据目录、结果、数据库、导出和日志已加入 `.gitignore`。测试数据均在临时目录生成。
+仓库只提交代码、脱敏配置模板、人工测试夹具、文档及用户明确要求附带的 EOT 基础标注集。`.env`、私人配置、根目录真实 JSONL、客户需求原文、音频数据目录、结果、数据库、导出和日志已加入 `.gitignore`。测试数据均在临时目录生成。
 
 不要把客户数据复制到源码或测试目录；新增真实数据请放 `data/` 或仓库外部目录。忽略规则不会自动清除已提交的文件，新增提交前仍需检查暂存文件列表。

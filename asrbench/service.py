@@ -5,7 +5,10 @@ import contextlib
 import time
 from pathlib import Path
 
+import httpx
 from filelock import FileLock, Timeout
+
+from . import eot
 
 from .audio import prepare_pcm
 from .config import STREAMING, public_profiles, redact, resolve_profile
@@ -26,6 +29,7 @@ class BenchService:
         db="runtime/asrbench.sqlite3",
         provider_factory=None,
         stream_recognizer=None,
+        eot_client_factory=None,
     ):
         self.config = config
         self.store = Store(db)
@@ -36,6 +40,7 @@ class BenchService:
         self.stops = {}
         self.provider_factory = provider_factory
         self.stream_recognizer = stream_recognizer
+        self.eot_client_factory = eot_client_factory or httpx.AsyncClient
 
     def activate(self):
         if self.active:
@@ -49,7 +54,19 @@ class BenchService:
         self.store.recover()
         self.active = True
 
-    async def import_dataset(self, path, audio_root=None):
+    async def import_dataset(self, path, audio_root=None, kind="asr"):
+        if kind not in ("asr", "eot"):
+            raise ValueError("数据类型必须为 asr 或 eot")
+        if kind == "eot":
+            result = await asyncio.to_thread(eot.validate_manifest, path)
+            return self.store.add_dataset(
+                dict(
+                    result,
+                    kind="eot",
+                    manifest=str(Path(path).expanduser().resolve()),
+                    audio_root=None,
+                )
+            )
         result = await asyncio.to_thread(validate_manifest, path, audio_root)
         # Punctuation-only speech references cannot have a meaningful CER denominator.
         for sample in result["samples"]:
@@ -59,12 +76,27 @@ class BenchService:
                 )
         body = dict(
             result,
+            kind="asr",
             manifest=str(Path(path).expanduser().resolve()),
             audio_root=str(Path(audio_root).expanduser().resolve())
             if audio_root
             else None,
         )
         return self.store.add_dataset(body)
+
+    async def import_builtin_eot(self):
+        return await self.import_dataset(eot.RESOURCE_DIR / "base.jsonl", kind="eot")
+
+    def eot_defaults(self):
+        settings = eot.defaults()
+        settings.update(
+            {
+                k: v
+                for k, v in self.config.get("eot", {}).items()
+                if k in ("prompt_template", "system_prompt", "label_policy")
+            }
+        )
+        return settings
 
     def profiles(self):
         return public_profiles(self.config)
@@ -82,6 +114,8 @@ class BenchService:
         return output
 
     def _verify_audio(self, samples):
+        if samples and "audio_path" not in samples[0]:
+            return
         for sample in samples:
             try:
                 s = Path(sample["audio_path"]).stat()
@@ -92,13 +126,39 @@ class BenchService:
                 raise ValueError("音频已改变，请重新导入并新建任务")
 
     def create_run(
-        self, dataset_id, profile_ids, mode="batch", concurrency=None, limit=None
+        self,
+        dataset_id,
+        profile_ids,
+        mode="batch",
+        concurrency=None,
+        limit=None,
+        prompt_template=None,
+        system_prompt=None,
+        label_policy=None,
     ):
         dataset = self.store.dataset(dataset_id)
         if dataset["errors"]:
             raise ValueError("数据集有校验错误，请修正后重新导入")
-        if mode not in ("batch", "stream"):
-            raise ValueError("mode 必须为 batch 或 stream")
+        if mode not in ("batch", "stream", "eot"):
+            raise ValueError("mode 必须为 batch、stream 或 eot")
+        expected_kind = "eot" if mode == "eot" else "asr"
+        if dataset.get("kind", "asr") != expected_kind:
+            raise ValueError("数据集类型与评测模式不匹配")
+        settings = self.eot_defaults()
+        if mode == "eot":
+            if prompt_template is not None:
+                settings["prompt_template"] = prompt_template
+            if system_prompt is not None:
+                settings["system_prompt"] = system_prompt
+            if label_policy is not None:
+                settings["label_policy"] = label_policy
+            eot.validate_prompt(settings["prompt_template"])
+            if not isinstance(settings["system_prompt"], str):
+                raise ValueError("EOT system_prompt 必须为文本")
+            if settings["label_policy"] not in eot.LABEL_POLICIES:
+                raise ValueError("EOT label_policy 必须为 original 或 stop_is_complete")
+        elif any(v is not None for v in (prompt_template, system_prompt, label_policy)):
+            raise ValueError("prompt 与标签策略只适用于 EOT")
         if not profile_ids or len(profile_ids) != len(set(profile_ids)):
             raise ValueError("请选择不重复的模型配置")
         lookup = {
@@ -107,6 +167,8 @@ class BenchService:
         if any(pid not in lookup for pid in profile_ids):
             raise ValueError("模型配置不存在或未启用")
         profiles = [lookup[pid] for pid in profile_ids]
+        if any((p["provider"] == "eot_chat") != (mode == "eot") for p in profiles):
+            raise ValueError("ASR 与 EOT 模型不能混用，请选择对应模式的模型")
         if mode == "stream" and any(p["provider"] not in STREAMING for p in profiles):
             raise ValueError("一期自然 final 延迟只支持腾讯两套适配器")
         concurrency = (
@@ -130,7 +192,10 @@ class BenchService:
                 "tencent": ("app_id", "secret_id", "secret_key"),
                 "tencent_v2": ("app_id", "secret_id", "secret_key"),
                 "volcengine": ("app_key", "access_key"),
+                "eot_chat": ("base_url", "model"),
             }.get(p["provider"], ("api_key",))
+            if mode == "eot":
+                eot.validate_params(params)
             if any(not params.get(k) for k in required):
                 raise ValueError(
                     f"模型 {p['profile_id']} 缺少凭据参数：{', '.join(required)}"
@@ -142,10 +207,15 @@ class BenchService:
                 "profiles": redact(profiles),
                 "mode": mode,
                 "concurrency": concurrency,
-                "metric_version": METRIC_VERSION,
+                "metric_version": eot.METRIC_VERSION
+                if mode == "eot"
+                else METRIC_VERSION,
+                **({"eot": settings} if mode == "eot" else {}),
                 "transport_policy": {
                     p["profile_id"]: "tencent_1to1_200ms"
                     if p["provider"] in STREAMING
+                    else "chat_completions"
+                    if p["provider"] == "eot_chat"
                     else "provider_batch"
                     for p in profiles
                 },
@@ -188,7 +258,9 @@ class BenchService:
         return self.store.run(rid)
 
     def report(self, rid):
-        return summarize(self.store.run(rid), self.store.attempts(rid))
+        run = self.store.run(rid)
+        fn = eot.summarize if run["spec"]["mode"] == "eot" else summarize
+        return fn(run, self.store.attempts(rid))
 
     async def close(self):
         for stop in self.stops.values():
@@ -221,6 +293,11 @@ class BenchService:
                         break
                     params = resolve_profile(profile)
                     sem = asyncio.Semaphore(run["spec"]["concurrency"])
+                    eot_client = (
+                        self.eot_client_factory()
+                        if run["spec"]["mode"] == "eot"
+                        else None
+                    )
 
                     async def process(sample):
                         pid, sid = profile["profile_id"], sample["id"]
@@ -230,30 +307,51 @@ class BenchService:
                             old["status"] == "success"
                             or (
                                 action != "retry"
-                                and old["status"] in ("failed", "timeout")
+                                and old["status"] in ("failed", "timeout", "invalid")
                             )
                         ):
                             return
                         if action == "retry" and (
-                            not old or old["status"] not in ("failed", "timeout")
+                            not old
+                            or old["status"] not in ("failed", "timeout", "invalid")
                         ):
                             return
                         async with sem:
                             if stop.is_set():
                                 return
-                            await self._process(
-                                rid, profile, params, sample, run["spec"]["mode"], stop
-                            )
+                            if run["spec"]["mode"] == "eot":
+                                await self._process_eot(
+                                    rid,
+                                    profile,
+                                    params,
+                                    sample,
+                                    run["spec"]["eot"],
+                                    stop,
+                                    eot_client,
+                                )
+                            else:
+                                await self._process(
+                                    rid,
+                                    profile,
+                                    params,
+                                    sample,
+                                    run["spec"]["mode"],
+                                    stop,
+                                )
 
                     # Bounded batches avoid allocating a task for every sample in large datasets.
                     samples = run["spec"]["samples"]
                     batch_size = run["spec"]["concurrency"] * 2
-                    for i in range(0, len(samples), batch_size):
-                        if stop.is_set():
-                            break
-                        await asyncio.gather(
-                            *(process(s) for s in samples[i : i + batch_size])
-                        )
+                    try:
+                        for i in range(0, len(samples), batch_size):
+                            if stop.is_set():
+                                break
+                            await asyncio.gather(
+                                *(process(s) for s in samples[i : i + batch_size])
+                            )
+                    finally:
+                        if eot_client:
+                            await eot_client.aclose()
                 self.store.state(rid, "cancelled" if stop.is_set() else "completed")
         except asyncio.CancelledError:
             if self.store.run(rid)["state"] != "cancelled":
@@ -367,4 +465,68 @@ class BenchService:
             if provider:
                 with contextlib.suppress(Exception):
                     await provider.close()
+            self.store.attempt(rid, pid, sid, body)
+
+    async def _process_eot(self, rid, profile, params, sample, settings, stop, client):
+        pid, sid = profile["profile_id"], sample["id"]
+        body = {
+            "status": "failed",
+            "input_text": sample["text"],
+            "source_label": sample["label"],
+            "label": eot.effective_label(sample, settings["label_policy"]),
+            "category": sample["category"],
+            "pred": None,
+            "raw_output": "",
+            "request_elapsed_ms": None,
+        }
+        self.store.event(rid, "sample_start", {"profile_id": pid, "sample_id": sid})
+        began = time.monotonic()
+
+        async def invoke():
+            try:
+                return await eot.call_model(client, params, sample["text"], settings)
+            finally:
+                body["request_elapsed_ms"] = (time.monotonic() - began) * 1000
+
+        work, stopped = asyncio.create_task(invoke()), asyncio.create_task(stop.wait())
+        try:
+            done, _ = await asyncio.wait(
+                [work, stopped],
+                timeout=params.get("timeout", 30),
+                return_when=asyncio.FIRST_COMPLETED,
+            )
+            if stopped in done:
+                body.update(status="cancelled", error="用户停止任务")
+            elif work not in done:
+                body.update(status="timeout", error="EOT 请求超时")
+            else:
+                result = await work
+                body.update(result)
+                if result["pred"] is None:
+                    body.update(status="invalid", error="模型未严格输出 0 或 1")
+                else:
+                    body.update(
+                        status="success", correct=result["pred"] == body["label"]
+                    )
+        except asyncio.CancelledError:
+            body.update(status="cancelled", error="服务中断")
+            raise
+        except (TimeoutError, asyncio.TimeoutError, httpx.TimeoutException):
+            body.update(status="timeout", error="EOT 请求超时")
+        except httpx.HTTPStatusError as exc:
+            body.update(
+                status="failed",
+                error=f"EOT 服务返回 HTTP {exc.response.status_code}，请检查模型、凭据和配额",
+            )
+        except Exception as exc:
+            body.update(
+                status="failed",
+                error=f"{type(exc).__name__}：EOT 请求失败，请检查服务地址和响应格式",
+            )
+        finally:
+            for task in (work, stopped):
+                task.cancel()
+            await asyncio.gather(work, stopped, return_exceptions=True)
+            if body["request_elapsed_ms"] is None:
+                body["request_elapsed_ms"] = (time.monotonic() - began) * 1000
             self.store.attempt(rid, pid, sid, body)

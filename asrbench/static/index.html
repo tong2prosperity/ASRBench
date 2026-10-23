@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ASRBench · 语音识别评测</title>
+    <title>ASRBench · 语音与 EOT 评测</title>
     <style>
       :root {
         font:
@@ -86,7 +86,8 @@
         margin: 13px 0 5px;
       }
       input,
-      select {
+      select,
+      textarea {
         border: 1px solid #cbd4e0;
         border-radius: 6px;
         padding: 10px;
@@ -234,7 +235,7 @@
   </head>
   <body>
     <header>
-      <h1>ASRBench <span>语音识别评测</span></h1>
+      <h1>ASRBench <span>语音与 EOT 评测</span></h1>
       <span>本机运行 · 客户数据保存在本地</span>
     </header>
     <nav>
@@ -250,6 +251,17 @@
             支持客户 JSONL：sample_id、audio_uri、gold_text。storage://
             路径按文件名映射到本机 wav 目录。
           </p>
+          <label for="importKind">数据类型</label>
+          <select id="importKind">
+            <option value="asr">ASR 音频与参考文本</option>
+            <option value="eot">EOT 文本与完成标签</option>
+          </select>
+          <p class="muted" id="importHelp">
+            EOT 清单使用
+            text、label（0/1）、category；无需音频。可直接载入附带的 1,134
+            条基础文本。
+          </p>
+          <button id="builtinEotBtn">载入内置 EOT 基础集（1134 条）</button>
           <div class="grid">
             <div>
               <label for="manifest">选择 JSONL 文件</label
@@ -259,7 +271,7 @@
               ><input id="manifestPath" placeholder="/path/to/dataset.jsonl" />
             </div>
             <div>
-              <label for="audioRoot">本机 wav 根目录</label
+              <label for="audioRoot">本机 wav 根目录（ASR）</label
               ><input id="audioRoot" placeholder="/path/to/wavs" />
               <p class="muted">
                 填写运行服务的计算机上的目录。音频不复制到项目中。浏览器上传的清单如含相对音频路径，必须填写此目录。
@@ -288,6 +300,7 @@
               ><select id="mode">
                 <option value="batch">准确率批测 · 所有云端模型</option>
                 <option value="stream">实时回放 · 腾讯 ASR final 延迟</option>
+                <option value="eot">语义 EOT · 文本完成判断</option>
               </select>
               <p id="modeHelp" class="notice"></p>
               <div class="grid">
@@ -316,6 +329,39 @@
               </p>
             </div>
           </div>
+          <div id="eotControls" class="hidden">
+            <label for="labelPolicy">EOT 标签口径</label
+            ><select id="labelPolicy">
+              <option value="original">保留原始标签：停止类为 0</option>
+              <option value="stop_is_complete">
+                停止类视为完成：silence_request 为 1
+              </option>
+            </select>
+            <div class="grid">
+              <div>
+                <label for="promptTemplate"
+                  >用户 Prompt（包含一个 %s 或 {text}）</label
+                ><textarea
+                  id="promptTemplate"
+                  rows="10"
+                  style="width: 100%"
+                ></textarea>
+              </div>
+              <div>
+                <label for="systemPrompt">系统 Prompt（可留空）</label
+                ><textarea
+                  id="systemPrompt"
+                  rows="10"
+                  style="width: 100%"
+                ></textarea>
+                <p class="muted">
+                  1 表示说完，0
+                  表示未说完。原始标签不会修改，报告会记录所选口径。模型配置中的独立
+                  prompt 优先。
+                </p>
+              </div>
+            </div>
+          </div>
           <button id="startBtn" class="primary">启动评测</button>
         </div>
       </section>
@@ -340,12 +386,13 @@
               ><a id="csvExport" class="link">CSV</a
               ><a id="mdExport" class="link">Markdown</a>
             </div>
-            <p class="muted">
+            <p class="muted" id="reportHelp">
               请求失败不计入自身
               CER/WER；横向比较请使用共同成功样本指标并检查覆盖率。流式请求时长包含
               10 秒观察窗口。
             </p>
             <div id="summary" class="scroll"></div>
+            <div id="eotBreakdown"></div>
             <details>
               <summary>运行参数（脱敏）</summary>
               <pre id="runSpec"></pre>
@@ -353,9 +400,15 @@
           </div>
           <div class="panel">
             <h2>逐条结果与差异</h2>
-            <p class="muted">
+            <p class="muted" id="diffHelp">
               红色删除，绿色插入；差异显示原文，计分使用统一规范化后的文本。
             </p>
+            <label
+              ><input
+                id="errorsOnly"
+                type="checkbox"
+              />仅看差异／误判／失败</label
+            >
             <div id="sampleResults" class="scroll"></div>
             <div class="toolbar">
               <button id="prevPage">上一页</button><span id="pageInfo"></span
@@ -385,7 +438,9 @@
         source = null,
         offset = 0,
         timer = null,
-        events = [];
+        events = [],
+        eotDefaults = {},
+        activeMode = "batch";
       const esc = (s) =>
         String(s ?? "").replace(
           /[&<>"']/g,
@@ -438,35 +493,72 @@
           ? datasetItems
               .map(
                 (d) =>
-                  `<div class="toolbar"><b>${esc(d.id)}</b><span>${d.count} 条</span><span class="${d.errors.length ? "error" : "success"}">${d.errors.length ? "校验未通过" : "可评测"}</span><span class="muted">${esc(d.manifest)}</span></div>`,
+                  `<div class="toolbar"><b>${esc(d.id)}</b><span>${d.kind === "eot" ? "EOT 文本" : "ASR 音频"} · ${d.count} 条</span><span class="${d.errors.length ? "error" : "success"}">${d.errors.length ? "校验未通过" : "可评测"}</span><span class="muted">${esc(d.manifest)}</span></div>`,
               )
               .join("")
           : '<p class="muted">尚未导入数据集</p>';
+        datasetOptions();
+      }
+      function datasetOptions() {
+        const previous = $("datasetSelect").value;
+        const kind = $("mode").value === "eot" ? "eot" : "asr";
         $("datasetSelect").innerHTML = datasetItems
-          .filter((d) => !d.errors.length)
+          .filter((d) => !d.errors.length && (d.kind || "asr") === kind)
           .map(
             (d) =>
               `<option value="${esc(d.id)}">${esc(d.id)} · ${d.count} 条</option>`,
           )
           .join("");
+        if ([...$("datasetSelect").options].some((o) => o.value === previous))
+          $("datasetSelect").value = previous;
       }
+      $("importKind").onchange = () => {
+        $("audioRoot").disabled = $("importKind").value === "eot";
+      };
+      $("builtinEotBtn").onclick = async () => {
+        const b = $("builtinEotBtn");
+        b.disabled = true;
+        try {
+          const d = await api("datasets/builtin-eot", {});
+          await refreshDatasets();
+          $("mode").value = "eot";
+          modeChanged();
+          $("datasetSelect").value = d.id;
+          page("new");
+        } catch (e) {
+          error(e);
+        } finally {
+          b.disabled = false;
+        }
+      };
       $("importBtn").onclick = async () => {
         const button = $("importBtn");
         button.disabled = true;
-        $("importStatus").textContent = "校验音频中…";
+        $("importStatus").textContent =
+          $("importKind").value === "eot" ? "校验文本与标签中…" : "校验音频中…";
         try {
           const file = $("manifest").files[0],
             path = $("manifestPath").value.trim();
           if (!file && !path) throw Error("请选择 JSONL 或填写清单路径");
           if (file && path) throw Error("请选择文件或路径其中一种");
-          const body = { audio_root: $("audioRoot").value.trim() || null };
+          const body = {
+            kind: $("importKind").value,
+            audio_root:
+              $("importKind").value === "asr"
+                ? $("audioRoot").value.trim() || null
+                : null,
+          };
           if (file) body.manifest_text = await file.text();
           else body.manifest_path = path;
           const d = await api("datasets", body);
           $("validation").innerHTML =
-            `<p class="${d.errors.length ? "error" : "success"}">${d.count} 条音频可读取；${d.errors.length} 项错误；${d.warnings.length} 项提示</p><pre>${esc(JSON.stringify({ errors: d.errors, warnings: d.warnings }, null, 2))}</pre><details><summary>样本预览</summary><pre>${esc(JSON.stringify(d.samples.slice(0, 3), null, 2))}</pre></details>`;
+            `<p class="${d.errors.length ? "error" : "success"}">${d.count} 条样本可读取；${d.errors.length} 项错误；${d.warnings.length} 项提示</p><pre>${esc(JSON.stringify({ errors: d.errors, warnings: d.warnings }, null, 2))}</pre><details><summary>样本预览</summary><pre>${esc(JSON.stringify(d.samples.slice(0, 3), null, 2))}</pre></details>`;
           await refreshDatasets();
-          if (!d.errors.length) $("datasetSelect").value = d.id;
+          if (!d.errors.length) {
+            $("mode").value = d.kind === "eot" ? "eot" : "batch";
+            modeChanged();
+            $("datasetSelect").value = d.id;
+          }
         } catch (e) {
           error(e);
         } finally {
@@ -475,18 +567,28 @@
         }
       };
       function modeChanged() {
-        const stream = $("mode").value === "stream";
+        const mode = $("mode").value,
+          stream = mode === "stream",
+          eot = mode === "eot";
         $("concurrency").value = stream ? 1 : 3;
         $("concurrency").disabled = stream;
-        $("modeHelp").textContent = stream
-          ? "按 1:1 速度回放，音频后补 10 秒静音。只测 ASR final 延迟；不评估语义断句。"
-          : "比较 CER/WER、请求耗时及 RTF。所有模型使用相同音频规范与文本计分规则。";
-        $("models").innerHTML = models
-          .map(
-            (m) =>
-              `<label class="model"><input type="checkbox" name="model" value="${esc(m.profile_id)}" ${stream && !m.modes.includes("stream") ? "disabled" : ""}>${esc(m.name)} <span class="muted">${esc(m.provider)} · ${esc(m.params?.model || m.params?.engine_model_type || m.model || m.engine_model_type || "默认引擎")}${stream && !m.modes.includes("stream") ? " · 暂无自然 final 指标" : ""}</span></label>`,
-          )
-          .join("");
+        $("eotControls").classList.toggle("hidden", !eot);
+        $("modeHelp").textContent = eot
+          ? "判断文本是否说完，比较准确率、精确率、召回率、FPR 与请求耗时；不计算音频断句耗时。"
+          : stream
+            ? "按 1:1 速度回放，音频后补 10 秒静音。只测 ASR final 延迟；不评估语义断句。"
+            : "比较 CER/WER、请求耗时及 RTF。所有模型使用相同音频规范与文本计分规则。";
+        $("models").innerHTML =
+          models
+            .filter((m) =>
+              eot ? m.modes.includes("eot") : !m.modes.includes("eot"),
+            )
+            .map(
+              (m) =>
+                `<label class="model"><input type="checkbox" name="model" value="${esc(m.profile_id)}" ${!m.modes.includes(mode) ? "disabled" : ""}>${esc(m.name)} <span class="muted">${esc(m.provider)} · ${esc(m.params?.model || m.params?.engine_model_type || m.model || m.engine_model_type || "默认引擎")}${!m.modes.includes(mode) ? " · 暂不支持此模式" : ""}</span></label>`,
+            )
+            .join("") || '<p class="muted">请在配置文件中添加对应模型。</p>';
+        datasetOptions();
       }
       $("mode").onchange = modeChanged;
       $("startBtn").onclick = async () => {
@@ -502,6 +604,13 @@
             mode: $("mode").value,
             concurrency: Number($("concurrency").value),
             limit: $("limit").value ? Number($("limit").value) : null,
+            ...($("mode").value === "eot"
+              ? {
+                  prompt_template: $("promptTemplate").value,
+                  system_prompt: $("systemPrompt").value,
+                  label_policy: $("labelPolicy").value,
+                }
+              : {}),
           });
           page("runs");
           await openRun(run.id);
@@ -562,6 +671,7 @@
           failed: "失败",
           success: "成功",
           timeout: "超时",
+          invalid: "无法解析",
         })[s] || s;
       const num = (v, pct = false) =>
         v === null || v === undefined
@@ -574,11 +684,16 @@
         const id = selectedRun;
         const r = await api(`runs/${id}/report`);
         if (id !== selectedRun) return;
+        activeMode = r.mode;
         const total = r.profiles.reduce((n, p) => n + p.total, 0),
           done = r.profiles.reduce((n, p) => n + p.completed, 0);
         $("runBadges").innerHTML = [
           stateName(r.state),
-          r.mode === "batch" ? "准确率批测" : "实时回放",
+          r.mode === "eot"
+            ? "语义 EOT"
+            : r.mode === "batch"
+              ? "准确率批测"
+              : "实时回放",
           `${done}/${total} 已有结果`,
           `共同成功 ${r.common_count} 条 · ${num(r.common_coverage, true)}`,
         ]
@@ -594,19 +709,52 @@
         $("retryBtn").disabled =
           active || !r.profiles.some((p) => p.failures > 0);
         $("runSpec").textContent = JSON.stringify(r.spec, null, 2);
-        $("summary").innerHTML =
-          `<table><thead><tr><th>模型</th><th>成功/总数</th><th>失败率</th><th>CER</th><th>WER</th><th>共同 CER</th><th>共同 WER</th><th>请求均值 ms</th><th>请求 P50 / P95 ms</th><th>RTF</th><th>final 均值 ms</th><th>final P50 / P95 ms</th><th>final 覆盖率</th></tr></thead><tbody>${r.profiles.map((p) => `<tr><td>${esc(p.name)}</td><td>${p.success}/${p.total}</td><td>${num(p.failure_rate, true)}</td><td>${num(p.accuracy.cer, true)}</td><td>${num(p.accuracy.wer, true)}</td><td>${num(p.common_accuracy.cer, true)}</td><td>${num(p.common_accuracy.wer, true)}</td><td>${num(p.request_elapsed_ms.mean)}</td><td>${num(p.request_elapsed_ms.p50)} / ${num(p.request_elapsed_ms.p95)}</td><td>${num(p.rtf)}</td><td>${num(p.final_latency_ms.mean)}</td><td>${num(p.final_latency_ms.p50)} / ${num(p.final_latency_ms.p95)}</td><td>${num(p.final_coverage, true)}</td></tr>`).join("")}</tbody></table>`;
+        if (r.mode !== "eot")
+          $("summary").innerHTML =
+            `<table><thead><tr><th>模型</th><th>成功/总数</th><th>失败率</th><th>CER</th><th>WER</th><th>共同 CER</th><th>共同 WER</th><th>请求均值 ms</th><th>请求 P50 / P95 ms</th><th>RTF</th><th>final 均值 ms</th><th>final P50 / P95 ms</th><th>final 覆盖率</th></tr></thead><tbody>${r.profiles.map((p) => `<tr><td>${esc(p.name)}</td><td>${p.success}/${p.total}</td><td>${num(p.failure_rate, true)}</td><td>${num(p.accuracy.cer, true)}</td><td>${num(p.accuracy.wer, true)}</td><td>${num(p.common_accuracy.cer, true)}</td><td>${num(p.common_accuracy.wer, true)}</td><td>${num(p.request_elapsed_ms.mean)}</td><td>${num(p.request_elapsed_ms.p50)} / ${num(p.request_elapsed_ms.p95)}</td><td>${num(p.rtf)}</td><td>${num(p.final_latency_ms.mean)}</td><td>${num(p.final_latency_ms.p50)} / ${num(p.final_latency_ms.p95)}</td><td>${num(p.final_coverage, true)}</td></tr>`).join("")}</tbody></table>`;
+        $("reportHelp").textContent =
+          r.mode === "eot"
+            ? "只接受严格的 0/1 输出；请求失败与无法解析分别统计。请结合共同有效覆盖率比较分类指标。请求耗时不代表音频断句耗时。标签口径：" +
+              r.spec.eot.label_policy
+            : "请求失败不计入自身 CER/WER；横向比较使用共同成功样本及覆盖率。流式请求总时长包含观察窗口。";
+        $("diffHelp").textContent =
+          r.mode === "eot"
+            ? "显示原始标签、当前标签及模型原始输出。1 表示完成，0 表示未完成。"
+            : "红色删除，绿色插入；差异显示原文，计分使用规范化后的文本。";
+        $("eotBreakdown").innerHTML = "";
+        if (r.mode === "eot") renderEotReport(r);
         await refreshResults();
+      }
+      function renderEotReport(r) {
+        $("summary").innerHTML =
+          `<table><thead><tr><th>模型</th><th>有效/总数</th><th>准确率</th><th>精确率</th><th>召回率</th><th>误判率 FPR</th><th>共同准确率</th><th>请求失败</th><th>无法解析</th><th>均值 ms</th><th>P50 / P95 ms</th></tr></thead><tbody>${r.profiles.map((p) => `<tr><td>${esc(p.name)}</td><td>${p.success}/${p.total}</td>${["accuracy", "precision", "recall", "fpr"].map((k) => `<td>${num(p.metrics[k], true)}</td>`).join("")}<td>${num(p.common_metrics.accuracy, true)}</td><td>${p.request_failures}</td><td>${p.unparsed}</td><td>${num(p.request_elapsed_ms.mean)}</td><td>${num(p.request_elapsed_ms.p50)} / ${num(p.request_elapsed_ms.p95)}</td></tr>`).join("")}</tbody></table>`;
+        $("eotBreakdown").innerHTML = r.profiles
+          .map(
+            (p) =>
+              `<details><summary>${esc(p.name)} · 分类、混淆矩阵与核心指标</summary><p>TP ${p.metrics.tp} / FP ${p.metrics.fp} / FN ${p.metrics.fn} / TN ${p.metrics.tn}；排除停止类的核心准确率 ${num(p.core_metrics.accuracy, true)}（${p.core_metrics.count} 条）</p><div class="scroll"><table><thead><tr><th>类别</th><th>有效数</th><th>准确率</th><th>精确率</th><th>召回率</th><th>FPR</th></tr></thead><tbody>${Object.entries(
+                p.categories,
+              )
+                .map(
+                  ([c, m]) =>
+                    `<tr><td>${esc(c)}</td><td>${m.count}</td>${["accuracy", "precision", "recall", "fpr"].map((k) => `<td>${num(m[k], true)}</td>`).join("")}</tr>`,
+                )
+                .join("")}</tbody></table></div></details>`,
+          )
+          .join("");
       }
       async function refreshResults() {
         if (!selectedRun) return;
         const id = selectedRun;
         const data = await api(
-          `runs/${id}/results?offset=${offset}&limit=20&history=${$("history").checked}`,
+          `runs/${id}/results?offset=${offset}&limit=20&history=${$("history").checked}&errors_only=${$("errorsOnly").checked}`,
         );
         if (id !== selectedRun) return;
-        $("sampleResults").innerHTML =
-          `<table><thead><tr><th>模型 / 样本 / 尝试</th><th>状态</th><th>参考文本</th><th>识别文本与差异</th><th>CER / WER</th><th>final 延迟</th><th>原音频</th></tr></thead><tbody>${data.rows.map((r) => `<tr><td>${esc(r.profile_id)}<br>${esc(r.sample_id)} / #${r.attempt_id}</td><td class="wrap">${esc(stateName(r.status))}<br><span class="error">${esc(r.error || "")}</span></td><td class="wrap">${esc(r.reference_text)}</td><td class="wrap">${r.diff.map((d) => (d.op === "equal" ? esc(d.hypothesis) : d.op === "delete" ? `<del>${esc(d.reference)}</del>` : d.op === "insert" ? `<ins>${esc(d.hypothesis)}</ins>` : `<del>${esc(d.reference)}</del><ins>${esc(d.hypothesis)}</ins>`)).join("")}</td><td>${num(r.cer, true)} / ${num(r.wer, true)}</td><td class="wrap">${num(r.final_latency_ms)} ms<br><span class="muted">${esc(r.final_reason || "")}</span></td><td><audio controls preload="none" src="/api/runs/${encodeURIComponent(id)}/audio/${encodeURIComponent(r.sample_id)}"></audio></td></tr>`).join("")}</tbody></table>`;
+        if (activeMode !== "eot")
+          $("sampleResults").innerHTML =
+            `<table><thead><tr><th>模型 / 样本 / 尝试</th><th>状态</th><th>参考文本</th><th>识别文本与差异</th><th>CER / WER</th><th>final 延迟</th><th>原音频</th></tr></thead><tbody>${data.rows.map((r) => `<tr><td>${esc(r.profile_id)}<br>${esc(r.sample_id)} / #${r.attempt_id}</td><td class="wrap">${esc(stateName(r.status))}<br><span class="error">${esc(r.error || "")}</span></td><td class="wrap">${esc(r.reference_text)}</td><td class="wrap">${r.diff.map((d) => (d.op === "equal" ? esc(d.hypothesis) : d.op === "delete" ? `<del>${esc(d.reference)}</del>` : d.op === "insert" ? `<ins>${esc(d.hypothesis)}</ins>` : `<del>${esc(d.reference)}</del><ins>${esc(d.hypothesis)}</ins>`)).join("")}</td><td>${num(r.cer, true)} / ${num(r.wer, true)}</td><td class="wrap">${num(r.final_latency_ms)} ms<br><span class="muted">${esc(r.final_reason || "")}</span></td><td><audio controls preload="none" src="/api/runs/${encodeURIComponent(id)}/audio/${encodeURIComponent(r.sample_id)}"></audio></td></tr>`).join("")}</tbody></table>`;
+        if (activeMode === "eot")
+          $("sampleResults").innerHTML =
+            `<table><thead><tr><th>模型 / 样本 / 尝试</th><th>状态</th><th>输入文本</th><th>类别</th><th>原始 / 当前标签</th><th>预测</th><th>是否正确</th><th>原始输出</th><th>请求 ms</th></tr></thead><tbody>${data.rows.map((r) => `<tr><td>${esc(r.profile_id)}<br>${esc(r.sample_id)} / #${r.attempt_id}</td><td class="wrap">${esc(stateName(r.status))}<br><span class="error">${esc(r.error || "")}</span></td><td class="wrap">${esc(r.input_text)}</td><td>${esc(r.category)}</td><td>${r.source_label} / ${r.label}</td><td>${r.pred ?? "—"}</td><td class="${r.correct ? "success" : "error"}">${r.status === "success" ? (r.correct ? "正确" : "错误判断") : "—"}</td><td class="wrap">${esc(r.raw_output)}</td><td>${num(r.request_elapsed_ms)}</td></tr>`).join("")}</tbody></table>`;
         $("pageInfo").textContent =
           `${data.total ? offset + 1 : 0}–${Math.min(offset + 20, data.total)} / ${data.total}`;
         $("prevPage").disabled = offset === 0;
@@ -634,7 +782,15 @@
         offset = 0;
         refreshResults().catch(error);
       };
+      $("errorsOnly").onchange = () => {
+        offset = 0;
+        refreshResults().catch(error);
+      };
       (async () => {
+        eotDefaults = await api("eot/defaults");
+        $("promptTemplate").value = eotDefaults.prompt_template;
+        $("systemPrompt").value = eotDefaults.system_prompt;
+        $("labelPolicy").value = eotDefaults.label_policy;
         await refreshDatasets();
         models = await api("models");
         modeChanged();

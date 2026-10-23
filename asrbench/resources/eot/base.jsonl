@@ -1,0 +1,1134 @@
+{"text": "你好我想咨询一下我的订单状态", "label": 1, "category": "customer_service"}
+{"text": "我刚才看到一个优惠活动可以帮我解答一下吗", "label": 1, "category": "customer_service"}
+{"text": "请问我可以在哪里找到我的发票", "label": 1, "category": "customer_service"}
+{"text": "我有点困惑关于这个产品的保修政策能说的再具体一点吗", "label": 1, "category": "customer_service"}
+{"text": "能告诉我预计多久能收到我的包裹吗", "label": 1, "category": "customer_service"}
+{"text": "谢谢你的帮助我想确认一下我的地址", "label": 1, "category": "customer_service"}
+{"text": "我对这个问题还有疑问可以再解释一下吗", "label": 1, "category": "customer_service"}
+{"text": "请问我应该如何更改我的付款方式", "label": 1, "category": "customer_service"}
+{"text": "我已经尝试过了但还是无法登录我的账户", "label": 1, "category": "customer_service"}
+{"text": "能帮我查一下我的退款进度吗", "label": 1, "category": "customer_service"}
+{"text": "我想咨询一下关于旅行保险的细节", "label": 1, "category": "customer_service"}
+{"text": "我想知道这个产品的具体使用方法", "label": 1, "category": "customer_service"}
+{"text": "请问有没有可能加快我的订单处理速度", "label": 1, "category": "customer_service"}
+{"text": "我对这个服务有一些反馈可以听听吗", "label": 1, "category": "customer_service"}
+{"text": "我希望能了解更多关于你们的售后服务", "label": 1, "category": "customer_service"}
+{"text": "请问我可以在哪里找到用户手册", "label": 1, "category": "customer_service"}
+{"text": "我看到了一些评论想确认一下它们的真实性", "label": 1, "category": "customer_service"}
+{"text": "谢谢你我已经收到了你发来的链接", "label": 1, "category": "customer_service"}
+{"text": "能不能告诉我这个活动的截止日期是什么时候", "label": 1, "category": "customer_service"}
+{"text": "我想知道如何申请退货", "label": 1, "category": "customer_service"}
+{"text": "请问有没有其他的联系方式", "label": 1, "category": "customer_service"}
+{"text": "我希望能尽快得到回复关于我的申请", "label": 1, "category": "customer_service"}
+{"text": "谢谢你的建议我会尝试一下的", "label": 1, "category": "customer_service"}
+{"text": "我对这个产品的质量有点担心可以帮我吗", "label": 1, "category": "customer_service"}
+{"text": "请问客服的工作时间是怎样的", "label": 1, "category": "customer_service"}
+{"text": "我认为我的优势在于一个我的创新思维和还有就是团队合作能力", "label": 1, "category": "interview"}
+{"text": "我对这个职位真的非常感兴趣", "label": 1, "category": "interview"}
+{"text": "请问能告诉我这个团队的文化吗", "label": 1, "category": "interview"}
+{"text": "我之前的工作经历主要是集中在项目管理上", "label": 1, "category": "interview"}
+{"text": "我认为这个职位很符合我的技能和背景", "label": 1, "category": "interview"}
+{"text": "请问你对我的简历有什么具体的看法吗", "label": 1, "category": "interview"}
+{"text": "我希望能在这个职位上发挥我的优势", "label": 1, "category": "interview"}
+{"text": "我希望就是能够在这里学习到更多新技能", "label": 1, "category": "interview"}
+{"text": "我对这个行业的未来有一些自己的看法", "label": 1, "category": "interview"}
+{"text": "请问您能分享一下公司近期的目标吗", "label": 1, "category": "interview"}
+{"text": "我觉得团队合作在这个角色中非常重要", "label": 1, "category": "interview"}
+{"text": "我希望能在贵公司学习和成长", "label": 1, "category": "interview"}
+{"text": "请问贵公司对员工的培训支持如何", "label": 1, "category": "interview"}
+{"text": "我有一些问题关于这个职位的日常职责", "label": 1, "category": "interview"}
+{"text": "谢谢帮忙分享了公司愿景我很认同", "label": 1, "category": "interview"}
+{"text": "我期待能为团队带来新的想法和创意", "label": 1, "category": "interview"}
+{"text": "请问您对我的职业发展有什么建议吗", "label": 1, "category": "interview"}
+{"text": "我会认真考虑您提到的建议", "label": 1, "category": "interview"}
+{"text": "我希望能在这个项目中参与更多的决策", "label": 1, "category": "interview"}
+{"text": "请问这个职位的挑战主要是什么", "label": 1, "category": "interview"}
+{"text": "我对这个公司的产品研究了很多", "label": 1, "category": "interview"}
+{"text": "我在项目管理方面有大概三年的经验", "label": 1, "category": "interview"}
+{"text": "我期待能与团队合作并实现目标", "label": 1, "category": "interview"}
+{"text": "请问您对我这个角色的期望是什么", "label": 1, "category": "interview"}
+{"text": "我希望能在贵公司找到一个长久的发展机会", "label": 1, "category": "interview"}
+{"text": "我对这道题有点困惑可以帮我解释一下吗", "label": 1, "category": "education"}
+{"text": "谢谢刚才的讲解让我更清楚了", "label": 1, "category": "education"}
+{"text": "请问能推荐一些相关的学习资料吗", "label": 1, "category": "education"}
+{"text": "我想请教一下在地理课上提到的气候变化问题", "label": 1, "category": "education"}
+{"text": "我对这个概念还是有些不太理解", "label": 1, "category": "education"}
+{"text": "能不能再举个例子帮助我更好地理解", "label": 1, "category": "education"}
+{"text": "我想讨论一下在历史课上提到的法国大革命的影响", "label": 1, "category": "education"}
+{"text": "请问你觉得我在哪些方面可以提升", "label": 1, "category": "education"}
+{"text": "我希望能在这个课程中学到更多实用的知识", "label": 1, "category": "education"}
+{"text": "我对下节课的内容有些期待", "label": 1, "category": "education"}
+{"text": "请问这个项目的评分标准是什么", "label": 1, "category": "education"}
+{"text": "我有一些问题关于考试的形式和内容", "label": 1, "category": "education"}
+{"text": "谢谢给我提供了这么多有用的信息", "label": 1, "category": "education"}
+{"text": "我想知道你对小组的表现有什么看法", "label": 1, "category": "education"}
+{"text": "请问能给我一些复习的建议吗", "label": 1, "category": "education"}
+{"text": "我对这门课的主题特别感兴趣", "label": 1, "category": "education"}
+{"text": "能不能告诉我如何更好地准备这次考试", "label": 1, "category": "education"}
+{"text": "我在做那个生物实验时有些步骤不太明白", "label": 1, "category": "education"}
+{"text": "我对这个实验有一些具体的问题", "label": 1, "category": "education"}
+{"text": "请问能推荐一些在线学习资源吗", "label": 1, "category": "education"}
+{"text": "我希望能在课堂上参与更多的讨论", "label": 1, "category": "education"}
+{"text": "请问你对我们下次作业的期望是什么", "label": 1, "category": "education"}
+{"text": "我对这个话题有一些不同的看法", "label": 1, "category": "education"}
+{"text": "我在阅读关于细胞生物学的章节时遇到了一些难题", "label": 1, "category": "education"}
+{"text": "请问你觉得我应该如何规划我的学习时间", "label": 1, "category": "education"}
+{"text": "我想今天我们可以聊聊旅行的主题", "label": 1, "category": "conversation"}
+{"text": "你能教我一些关于日常对话的常用短语吗", "label": 1, "category": "conversation"}
+{"text": "如何让英语的阅读能力有很大的一个提升", "label": 1, "category": "conversation"}
+{"text": "怎么提高我的那个听力理解能力", "label": 1, "category": "conversation"}
+{"text": "我最近去了一个很美的地方想分享一下", "label": 1, "category": "conversation"}
+{"text": "你觉得旅行前做哪些准备比较重要", "label": 1, "category": "conversation"}
+{"text": "我想知道如何才能更好地规划行程", "label": 1, "category": "conversation"}
+{"text": "你觉得培养兴趣爱好对生活有什么影响", "label": 1, "category": "conversation"}
+{"text": "你能帮我纠正这个我的发音问题吗", "label": 1, "category": "conversation"}
+{"text": "我有一些词汇但是我不知道在什么场合使用它们", "label": 1, "category": "conversation"}
+{"text": "我想学习一些实用的旅行英语", "label": 1, "category": "conversation"}
+{"text": "你有没有推荐的旅行小窍门", "label": 1, "category": "conversation"}
+{"text": "我觉得了解文化差异很重要", "label": 1, "category": "conversation"}
+{"text": "我想知道如何找到自己真正喜欢的事情", "label": 1, "category": "conversation"}
+{"text": "你有没有喜欢的学习资源可以分享", "label": 1, "category": "conversation"}
+{"text": "我想知道如何才能拍出好看的旅行照片", "label": 1, "category": "conversation"}
+{"text": "你觉得独自旅行和团队旅行的区别是什么", "label": 1, "category": "conversation"}
+{"text": "我最近看到了一些旅行纪录片特别喜欢", "label": 1, "category": "conversation"}
+{"text": "请问如何才能在旅行中保持安全", "label": 1, "category": "conversation"}
+{"text": "有没有推荐的电视剧或者电影", "label": 1, "category": "conversation"}
+{"text": "我最近开始学吉他挺有挑战的", "label": 1, "category": "conversation"}
+{"text": "我在学习新的语言时遇到了一些困难", "label": 1, "category": "conversation"}
+{"text": "请问你觉得旅行中最值得花时间的部分是什么", "label": 1, "category": "conversation"}
+{"text": "我想知道如何才能更好地记录旅行的点滴", "label": 1, "category": "conversation"}
+{"text": "请问你觉得有效的学习方法是什么", "label": 1, "category": "conversation"}
+{"text": "Hey there I was wondering can you help me with my order", "label": 1, "category": "customer_service"}
+{"text": "Hi I received my package but its damaged What can we do", "label": 1, "category": "customer_service"}
+{"text": "Hello I have a question about my account can you check that for me", "label": 1, "category": "customer_service"}
+{"text": "Im really confused about the billing could you explain it", "label": 1, "category": "customer_service"}
+{"text": "Hey I tried to return an item but Im not sure how to proceed", "label": 1, "category": "customer_service"}
+{"text": "Hi I noticed a charge I didnt expect can you clarify that", "label": 1, "category": "customer_service"}
+{"text": "Hello my product isnt working whats the next step", "label": 1, "category": "customer_service"}
+{"text": "Id like to change my shipping address is that possible", "label": 1, "category": "customer_service"}
+{"text": "Hi there can you tell me about your refund policy please", "label": 1, "category": "customer_service"}
+{"text": "Im having trouble logging in can you assist me with that", "label": 1, "category": "customer_service"}
+{"text": "Hey I need to cancel my subscription how do I do that", "label": 1, "category": "customer_service"}
+{"text": "Hi can you help me find a specific product I cant locate it", "label": 1, "category": "customer_service"}
+{"text": "Im really interested in your services but I have a few questions", "label": 1, "category": "customer_service"}
+{"text": "Hello Id like to upgrade my plan what are my options", "label": 1, "category": "customer_service"}
+{"text": "Hey I was promised a discount but I didnt receive it", "label": 1, "category": "customer_service"}
+{"text": "Hi I need some technical support my device is acting up", "label": 1, "category": "customer_service"}
+{"text": "Ive been waiting for my order can you check the status", "label": 1, "category": "customer_service"}
+{"text": "Hello Id like to provide feedback is there a form for that", "label": 1, "category": "customer_service"}
+{"text": "Hey Im looking for a replacement part can you help me find it", "label": 1, "category": "customer_service"}
+{"text": "Hi I received the wrong item what should I do next", "label": 1, "category": "customer_service"}
+{"text": "Im curious about your warranty policy could you explain it", "label": 1, "category": "customer_service"}
+{"text": "Hello Id like to speak to a manager is that possible", "label": 1, "category": "customer_service"}
+{"text": "Hey Im not satisfied with my purchase can I get a refund", "label": 1, "category": "customer_service"}
+{"text": "Hi I have a question about your shipping times can you clarify", "label": 1, "category": "customer_service"}
+{"text": "Im really interested in your promotions can you tell me more", "label": 1, "category": "customer_service"}
+{"text": "Hi thanks for having me Im excited to be here", "label": 1, "category": "interview"}
+{"text": "Could you tell me more about the team Id love to know", "label": 1, "category": "interview"}
+{"text": "I read about your companys values and they really resonate with me", "label": 1, "category": "interview"}
+{"text": "What does a typical day look like for this position", "label": 1, "category": "interview"}
+{"text": "Ive worked on similar projects and I think I could contribute well", "label": 1, "category": "interview"}
+{"text": "Can you share some challenges the team is currently facing", "label": 1, "category": "interview"}
+{"text": "Im really passionate about this field and Id love to grow with your company", "label": 1, "category": "interview"}
+{"text": "How do you measure success in this role", "label": 1, "category": "interview"}
+{"text": "I noticed your company is expanding what does that mean for this position", "label": 1, "category": "interview"}
+{"text": "What opportunities for professional development does your company offer", "label": 1, "category": "interview"}
+{"text": "Im curious about the company culture could you describe it", "label": 1, "category": "interview"}
+{"text": "What qualities do you think are essential for someone to succeed here", "label": 1, "category": "interview"}
+{"text": "Can you tell me about the onboarding process for new employees", "label": 1, "category": "interview"}
+{"text": "Ive been following your companys progress and Im impressed by your initiatives", "label": 1, "category": "interview"}
+{"text": "How does the team typically collaborate on projects", "label": 1, "category": "interview"}
+{"text": "What are the next steps in the interview process if Im selected", "label": 1, "category": "interview"}
+{"text": "Id love to know more about your leadership style how do you support your team", "label": 1, "category": "interview"}
+{"text": "What excites you most about working here at this company", "label": 1, "category": "interview"}
+{"text": "How often do performance reviews happen and what do they entail", "label": 1, "category": "interview"}
+{"text": "Im interested in the companys future goals where do you see it in five years", "label": 1, "category": "interview"}
+{"text": "Can you share an example of a successful project the team has completed recently", "label": 1, "category": "interview"}
+{"text": "What tools or technologies does the team use on a daily basis", "label": 1, "category": "interview"}
+{"text": "Id like to understand the work life balance at your company", "label": 1, "category": "interview"}
+{"text": "What kind of feedback do you typically give to your team members", "label": 1, "category": "interview"}
+{"text": "Thank you for this opportunity I really appreciate your time", "label": 1, "category": "interview"}
+{"text": "Hi I have a question about my assignment could you help me", "label": 1, "category": "education"}
+{"text": "Im really struggling with this topic can you explain it to me", "label": 1, "category": "education"}
+{"text": "Could you clarify the requirements for the project just to make sure I understand", "label": 1, "category": "education"}
+{"text": "I missed the last class can you tell me what I need to catch up on", "label": 1, "category": "education"}
+{"text": "Id like to know more about the grading criteria how does it work", "label": 1, "category": "education"}
+{"text": "Can you recommend some resources to help me study for the exam", "label": 1, "category": "education"}
+{"text": "Im having trouble understanding this concept could you break it down for me", "label": 1, "category": "education"}
+{"text": "Whats the best way to prepare for the upcoming test in your opinion", "label": 1, "category": "education"}
+{"text": "I have a few questions about the syllabus is now a good time to ask", "label": 1, "category": "education"}
+{"text": "Can you explain the difference between these two theories Im a bit confused", "label": 1, "category": "education"}
+{"text": "Id like to discuss my progress in the class can we set up a time to talk", "label": 1, "category": "education"}
+{"text": "How can I improve my participation in class discussions", "label": 1, "category": "education"}
+{"text": "What are some effective study techniques you would recommend", "label": 1, "category": "education"}
+{"text": "Im curious about the internship opportunities related to this course", "label": 1, "category": "education"}
+{"text": "Could you tell me more about the group project and how it will be graded", "label": 1, "category": "education"}
+{"text": "Im interested in pursuing further studies what advice do you have", "label": 1, "category": "education"}
+{"text": "Can you help me understand the feedback I received on my paper", "label": 1, "category": "education"}
+{"text": "Whats the best way to approach this topic for my research", "label": 1, "category": "education"}
+{"text": "Id like to know about any upcoming workshops that could benefit me", "label": 1, "category": "education"}
+{"text": "How do I access additional help if Im struggling with the material", "label": 1, "category": "education"}
+{"text": "Can you suggest any books or articles that would deepen my understanding", "label": 1, "category": "education"}
+{"text": "Whats the policy on late submissions for assignments", "label": 1, "category": "education"}
+{"text": "Im curious about the career paths that this course can lead to", "label": 1, "category": "education"}
+{"text": "How do you recommend balancing coursework with other responsibilities", "label": 1, "category": "education"}
+{"text": "Thank you for your help I really appreciate your guidance", "label": 1, "category": "education"}
+{"text": "Hey Id love to practice my speaking skills can we chat for a bit", "label": 1, "category": "conversation"}
+{"text": "Could you help me with my pronunciation I think I need some tips", "label": 1, "category": "conversation"}
+{"text": "I want to work on my fluency do you have any conversation starters", "label": 1, "category": "conversation"}
+{"text": "What topics do you enjoy discussing that we could talk about today", "label": 1, "category": "conversation"}
+{"text": "Im trying to expand my vocabulary can you suggest some interesting words", "label": 1, "category": "conversation"}
+{"text": "Lets do a role play it might help me get more comfortable", "label": 1, "category": "conversation"}
+{"text": "How do you usually prepare for a conversation in a new language", "label": 1, "category": "conversation"}
+{"text": "Id like to practice describing my day can I give it a try", "label": 1, "category": "conversation"}
+{"text": "Whats your favorite way to learn new phrases any methods you recommend", "label": 1, "category": "conversation"}
+{"text": "I sometimes struggle with small talk can we practice that", "label": 1, "category": "conversation"}
+{"text": "Can you give me feedback on my speaking after we finish", "label": 1, "category": "conversation"}
+{"text": "Whats a common mistake learners make when speaking English", "label": 1, "category": "conversation"}
+{"text": "I want to sound more natural do you have any tips for that", "label": 1, "category": "conversation"}
+{"text": "Lets talk about our hobbies its a fun way to practice", "label": 1, "category": "conversation"}
+{"text": "How do you feel about discussing current events it could be interesting", "label": 1, "category": "conversation"}
+{"text": "Id like to work on my listening skills can you speak a bit faster", "label": 1, "category": "conversation"}
+{"text": "Whats a good way to practice asking questions in a conversation", "label": 1, "category": "conversation"}
+{"text": "Can we focus on idiomatic expressions I find them tricky", "label": 1, "category": "conversation"}
+{"text": "Id love to share my opinions on a topic can you ask me some questions", "label": 1, "category": "conversation"}
+{"text": "How do you stay motivated when practicing a new language", "label": 1, "category": "conversation"}
+{"text": "Can you help me with transition phrases to make my speech smoother", "label": 1, "category": "conversation"}
+{"text": "I want to practice giving presentations can we do a mock one", "label": 1, "category": "conversation"}
+{"text": "Whats your favorite topic to discuss when practicing speaking", "label": 1, "category": "conversation"}
+{"text": "Lets try to have a debate itll challenge my speaking skills", "label": 1, "category": "conversation"}
+{"text": "Thanks for helping me practice I really appreciate your support", "label": 1, "category": "conversation"}
+{"text": "当代量子计算的发展为密码学带来了前所未有的挑战与机遇", "label": 1, "category": "academic"}
+{"text": "机器学习算法在处理非结构化数据时仍然面临着诸多技术瓶颈", "label": 1, "category": "academic"}
+{"text": "区块链技术的去中心化特性为金融系统提供了新的安全范式", "label": 1, "category": "academic"}
+{"text": "神经网络在图像识别领域的突破性进展改变了计算机视觉的应用前景", "label": 1, "category": "academic"}
+{"text": "量子纠缠现象的理论研究对于构建量子通信网络具有重要意义", "label": 1, "category": "academic"}
+{"text": "高维数据可视化技术能够帮助研究人员发现复杂数据集中的隐藏模式", "label": 1, "category": "academic"}
+{"text": "深度强化学习算法通过自我对弈实现了超越人类水平的复杂策略制定", "label": 1, "category": "academic"}
+{"text": "边缘计算将数据处理能力分散到网络边缘以减少延迟并提高效率", "label": 1, "category": "academic"}
+{"text": "分布式系统在保证数据一致性的同时追求高可用性面临着本质困境", "label": 1, "category": "academic"}
+{"text": "脑机接口技术通过解读脑电波实现了人类思维与计算机的直接交互", "label": 1, "category": "academic"}
+{"text": "自然语言处理模型在多语言环境下的语义理解依然存在文化适应性问题", "label": 1, "category": "academic"}
+{"text": "基因编辑技术的伦理争议凸显了科学发展与社会价值取舍的复杂性", "label": 1, "category": "academic"}
+{"text": "人工智能在医疗诊断中的应用需要解决可解释性与责任归属问题", "label": 1, "category": "academic"}
+{"text": "复杂系统的涌现特性使得仅通过研究组成部分难以预测整体行为", "label": 1, "category": "academic"}
+{"text": "蛋白质折叠问题的计算方法对于理解生命本质和疾病机理具有重要意义", "label": 1, "category": "academic"}
+{"text": "高性能计算在气候模拟中的应用有助于提高极端天气事件的预测准确性", "label": 1, "category": "academic"}
+{"text": "材料科学中的计算模拟加速了新型功能材料的发现与设计过程", "label": 1, "category": "academic"}
+{"text": "数据隐私保护与大数据分析效率之间的权衡是技术与伦理的双重挑战", "label": 1, "category": "academic"}
+{"text": "时间序列预测在金融市场中的应用需要考虑随机性与系统性风险的平衡", "label": 1, "category": "academic"}
+{"text": "认知计算尝试模拟人类思维过程以解决传统计算方法难以应对的复杂问题", "label": 1, "category": "academic"}
+{"text": "知识图谱通过实体关系的结构化表示增强了智能系统的推理能力", "label": 1, "category": "academic"}
+{"text": "社交网络分析揭示了信息传播与群体行为形成的复杂动力学机制", "label": 1, "category": "academic"}
+{"text": "无监督学习在发现数据内在结构方面表现出独特优势与方法论局限", "label": 1, "category": "academic"}
+{"text": "量子算法为特定计算问题提供了理论上的指数级加速可能", "label": 1, "category": "academic"}
+{"text": "生物信息学通过计算方法分析海量基因数据助力精准医疗发展", "label": 1, "category": "academic"}
+{"text": "虚拟现实技术与认知科学的结合为人类感知研究提供了新范式", "label": 1, "category": "academic"}
+{"text": "分布式账本技术重新定义了数字资产的所有权验证与转移机制", "label": 1, "category": "academic"}
+{"text": "群体智能算法通过模拟自然界集体行为解决复杂优化问题", "label": 1, "category": "academic"}
+{"text": "计算神经科学尝试构建数学模型解释神经系统的信息处理机制", "label": 1, "category": "academic"}
+{"text": "可解释人工智能研究旨在使黑盒模型的决策过程变得透明可理解", "label": 1, "category": "academic"}
+{"text": "数字孪生技术通过虚实结合的方式实现了复杂系统的全生命周期管理", "label": 1, "category": "academic"}
+{"text": "混合云架构在保持数据主权的同时实现了计算资源的弹性扩展", "label": 1, "category": "academic"}
+{"text": "图神经网络通过结构化数据的拓扑关系学习提升了关系推理能力", "label": 1, "category": "academic"}
+{"text": "多模态学习整合了不同感知渠道的信息以实现更全面的场景理解", "label": 1, "category": "academic"}
+{"text": "量子密钥分发技术利用量子力学原理实现了理论上不可窃听的通信", "label": 1, "category": "academic"}
+{"text": "联邦学习在保护数据隐私的前提下实现了多方协同的模型训练", "label": 1, "category": "academic"}
+{"text": "数据治理框架需要平衡技术实现成本与数据价值最大化的目标", "label": 1, "category": "academic"}
+{"text": "分子动力学模拟为药物设计与材料开发提供了原子尺度的理论基础", "label": 1, "category": "academic"}
+{"text": "集成学习通过结合多个基础模型的优势提高了预测系统的鲁棒性", "label": 1, "category": "academic"}
+{"text": "数字货币的匿名性与可追踪性之间的辩证关系体现了技术设计的价值取向", "label": 1, "category": "academic"}
+{"text": "元学习算法通过学习如何学习提升了人工智能系统的适应能力", "label": 1, "category": "academic"}
+{"text": "生成对抗网络在内容创作领域展现出模糊艺术与技术边界的潜力", "label": 1, "category": "academic"}
+{"text": "人类增强技术引发了关于人性本质与未来进化方向的深刻思考", "label": 1, "category": "academic"}
+{"text": "复杂网络理论为理解现实世界中的大规模互联系统提供了数学工具", "label": 1, "category": "academic"}
+{"text": "计算社会科学利用大数据与算法模型重新审视人类行为与社会结构", "label": 1, "category": "academic"}
+{"text": "可持续计算要求在技术创新中同时考虑环境影响与资源消耗问题", "label": 1, "category": "academic"}
+{"text": "Quantum coherence maintenance remains one of the fundamental challenges in developing practical quantum computers with significant error correction capabilities", "label": 1, "category": "academic"}
+{"text": "The interaction between epigenetic mechanisms and environmental factors presents complex challenges for understanding heritable changes that occur without alterations to DNA sequences", "label": 1, "category": "academic"}
+{"text": "Neuroplasticity demonstrates the remarkable ability of neural networks to reorganize pathways adapt to new situations or changes in environment and recover from traumatic brain injuries", "label": 1, "category": "academic"}
+{"text": "Theoretical frameworks in contemporary cognitive linguistics suggest that metaphorical thinking constitutes a fundamental aspect of human conceptual systems rather than mere linguistic flourishes", "label": 1, "category": "academic"}
+{"text": "The emergent properties of complex adaptive systems often exhibit behavioral patterns that cannot be predicted solely through reductionist analysis of their constituent components", "label": 1, "category": "academic"}
+{"text": "The anthropogenic impact on biogeochemical cycles particularly carbon and nitrogen has created unprecedented perturbations in planetary boundaries leading to cascading environmental consequences", "label": 1, "category": "academic"}
+{"text": "Advancements in quantum field theory have revealed profound connections between seemingly disparate physical phenomena through principles of symmetry breaking and gauge invariance", "label": 1, "category": "academic"}
+{"text": "Contemporary political polarization has been exacerbated by algorithmic content curation creating epistemological bubbles that reinforce existing beliefs and minimize exposure to contradictory information", "label": 1, "category": "academic"}
+{"text": "Paleoclimatological data extracted from ice cores tree rings and sedimentary deposits provide crucial insights into climate variability patterns predating instrumental records", "label": 1, "category": "academic"}
+{"text": "The theoretical underpinnings of consciousness remain contentious with competing frameworks including higher order theories integrated information theory and global workspace models", "label": 1, "category": "academic"}
+{"text": "Immunological memory exhibits remarkable specificity and longevity enabling rapid responses to previously encountered pathogens through complex cellular signaling cascades", "label": 1, "category": "academic"}
+{"text": "The mathematics of optimal transport theory has found surprising applications in fields ranging from economics to computer vision demonstrating the unexpected utility of abstract theoretical constructs", "label": 1, "category": "academic"}
+{"text": "The construction of ethical frameworks for artificial general intelligence must address fundamental questions about value alignment consciousness recognition and moral agency", "label": 1, "category": "academic"}
+{"text": "Topological data analysis provides mathematical tools for identifying structural features persistent across multiple scales within complex multidimensional datasets", "label": 1, "category": "academic"}
+{"text": "The entanglement of quantum particles enables nonlocal correlations that challenge classical intuitions about physical reality and information propagation constraints", "label": 1, "category": "academic"}
+{"text": "Dynamical systems theory offers mathematical frameworks for understanding chaotic behaviors where deterministic systems exhibit extreme sensitivity to initial conditions", "label": 1, "category": "academic"}
+{"text": "The microbiome demonstrates complex ecological interactions with host physiology influencing everything from immune function to neurobehavioral development through multiple biochemical pathways", "label": 1, "category": "academic"}
+{"text": "Game theoretic approaches to evolutionary biology have illuminated how seemingly cooperative behaviors can emerge from selfinterested strategies through mechanisms like reciprocal altruism", "label": 1, "category": "academic"}
+{"text": "The paradoxical relationship between quantum mechanics and general relativity represents one of the most profound theoretical inconsistencies in modern physics", "label": 1, "category": "academic"}
+{"text": "Behavioral economics challenges rational choice theory by demonstrating systematic cognitive biases that influence decision making processes under conditions of uncertainty", "label": 1, "category": "academic"}
+{"text": "The anthropology of scientific practice examines how cultural contexts and social dynamics influence knowledge production even within ostensibly objective methodological frameworks", "label": 1, "category": "academic"}
+{"text": "Neuroimaging techniques reveal that bilingualism reconfigures functional brain architecture potentially providing cognitive reserves that delay neurodegenerative disease progression", "label": 1, "category": "academic"}
+{"text": "Cryptographic protocols leveraging zeroknowledge proofs enable verification of computational statements without revealing underlying sensitive information", "label": 1, "category": "academic"}
+{"text": "The evolutionary arms race between hosts and pathogens drives rapid genetic adaptations illustrating powerful selective pressures operating at molecular levels", "label": 1, "category": "academic"}
+{"text": "The hypothetical technological singularity represents a speculative point where artificial intelligence might surpass human cognitive capabilities initiating unpredictable developmental trajectories", "label": 1, "category": "academic"}
+{"text": "Contemporary cosmological models must reconcile observational evidence for accelerating universal expansion with theoretical frameworks accounting for dark matter and dark energy", "label": 1, "category": "academic"}
+{"text": "Nonequilibrium thermodynamics extends classical principles to open systems exhibiting selforganization through energy dissipation and entropy production", "label": 1, "category": "academic"}
+{"text": "Archaeological evidence increasingly suggests that human cognitive modernity preceded anatomical modernity challenging linear models of evolutionary development", "label": 1, "category": "academic"}
+{"text": "Tensorial mathematical frameworks provide essential tools for describing physical phenomena across scales from quantum field theories to cosmological models", "label": 1, "category": "academic"}
+{"text": "The extended evolutionary synthesis incorporates epigenetic inheritance developmental plasticity and niche construction expanding beyond traditional neoDarwinian mechanisms", "label": 1, "category": "academic"}
+{"text": "Philosophical zombies present theoretical entities physically identical to conscious humans but lacking subjective experience challenging physicalist accounts of consciousness", "label": 1, "category": "academic"}
+{"text": "Comparative linguistics employing phylogenetic methods borrowed from evolutionary biology provides insights into historical language relationships and cultural transmission patterns", "label": 1, "category": "academic"}
+{"text": "Mathematical category theory provides abstract frameworks for identifying structural similarities across seemingly disparate domains from computing to quantum physics", "label": 1, "category": "academic"}
+{"text": "Computational models of moral cognition attempt to formalize ethical decision making processes through algorithmic representations of deontological and consequentialist frameworks", "label": 1, "category": "academic"}
+{"text": "The neuroscientific study of meditation demonstrates measurable changes in brain structure and function associated with sustained attentional practices", "label": 1, "category": "academic"}
+{"text": "Theoretical approaches to abiogenesis must account for the transition from nonliving chemical systems to entities capable of metabolism replication and evolution", "label": 1, "category": "academic"}
+{"text": "The social determinants of health illustrate how economic political and cultural factors create population level health disparities independent of medical interventions", "label": 1, "category": "academic"}
+{"text": "Gödels incompleteness theorems demonstrate fundamental limitations of mathematical systems revealing that sufficiently complex formal systems cannot be both complete and consistent", "label": 1, "category": "academic"}
+{"text": "Synesthetic experiences challenge conventional models of sensory processing by demonstrating systematic crossmodal associations between distinct perceptual domains", "label": 1, "category": "academic"}
+{"text": "Contemporary bioethical frameworks must address unprecedented questions raised by technologies enabling human germline modifications and genetic enhancement", "label": 1, "category": "academic"}
+{"text": "Symbiotic relationships in evolutionary biology demonstrate how interspecies dependencies drive coevolutionary processes shaping genetic developmental and ecological dynamics", "label": 1, "category": "academic"}
+{"text": "Urban planning increasingly incorporates principles of environmental psychology to design spaces optimizing psychological wellbeing through biophilic elements", "label": 1, "category": "academic"}
+{"text": "Advanced cryptographic voting protocols attempt to simultaneously achieve seemingly contradictory properties including individual verifiability coercion resistance and ballot secrecy", "label": 1, "category": "academic"}
+{"text": "The hierarchical structure of biological organization from molecules to ecosystems exhibits emergent properties at each level that transcend reductionist explanations", "label": 1, "category": "academic"}
+{"text": "Cultural evolution theory applies quantitative models to understand transmission dynamics of ideas behaviors and technologies through social learning mechanisms", "label": 1, "category": "academic"}
+{"text": "Scientific models of consciousness must reconcile subjective phenomenological experiences with objective neurophysiological processes underlying cognitive functions", "label": 1, "category": "academic"}
+{"text": "The mathematical structure of quantum mechanics specifically Hilbert spaces and operator theory provides the theoretical foundation for quantum information science", "label": 1, "category": "academic"}
+{"text": "Comparative mythology reveals recurring archetypal patterns across culturally independent traditions suggesting potential universality in human psychological structures", "label": 1, "category": "academic"}
+{"text": "认知科学与人工智能的交叉研究为构建类人智能系统提供了新的思路与挑战", "label": 1, "category": "academic"}
+{"text": "复杂系统中的相变现象在物理学社会学与生态学领域展现出惊人的数学相似性", "label": 1, "category": "academic"}
+{"text": "跨学科研究方法论面临着不同学科知识体系整合与方法论兼容性的双重挑战", "label": 1, "category": "academic"}
+{"text": "Advances in nanotechnology particularly molecular manufacturing capabilities could potentially transform material science energy production and medical interventions through precise atomic manipulation", "label": 1, "category": "academic"}
+{"text": "Theoretical approaches to artificial consciousness must distinguish between functional simulation of awareness and the potential emergence of genuine phenomenological experience", "label": 1, "category": "academic"}
+{"text": "The application of complexity theory to educational systems suggests that optimal learning environments may exist at the edge of chaos between rigid structure and complete randomness", "label": 1, "category": "academic"}
+{"text": "你知道哪里可以找到关于这个软件的详细教程吗", "label": 1, "category": "customer_service"}
+{"text": "我昨天买的那个手机屏幕好像有点问题可以换吗", "label": 1, "category": "customer_service"}
+{"text": "这个价格已经包含了所有的税费和运费对吗", "label": 1, "category": "customer_service"}
+{"text": "能帮我查一下我上次的购物记录吗我找不到了", "label": 1, "category": "customer_service"}
+{"text": "我忘记了我的密码可以帮我重置一下吗", "label": 1, "category": "customer_service"}
+{"text": "这个尺码对我来说有点小能换大一号的吗", "label": 1, "category": "customer_service"}
+{"text": "请问你们的实体店在哪个商场里面", "label": 1, "category": "customer_service"}
+{"text": "你能为我推荐一些适合初学者的书籍吗", "label": 1, "category": "customer_service"}
+{"text": "我想取消我的会员资格应该怎么操作", "label": 1, "category": "customer_service"}
+{"text": "我的包裹已经延迟了三天请问是什么原因", "label": 1, "category": "customer_service"}
+{"text": "能否帮我预约下周三下午的咨询服务", "label": 1, "category": "customer_service"}
+{"text": "我对你们新推出的智能手表很感兴趣想了解更多", "label": 1, "category": "customer_service"}
+{"text": "请问有没有学生优惠或者什么促销活动", "label": 1, "category": "customer_service"}
+{"text": "我想知道如何设置自动付款功能", "label": 1, "category": "customer_service"}
+{"text": "这个产品的颜色看起来和网站上的有点不一样", "label": 1, "category": "customer_service"}
+{"text": "能否提供一下你们的营业时间和具体地址", "label": 1, "category": "customer_service"}
+{"text": "我在使用软件的过程中遇到了一些技术问题", "label": 1, "category": "customer_service"}
+{"text": "请问你们的售后服务是否包括上门维修", "label": 1, "category": "customer_service"}
+{"text": "我需要一份详细的收据可以发给我吗", "label": 1, "category": "customer_service"}
+{"text": "我想了解一下你们的退换货政策有什么限制", "label": 1, "category": "customer_service"}
+{"text": "请问我应该如何正确测量尺寸以选择合适的产品", "label": 1, "category": "customer_service"}
+{"text": "我对你们公司的企业文化非常认可希望加入团队", "label": 1, "category": "interview"}
+{"text": "我可以提供一些我过去项目的案例和成果", "label": 1, "category": "interview"}
+{"text": "请问面试过程中需要准备什么材料或者演示", "label": 1, "category": "interview"}
+{"text": "我的背景可能与职位描述不完全匹配但我有相关经验", "label": 1, "category": "interview"}
+{"text": "我想了解一下这个职位的晋升路径和发展机会", "label": 1, "category": "interview"}
+{"text": "请问公司对员工有哪些额外的福利政策", "label": 1, "category": "interview"}
+{"text": "我希望能了解更多关于团队日常工作流程的信息", "label": 1, "category": "interview"}
+{"text": "我对贵公司的发展战略很感兴趣能否分享一下", "label": 1, "category": "interview"}
+{"text": "我的技术专长主要集中在数据分析和可视化方面", "label": 1, "category": "interview"}
+{"text": "请问贵公司是否支持远程或者混合工作模式", "label": 1, "category": "interview"}
+{"text": "我想了解一下这个行业的发展趋势和挑战", "label": 1, "category": "interview"}
+{"text": "我认为我的沟通能力和解决问题的能力是我的优势", "label": 1, "category": "interview"}
+{"text": "请问您能描述一下团队内部的协作方式吗", "label": 1, "category": "interview"}
+{"text": "我希望能够在职业生涯中不断学习和挑战自己", "label": 1, "category": "interview"}
+{"text": "我能否了解一下公司对这个职位的考核指标", "label": 1, "category": "interview"}
+{"text": "请问公司在行业中的竞争优势是什么", "label": 1, "category": "interview"}
+{"text": "我对这个领域充满热情并且有相关的项目经验", "label": 1, "category": "interview"}
+{"text": "请问贵公司的国际业务发展如何", "label": 1, "category": "interview"}
+{"text": "我希望能在实际工作中学习和应用新技术", "label": 1, "category": "interview"}
+{"text": "请问课堂上讲的那个公式怎么推导出来的", "label": 1, "category": "education"}
+{"text": "我对这个理论概念的应用场景还不太清楚", "label": 1, "category": "education"}
+{"text": "能推荐一些能帮助理解这个主题的辅助材料吗", "label": 1, "category": "education"}
+{"text": "请问期末考试会涵盖哪些章节的内容", "label": 1, "category": "education"}
+{"text": "我在完成作业时遇到了一些难题能给些提示吗", "label": 1, "category": "education"}
+{"text": "能否再详细讲解一下这个实验的操作步骤", "label": 1, "category": "education"}
+{"text": "我想了解一下如何提高我的论文写作质量", "label": 1, "category": "education"}
+{"text": "请问有没有针对这门课程的学习小组可以加入", "label": 1, "category": "education"}
+{"text": "我想知道如何更有效地准备即将到来的期中考试", "label": 1, "category": "education"}
+{"text": "能否解释一下为什么这两个概念经常被混淆", "label": 1, "category": "education"}
+{"text": "我对这个研究方向很感兴趣想深入学习", "label": 1, "category": "education"}
+{"text": "请问教授有没有推荐的参考书目或论文", "label": 1, "category": "education"}
+{"text": "我在理解这个数学问题时遇到了瓶颈", "label": 1, "category": "education"}
+{"text": "我想请教一下如何改进我的实验方法", "label": 1, "category": "education"}
+{"text": "请问有没有针对这个课题的在线资源或视频", "label": 1, "category": "education"}
+{"text": "我对这个历史事件的背景和影响很感兴趣", "label": 1, "category": "education"}
+{"text": "能否分享一些应对考试焦虑的有效策略", "label": 1, "category": "education"}
+{"text": "我想了解更多关于这个学科前沿研究的情况", "label": 1, "category": "education"}
+{"text": "请问如何在课堂讨论中更有效地表达自己的观点", "label": 1, "category": "education"}
+{"text": "我在实验过程中观察到了一些意外的结果", "label": 1, "category": "education"}
+{"text": "我想讨论一下我论文选题的可行性", "label": 1, "category": "education"}
+{"text": "请问有没有校内实习或研究的机会", "label": 1, "category": "education"}
+{"text": "我想知道如何平衡学业和个人兴趣爱好", "label": 1, "category": "education"}
+{"text": "请问对外语学习有什么有效的记忆技巧吗", "label": 1, "category": "conversation"}
+{"text": "我最近在看一部关于文化差异的纪录片很有启发", "label": 1, "category": "conversation"}
+{"text": "能给我推荐一些提高口语流利度的练习方法吗", "label": 1, "category": "conversation"}
+{"text": "我想了解不同国家的礼仪和社交习惯", "label": 1, "category": "conversation"}
+{"text": "请问有什么方法可以快速扩大词汇量", "label": 1, "category": "conversation"}
+{"text": "我在理解复杂语法结构时遇到了困难", "label": 1, "category": "conversation"}
+{"text": "最近我尝试了一种新的学习方法效果不错", "label": 1, "category": "conversation"}
+{"text": "我想知道如何才能更自然地使用地道表达", "label": 1, "category": "conversation"}
+{"text": "请问有没有好用的语言学习应用推荐", "label": 1, "category": "conversation"}
+{"text": "我经常犯同样的语法错误该如何改正", "label": 1, "category": "conversation"}
+{"text": "我想了解不同口音之间的主要区别", "label": 1, "category": "conversation"}
+{"text": "请问如何准备语言能力考试最有效", "label": 1, "category": "conversation"}
+{"text": "我发现通过看原版电影学习语言很有帮助", "label": 1, "category": "conversation"}
+{"text": "我想知道如何找到合适的语言交换伙伴", "label": 1, "category": "conversation"}
+{"text": "请问你有没有环游世界的经历可以分享", "label": 1, "category": "conversation"}
+{"text": "我对不同文化中的饮食习惯很感兴趣", "label": 1, "category": "conversation"}
+{"text": "我开始尝试用外语写日记来提高表达能力", "label": 1, "category": "conversation"}
+{"text": "请问如何才能克服说外语时的紧张感", "label": 1, "category": "conversation"}
+{"text": "我在理解文化背景的习语时有些困惑", "label": 1, "category": "conversation"}
+{"text": "我想知道如何在短时间内提高听力水平", "label": 1, "category": "conversation"}
+{"text": "请问有没有适合初学者的原版读物推荐", "label": 1, "category": "conversation"}
+{"text": "我希望能够掌握更多关于商务交流的专业词汇", "label": 1, "category": "conversation"}
+{"text": "量子信息技术在通信安全领域的应用前景令人期待", "label": 1, "category": "academic"}
+{"text": "细粒度的权限控制系统能有效防止信息泄露风险", "label": 1, "category": "academic"}
+{"text": "基于注意力机制的模型在序列处理任务中表现出色", "label": 1, "category": "academic"}
+{"text": "合成生物学的伦理边界需要多学科视角共同探讨", "label": 1, "category": "academic"}
+{"text": "人机交互设计应当充分考虑不同群体的认知特点", "label": 1, "category": "academic"}
+{"text": "新型半导体材料的研发突破了传统物理极限", "label": 1, "category": "academic"}
+{"text": "城市智能交通系统通过大数据优化路径减少拥堵", "label": 1, "category": "academic"}
+{"text": "人工智能辅助创作引发了对艺术本质的深度思考", "label": 1, "category": "academic"}
+{"text": "气候变化对全球生态系统产生的影响呈现非线性特征", "label": 1, "category": "academic"}
+{"text": "分子标记技术为物种起源研究提供了新的证据链", "label": 1, "category": "academic"}
+{"text": "非侵入式脑成像技术揭示了认知过程的神经基础", "label": 1, "category": "academic"}
+{"text": "数据驱动的精准医疗模型需要平衡通用性与个体化", "label": 1, "category": "academic"}
+{"text": "数学物理中的几何方法统一了多种表面上的散射现象", "label": 1, "category": "academic"}
+{"text": "量子计算在优化问题求解上展现出独特优势", "label": 1, "category": "academic"}
+{"text": "生物启发的算法为复杂工程设计提供了新思路", "label": 1, "category": "academic"}
+{"text": "前沿纳米材料在可持续能源转换中扮演关键角色", "label": 1, "category": "academic"}
+{"text": "网络空间安全需要构建多层次的技术法律防御体系", "label": 1, "category": "academic"}
+{"text": "星际探测任务的通信延迟问题制约了深空探索", "label": 1, "category": "academic"}
+{"text": "认知科学的多元研究方法揭示了意识的复杂本质", "label": 1, "category": "academic"}
+{"text": "机器学习模型解释性与性能之间存在内在权衡", "label": 1, "category": "academic"}
+{"text": "元宇宙概念的实现依赖跨学科技术的协同创新", "label": 1, "category": "academic"}
+{"text": "社会信任机制在分布式经济系统中至关重要", "label": 1, "category": "academic"}
+{"text": "深度学习在小样本场景下的泛化能力仍有局限", "label": 1, "category": "academic"}
+{"text": "太赫兹通信技术为下一代无线网络提供了可能", "label": 1, "category": "academic"}
+{"text": "信息物理融合系统在工业自动化中展现巨大潜力", "label": 1, "category": "academic"}
+{"text": "气候工程干预措施可能引发全球治理的伦理挑战", "label": 1, "category": "academic"}
+{"text": "非结构化知识的符号化表示面临语义保真度问题", "label": 1, "category": "academic"}
+{"text": "人工合成的蛋白质结构实现了自然界不存在的功能", "label": 1, "category": "academic"}
+{"text": "量子力学解释世界的方式挑战了传统哲学框架", "label": 1, "category": "academic"}
+{"text": "边缘智能装置通过本地计算减轻了网络传输负担", "label": 1, "category": "academic"}
+{"text": "多尺度建模方法弥合了微观机理与宏观现象的鸿沟", "label": 1, "category": "academic"}
+{"text": "脑科学研究揭示了决策过程的情感与理性交互机制", "label": 1, "category": "academic"}
+{"text": "混合专家模型通过动态路由优化了计算资源分配", "label": 1, "category": "academic"}
+{"text": "生物多样性保护需要考虑全球变化的长期影响", "label": 1, "category": "academic"}
+{"text": "循环经济理念重新定义了产品生命周期设计原则", "label": 1, "category": "academic"}
+{"text": "计算社会学通过网络分析揭示群体行为的涌现规律", "label": 1, "category": "academic"}
+{"text": "仿生机器人的运动控制从生物系统中获取灵感", "label": 1, "category": "academic"}
+{"text": "人工智能伦理准则需要在技术发展中不断更新", "label": 1, "category": "academic"}
+{"text": "I strongly believe that interdisciplinary collaboration can lead to innovative solutions for complex problems", "label": 1, "category": "professional"}
+{"text": "The recent software update seems to have fixed most of the performance issues but introduced some new bugs", "label": 1, "category": "professional"}
+{"text": "Could you elaborate on how your approach differs from the standard methodology in this field", "label": 1, "category": "professional"}
+{"text": "Im concerned about the environmental impact of this proposal and would like to see more sustainability measures", "label": 1, "category": "professional"}
+{"text": "The data suggests a correlation between these variables but we need further analysis to establish causation", "label": 1, "category": "professional"}
+{"text": "Ive been researching this topic extensively and found some interesting patterns in the historical records", "label": 1, "category": "professional"}
+{"text": "Our team has developed a new protocol that significantly reduces processing time while maintaining quality", "label": 1, "category": "professional"}
+{"text": "The complexity of this ecosystem makes it difficult to predict how it will respond to climate change", "label": 1, "category": "professional"}
+{"text": "Im trying to optimize my workflow and would appreciate any suggestions for productivity tools", "label": 1, "category": "professional"}
+{"text": "The preliminary results are promising but we need to conduct more trials to confirm our hypothesis", "label": 1, "category": "professional"}
+{"text": "Could you provide more details about the implementation timeline and resource requirements", "label": 1, "category": "professional"}
+{"text": "Im interested in exploring the ethical implications of artificial intelligence in healthcare settings", "label": 1, "category": "professional"}
+{"text": "The proposed solution addresses the immediate concern but might create longterm maintenance issues", "label": 1, "category": "professional"}
+{"text": "Im excited about the potential applications of this technology in developing regions", "label": 1, "category": "professional"}
+{"text": "We need to carefully consider the privacy implications before proceeding with data collection", "label": 1, "category": "professional"}
+{"text": "The literature review reveals significant gaps in our understanding of this phenomenon", "label": 1, "category": "professional"}
+{"text": "Im having trouble reconciling these conflicting theories could you offer some insight", "label": 1, "category": "professional"}
+{"text": "The user interface design needs refinement to enhance accessibility for diverse user groups", "label": 1, "category": "professional"}
+{"text": "Im fascinated by the cultural variations in how different societies approach this concept", "label": 1, "category": "professional"}
+{"text": "The financial projections look optimistic but have you accounted for market volatility", "label": 1, "category": "professional"}
+{"text": "Could you walk me through the decisionmaking process that led to this conclusion", "label": 1, "category": "professional"}
+{"text": "Im looking for feedback on my draft proposal particularly regarding the methodology section", "label": 1, "category": "professional"}
+{"text": "The regulatory framework creates certain constraints that we need to work within", "label": 1, "category": "professional"}
+{"text": "Im curious about how this technology might evolve over the next decade", "label": 1, "category": "professional"}
+{"text": "The statistical analysis revealed some unexpected correlations worth investigating further", "label": 1, "category": "professional"}
+{"text": "Have you considered alternative explanations for the anomalies in the data set", "label": 1, "category": "professional"}
+{"text": "Im concerned that our current approach doesnt adequately address the root cause", "label": 1, "category": "professional"}
+{"text": "The historical context is crucial for understanding why these patterns emerged", "label": 1, "category": "professional"}
+{"text": "Could you share some best practices for implementing this system in a large organization", "label": 1, "category": "professional"}
+{"text": "Im intrigued by the theoretical framework youve developed and its practical applications", "label": 1, "category": "professional"}
+{"text": "The case studies demonstrate both the potential and limitations of this approach", "label": 1, "category": "professional"}
+{"text": "Have you explored how cultural factors might influence the effectiveness of this strategy", "label": 1, "category": "professional"}
+{"text": "Im trying to balance efficiency with thoroughness in my research methodology", "label": 1, "category": "professional"}
+{"text": "The competitive landscape has changed significantly since our initial market analysis", "label": 1, "category": "professional"}
+{"text": "Could you elaborate on how you measured the success metrics in your study", "label": 1, "category": "professional"}
+{"text": "Im particularly interested in the longterm sustainability of this business model", "label": 1, "category": "professional"}
+{"text": "The technical specifications need to be aligned with the actual user requirements", "label": 1, "category": "professional"}
+{"text": "Have you considered the scalability challenges as the system grows more complex", "label": 1, "category": "professional"}
+{"text": "Im analyzing the trends to identify patterns that might predict future developments", "label": 1, "category": "professional"}
+{"text": "The crossfunctional team approach helped us address the problem from multiple perspectives", "label": 1, "category": "professional"}
+{"text": "Could you explain the rationale behind this strategic pivot in your business", "label": 1, "category": "professional"}
+{"text": "Im working to improve the reproducibility of our experimental results", "label": 1, "category": "professional"}
+{"text": "The qualitative findings offer context that complements our quantitative data", "label": 1, "category": "professional"}
+{"text": "Have you integrated feedback from diverse stakeholder groups in your proposal", "label": 1, "category": "professional"}
+{"text": "Im assessing the risk factors that could potentially impact project implementation", "label": 1, "category": "professional"}
+{"text": "The iterative design process allowed us to refine our solution based on user feedback", "label": 1, "category": "professional"}
+{"text": "Could you discuss the tradeoffs involved in prioritizing these competing objectives", "label": 1, "category": "professional"}
+{"text": "Im interested in understanding the neural mechanisms underlying this cognitive process", "label": 1, "category": "professional"}
+{"text": "The methodological approach combines elements from several established frameworks", "label": 1, "category": "professional"}
+{"text": "Have you considered how geopolitical factors might affect the supply chain", "label": 1, "category": "professional"}
+{"text": "Im developing a framework to evaluate the effectiveness of these interventions", "label": 1, "category": "professional"}
+{"text": "The preliminary data suggests a potential breakthrough but verification is needed", "label": 1, "category": "professional"}
+{"text": "Could you recommend resources for deepening my understanding of this specialized field", "label": 1, "category": "professional"}
+{"text": "Im attempting to bridge the gap between theoretical models and practical applications", "label": 1, "category": "professional"}
+{"text": "The economic implications extend beyond immediate financial considerations", "label": 1, "category": "professional"}
+{"text": "Have you addressed the potential biases in your sampling methodology", "label": 1, "category": "professional"}
+{"text": "Im investigating how cultural narratives shape public perception of scientific issues", "label": 1, "category": "professional"}
+{"text": "The multidisciplinary approach enables us to tackle complex societal challenges", "label": 1, "category": "professional"}
+{"text": "Could you elaborate on the technical specifications required for compatibility", "label": 1, "category": "professional"}
+{"text": "Im exploring the intersections between traditional knowledge and modern science", "label": 1, "category": "professional"}
+{"text": "The funding landscape for this type of research has changed dramatically", "label": 1, "category": "professional"}
+{"text": "Have you considered alternative metrics for measuring impact in this context", "label": 1, "category": "professional"}
+{"text": "Im designing experiments to test the boundaries of current theoretical models", "label": 1, "category": "professional"}
+{"text": "The comparative analysis reveals interesting patterns across different regions", "label": 1, "category": "professional"}
+{"text": "Could you explain how machine learning algorithms might improve predictive accuracy", "label": 1, "category": "professional"}
+{"text": "Im particularly concerned about ensuring equitable access to these resources", "label": 1, "category": "professional"}
+{"text": "Theoretical quantum networks could transform secure communications if practical challenges are overcome", "label": 1, "category": "academic"}
+{"text": "Gravitational wave astronomy provides unprecedented insights into cosmic events occurring billions of lightyears away", "label": 1, "category": "academic"}
+{"text": "Multifunctional metamaterials demonstrate programmable responses to electromagnetic microwave and acoustic stimuli", "label": 1, "category": "academic"}
+{"text": "Biodegradable electronics represent a promising solution to environmental challenges posed by electronic waste", "label": 1, "category": "academic"}
+{"text": "Contemporary cryptographic protocols increasingly rely on computational hardness assumptions that remain unproven", "label": 1, "category": "academic"}
+{"text": "Neuromorphic computing architectures mimic biological neural networks to achieve unprecedented energy efficiency", "label": 1, "category": "academic"}
+{"text": "Advanced statistical mechanics reveals emergent properties in complex systems across physical biological and social domains", "label": 1, "category": "academic"}
+{"text": "Experimental verification of topological insulator properties confirms theoretical predictions made decades earlier", "label": 1, "category": "academic"}
+{"text": "Bioengineered scaffolds with precise microarchitectures guide cellular organization for tissue regeneration", "label": 1, "category": "academic"}
+{"text": "Quantum supremacy demonstrations highlight both the potential and limitations of noisy intermediate scale devices", "label": 1, "category": "academic"}
+{"text": "Large language models exhibit emergent capabilities not explicitly programmed into their training objectives", "label": 1, "category": "academic"}
+{"text": "Photonic integrated circuits offer promising platforms for nextgeneration classical and quantum information processing", "label": 1, "category": "academic"}
+{"text": "Precision genome editing technologies raise profound questions about the boundaries of human intervention", "label": 1, "category": "academic"}
+{"text": "Computational fluid dynamics simulations reveal previously unobservable phenomena in turbulent systems", "label": 1, "category": "academic"}
+{"text": "Reinforcement learning algorithms demonstrate remarkable adaptability in uncertain dynamic environments", "label": 1, "category": "academic"}
+{"text": "Synthetic biology approaches enable the creation of organisms with entirely novel metabolic pathways", "label": 1, "category": "academic"}
+{"text": "Mathematical models of infectious disease transmission incorporate network theory to predict outbreak dynamics", "label": 1, "category": "academic"}
+{"text": "Atmospheric carbon capture technologies must achieve significant cost reductions for viable climate impact", "label": 1, "category": "academic"}
+{"text": "Protein folding prediction algorithms leverage deep learning to solve longstanding biochemical puzzles", "label": 1, "category": "academic"}
+{"text": "你好我想咨询", "label": 0, "category": "customer_service"}
+{"text": "我刚才看到一个优惠活动你能", "label": 0, "category": "customer_service"}
+{"text": "请问我可以在哪里", "label": 0, "category": "customer_service"}
+{"text": "我有点困惑关于这个产品的", "label": 0, "category": "customer_service"}
+{"text": "能告诉我预计多久能收", "label": 0, "category": "customer_service"}
+{"text": "谢谢你的帮助我想", "label": 0, "category": "customer_service"}
+{"text": "我对这个问题还", "label": 0, "category": "customer_service"}
+{"text": "请问我应该如何", "label": 0, "category": "customer_service"}
+{"text": "我已经尝试过了但还是无法", "label": 0, "category": "customer_service"}
+{"text": "能帮我查一下我的退", "label": 0, "category": "customer_service"}
+{"text": "我想咨询一下关于", "label": 0, "category": "customer_service"}
+{"text": "我想知道这个产品", "label": 0, "category": "customer_service"}
+{"text": "请问有没有可能加", "label": 0, "category": "customer_service"}
+{"text": "我对这个服务有一", "label": 0, "category": "customer_service"}
+{"text": "我希望能了解更多关于", "label": 0, "category": "customer_service"}
+{"text": "请问我可以在哪里找", "label": 0, "category": "customer_service"}
+{"text": "我看到了一些评论想确认一下它们的真", "label": 0, "category": "customer_service"}
+{"text": "谢谢你我已经", "label": 0, "category": "customer_service"}
+{"text": "能不能告诉我这个活动的截止日期是什么时", "label": 0, "category": "customer_service"}
+{"text": "我想知道如何申请退", "label": 0, "category": "customer_service"}
+{"text": "请问有没有其他", "label": 0, "category": "customer_service"}
+{"text": "我希望能尽快得到回复关于", "label": 0, "category": "customer_service"}
+{"text": "谢谢你的建议我会", "label": 0, "category": "customer_service"}
+{"text": "我对这个产品的质量", "label": 0, "category": "customer_service"}
+{"text": "请问客服的工作时间是", "label": 0, "category": "customer_service"}
+{"text": "我认为我的优势在于一个我的创新思维和", "label": 0, "category": "interview"}
+{"text": "我对这个职位真的非常", "label": 0, "category": "interview"}
+{"text": "请问能告诉我这个团队", "label": 0, "category": "interview"}
+{"text": "我之前的工作经历主要是集中在", "label": 0, "category": "interview"}
+{"text": "我认为这个职位很", "label": 0, "category": "interview"}
+{"text": "请问你对我的简历有什么", "label": 0, "category": "interview"}
+{"text": "我希望能在这个职位上发", "label": 0, "category": "interview"}
+{"text": "我希望就是能够在", "label": 0, "category": "interview"}
+{"text": "我对这个行业的未来有一些", "label": 0, "category": "interview"}
+{"text": "请问您能分享一下公司", "label": 0, "category": "interview"}
+{"text": "我觉得团队合作在这个", "label": 0, "category": "interview"}
+{"text": "我希望能在贵公司", "label": 0, "category": "interview"}
+{"text": "请问贵公司对员工", "label": 0, "category": "interview"}
+{"text": "我有一些问题关于这个", "label": 0, "category": "interview"}
+{"text": "谢谢帮忙分", "label": 0, "category": "interview"}
+{"text": "我期待能为团队带来新", "label": 0, "category": "interview"}
+{"text": "请问您对我的职业", "label": 0, "category": "interview"}
+{"text": "我会认真考虑您提", "label": 0, "category": "interview"}
+{"text": "我希望能在", "label": 0, "category": "interview"}
+{"text": "请问", "label": 0, "category": "customer_service"}
+{"text": "我对这个", "label": 0, "category": "customer_service"}
+{"text": "我在项目", "label": 0, "category": "interview"}
+{"text": "我期待能与", "label": 0, "category": "interview"}
+{"text": "请问您对我这个", "label": 0, "category": "interview"}
+{"text": "我希望能在", "label": 0, "category": "interview"}
+{"text": "我对这道题", "label": 0, "category": "education"}
+{"text": "谢谢刚才的讲解让", "label": 0, "category": "education"}
+{"text": "请问能推荐一些相关的", "label": 0, "category": "education"}
+{"text": "我想请教一下在地理课上提到", "label": 0, "category": "education"}
+{"text": "我对这个概念还是有", "label": 0, "category": "education"}
+{"text": "能不能再举", "label": 0, "category": "education"}
+{"text": "我想讨论一下在历史", "label": 0, "category": "education"}
+{"text": "请问你觉得我", "label": 0, "category": "education"}
+{"text": "我希望能在这个课程中", "label": 0, "category": "education"}
+{"text": "我对下节课的内容有", "label": 0, "category": "education"}
+{"text": "请问这个项目的评分", "label": 0, "category": "education"}
+{"text": "我有一些问题关于考试的形", "label": 0, "category": "education"}
+{"text": "谢谢给我提", "label": 0, "category": "education"}
+{"text": "我想知道你对小", "label": 0, "category": "education"}
+{"text": "请问能给我一些复习的", "label": 0, "category": "education"}
+{"text": "我对这门", "label": 0, "category": "education"}
+{"text": "能不能告诉我如何", "label": 0, "category": "education"}
+{"text": "我在做那", "label": 0, "category": "education"}
+{"text": "我对这个实验", "label": 0, "category": "education"}
+{"text": "请问能推荐一些在线", "label": 0, "category": "education"}
+{"text": "我希望能在课堂", "label": 0, "category": "education"}
+{"text": "请问你对我们下次作业", "label": 0, "category": "education"}
+{"text": "我对这个话题有一些不", "label": 0, "category": "education"}
+{"text": "我在阅读关于细胞生物学的章节时", "label": 0, "category": "education"}
+{"text": "请问你觉得我应该", "label": 0, "category": "education"}
+{"text": "我想今天我们可", "label": 0, "category": "conversation"}
+{"text": "你能教我", "label": 0, "category": "conversation"}
+{"text": "如何让英", "label": 0, "category": "conversation"}
+{"text": "怎么提高我的那", "label": 0, "category": "conversation"}
+{"text": "我最近", "label": 0, "category": "conversation"}
+{"text": "你觉得旅行前", "label": 0, "category": "conversation"}
+{"text": "我想知道如何才", "label": 0, "category": "conversation"}
+{"text": "你觉得培养兴趣爱好对", "label": 0, "category": "conversation"}
+{"text": "你能帮我纠正这个我的", "label": 0, "category": "conversation"}
+{"text": "我有一些词汇但是我", "label": 0, "category": "conversation"}
+{"text": "我想学习一些实用", "label": 0, "category": "conversation"}
+{"text": "你有没有推荐的", "label": 0, "category": "conversation"}
+{"text": "我觉得了解", "label": 0, "category": "conversation"}
+{"text": "我想知道如何找到", "label": 0, "category": "conversation"}
+{"text": "你有没有喜欢的学", "label": 0, "category": "conversation"}
+{"text": "我想知道如何才能拍出好", "label": 0, "category": "conversation"}
+{"text": "你觉得独自旅行和团队", "label": 0, "category": "conversation"}
+{"text": "我最近看到了", "label": 0, "category": "conversation"}
+{"text": "请问如何才", "label": 0, "category": "conversation"}
+{"text": "有没有推荐的电视剧或", "label": 0, "category": "conversation"}
+{"text": "我最近开始学", "label": 0, "category": "conversation"}
+{"text": "我在学习新的语言时", "label": 0, "category": "conversation"}
+{"text": "请问你觉得旅行中最值得", "label": 0, "category": "conversation"}
+{"text": "我想知道如何才", "label": 0, "category": "conversation"}
+{"text": "请问你觉得有", "label": 0, "category": "conversation"}
+{"text": "Hey there I was wondering", "label": 0, "category": "customer_service"}
+{"text": "Hi I received my package but its", "label": 0, "category": "customer_service"}
+{"text": "Hello I have a question about", "label": 0, "category": "customer_service"}
+{"text": "Im really confused about the", "label": 0, "category": "customer_service"}
+{"text": "Hey I tried to", "label": 0, "category": "customer_service"}
+{"text": "Hi I noticed a charge I", "label": 0, "category": "customer_service"}
+{"text": "Hello my product isnt", "label": 0, "category": "customer_service"}
+{"text": "Id like to", "label": 0, "category": "customer_service"}
+{"text": "Hi there can you tell", "label": 0, "category": "customer_service"}
+{"text": "Im having trouble logging in can you", "label": 0, "category": "customer_service"}
+{"text": "Hey I need", "label": 0, "category": "customer_service"}
+{"text": "Hi can you help me find", "label": 0, "category": "customer_service"}
+{"text": "Im really interested in your services but I have a", "label": 0, "category": "customer_service"}
+{"text": "Hello Id like", "label": 0, "category": "customer_service"}
+{"text": "Hey I was promised a", "label": 0, "category": "customer_service"}
+{"text": "Hi I need some", "label": 0, "category": "customer_service"}
+{"text": "Ive been waiting for my order can you", "label": 0, "category": "customer_service"}
+{"text": "Hello Id like to provide", "label": 0, "category": "customer_service"}
+{"text": "Hey Im looking for a replacement part can", "label": 0, "category": "customer_service"}
+{"text": "Hi I received the", "label": 0, "category": "customer_service"}
+{"text": "Im curious about your", "label": 0, "category": "customer_service"}
+{"text": "Hello Id like", "label": 0, "category": "customer_service"}
+{"text": "Hey Im not satisfied with", "label": 0, "category": "customer_service"}
+{"text": "Hi I have a question about", "label": 0, "category": "customer_service"}
+{"text": "Im really interested in your promotions can you tell", "label": 0, "category": "customer_service"}
+{"text": "Hi thanks for having me Im excited to", "label": 0, "category": "interview"}
+{"text": "Could you tell me more about the team Id", "label": 0, "category": "interview"}
+{"text": "I read about your companys values and they", "label": 0, "category": "interview"}
+{"text": "What does a typical day look like for", "label": 0, "category": "interview"}
+{"text": "Ive worked on", "label": 0, "category": "interview"}
+{"text": "Can you share some challenges the team is", "label": 0, "category": "interview"}
+{"text": "Im really passionate about this field and Im", "label": 0, "category": "interview"}
+{"text": "I noticed your company is expanding what does", "label": 0, "category": "interview"}
+{"text": "What opportunities for professional development does", "label": 0, "category": "interview"}
+{"text": "Im curious about the", "label": 0, "category": "interview"}
+{"text": "What qualities do you think are essential for", "label": 0, "category": "interview"}
+{"text": "Can you tell", "label": 0, "category": "interview"}
+{"text": "Ive been following your companys progress and", "label": 0, "category": "interview"}
+{"text": "How does", "label": 0, "category": "interview"}
+{"text": "What are", "label": 0, "category": "interview"}
+{"text": "I don't", "label": 0, "category": "interview"}
+{"text": "What excites you most about", "label": 0, "category": "interview"}
+{"text": "How often do performance reviews happen and what do they", "label": 0, "category": "interview"}
+{"text": "Im interested in", "label": 0, "category": "interview"}
+{"text": "Can you share an example of", "label": 0, "category": "interview"}
+{"text": "What tools or", "label": 0, "category": "interview"}
+{"text": "Id like to understand the work life balance at your", "label": 0, "category": "interview"}
+{"text": "What kind of", "label": 0, "category": "interview"}
+{"text": "Thank you for this opportunity I really", "label": 0, "category": "interview"}
+{"text": "Hi I have a question about my", "label": 0, "category": "education"}
+{"text": "Im really", "label": 0, "category": "customer_service"}
+{"text": "Could you please", "label": 0, "category": "education"}
+{"text": "I missed the", "label": 0, "category": "education"}
+{"text": "Id like to know more about the grading criteria how", "label": 0, "category": "education"}
+{"text": "Can you recommend some", "label": 0, "category": "education"}
+{"text": "Whats the best way to prepare for", "label": 0, "category": "education"}
+{"text": "I have a few questions about the syllabus is now a", "label": 0, "category": "education"}
+{"text": "Can you explain the difference between", "label": 0, "category": "education"}
+{"text": "Id like to discuss my", "label": 0, "category": "education"}
+{"text": "How can I", "label": 0, "category": "education"}
+{"text": "What are some effective study techniques you would", "label": 0, "category": "education"}
+{"text": "Could you tell me more about the group project and how it", "label": 0, "category": "education"}
+{"text": "Im interested in", "label": 0, "category": "interview"}
+{"text": "Can you help me understand the", "label": 0, "category": "education"}
+{"text": "Whats the best way to", "label": 0, "category": "education"}
+{"text": "Id like to know about any", "label": 0, "category": "education"}
+{"text": "How do I access additional help if Im", "label": 0, "category": "education"}
+{"text": "Can you suggest any books or articles that would", "label": 0, "category": "education"}
+{"text": "Whats the policy on late submissions for", "label": 0, "category": "education"}
+{"text": "Im curious about the career paths that this", "label": 0, "category": "education"}
+{"text": "How do you", "label": 0, "category": "interview"}
+{"text": "Thank you for your help I", "label": 0, "category": "education"}
+{"text": "Hey Id love to practice my speaking skills can we", "label": 0, "category": "conversation"}
+{"text": "Could you help me with my pronunciation I think I", "label": 0, "category": "conversation"}
+{"text": "I want to work on", "label": 0, "category": "conversation"}
+{"text": "What topics do you enjoy discussing that we could", "label": 0, "category": "conversation"}
+{"text": "Im trying to expand my vocabulary can you", "label": 0, "category": "conversation"}
+{"text": "Lets do a", "label": 0, "category": "conversation"}
+{"text": "How do you usually prepare for a", "label": 0, "category": "conversation"}
+{"text": "Id like", "label": 0, "category": "customer_service"}
+{"text": "Whats your favorite way to learn new phrases any", "label": 0, "category": "conversation"}
+{"text": "I sometimes struggle with small talk can we", "label": 0, "category": "conversation"}
+{"text": "Can you give me feedback on my", "label": 0, "category": "conversation"}
+{"text": "Whats a common mistake learners make when", "label": 0, "category": "conversation"}
+{"text": "I want to sound more natural do you have any", "label": 0, "category": "conversation"}
+{"text": "Lets talk about our", "label": 0, "category": "conversation"}
+{"text": "How do you feel about discussing current events it could", "label": 0, "category": "conversation"}
+{"text": "Id like to work on", "label": 0, "category": "conversation"}
+{"text": "Whats a good way to", "label": 0, "category": "conversation"}
+{"text": "Can we focus on", "label": 0, "category": "conversation"}
+{"text": "Id love to share my", "label": 0, "category": "conversation"}
+{"text": "How do you stay motivated when practicing a new", "label": 0, "category": "conversation"}
+{"text": "Can you help me with", "label": 0, "category": "conversation"}
+{"text": "I want to practice giving presentations can we do a", "label": 0, "category": "conversation"}
+{"text": "Whats your favorite topic to", "label": 0, "category": "conversation"}
+{"text": "Lets try to have a", "label": 0, "category": "conversation"}
+{"text": "Thanks for helping me practice I", "label": 0, "category": "conversation"}
+{"text": "当代量子计算的发展为", "label": 0, "category": "academic"}
+{"text": "机器学习算法在处理", "label": 0, "category": "academic"}
+{"text": "区块链技术的去中心化特性为", "label": 0, "category": "academic"}
+{"text": "神经网络在图像识别领域", "label": 0, "category": "academic"}
+{"text": "量子纠缠现象的理论研究对于", "label": 0, "category": "academic"}
+{"text": "高维数据可视化技术能够", "label": 0, "category": "academic"}
+{"text": "深度强化学习算法通过自我", "label": 0, "category": "academic"}
+{"text": "边缘计算将数据处理能力", "label": 0, "category": "academic"}
+{"text": "分布式系统在保证数据一致性", "label": 0, "category": "academic"}
+{"text": "脑机接口技术通过解读", "label": 0, "category": "academic"}
+{"text": "自然语言处理模型在多语言环境下", "label": 0, "category": "academic"}
+{"text": "基因编辑技术的伦理争议凸显了", "label": 0, "category": "academic"}
+{"text": "人工智能在医疗诊断中的", "label": 0, "category": "academic"}
+{"text": "复杂系统的涌现特性", "label": 0, "category": "academic"}
+{"text": "蛋白质折叠问题的计算方法对于", "label": 0, "category": "academic"}
+{"text": "高性能计算在气候模拟中的", "label": 0, "category": "academic"}
+{"text": "材料科学中的计算模拟加速了", "label": 0, "category": "academic"}
+{"text": "数据隐私保护与大数据分析", "label": 0, "category": "academic"}
+{"text": "时间序列预测在金融市场中的", "label": 0, "category": "academic"}
+{"text": "认知计算尝试模拟人类", "label": 0, "category": "academic"}
+{"text": "知识图谱通过实体关系的", "label": 0, "category": "academic"}
+{"text": "社交网络分析揭示了信息传播与", "label": 0, "category": "academic"}
+{"text": "无监督学习在发现数据内在结构", "label": 0, "category": "academic"}
+{"text": "量子算法为特定计算问题提供了", "label": 0, "category": "academic"}
+{"text": "生物信息学通过计算方法分析", "label": 0, "category": "academic"}
+{"text": "虚拟现实技术与认知科学的", "label": 0, "category": "academic"}
+{"text": "分布式账本技术重新定义了", "label": 0, "category": "academic"}
+{"text": "群体智能算法通过模拟自然界", "label": 0, "category": "academic"}
+{"text": "计算神经科学尝试构建数学模型", "label": 0, "category": "academic"}
+{"text": "可解释人工智能研究旨在使黑", "label": 0, "category": "academic"}
+{"text": "数字孪生技术通过虚实结合的", "label": 0, "category": "academic"}
+{"text": "混合云架构在保持数据主权的", "label": 0, "category": "academic"}
+{"text": "图神经网络通过结构化数据的", "label": 0, "category": "academic"}
+{"text": "多模态学习整合了不同感知渠", "label": 0, "category": "academic"}
+{"text": "量子密钥分发技术利用量子力学", "label": 0, "category": "academic"}
+{"text": "联邦学习在保护数据隐私的", "label": 0, "category": "academic"}
+{"text": "数据治理框架需要平衡技术", "label": 0, "category": "academic"}
+{"text": "分子动力学模拟为药物设计与", "label": 0, "category": "academic"}
+{"text": "集成学习通过结合多个基础", "label": 0, "category": "academic"}
+{"text": "数字货币的匿名性与可追踪性", "label": 0, "category": "academic"}
+{"text": "元学习算法通过学习如何", "label": 0, "category": "academic"}
+{"text": "生成对抗网络在内容创作领域", "label": 0, "category": "academic"}
+{"text": "人类增强技术引发了关于人性", "label": 0, "category": "academic"}
+{"text": "复杂网络理论为理解现实世界中的", "label": 0, "category": "academic"}
+{"text": "计算社会科学利用大数据与", "label": 0, "category": "academic"}
+{"text": "可持续计算要求在技术创新中", "label": 0, "category": "academic"}
+{"text": "你知道哪里可以找到关于这个", "label": 0, "category": "customer_service"}
+{"text": "我昨天买的那个手机屏幕好像有点", "label": 0, "category": "customer_service"}
+{"text": "这个价格已经包含了所有的", "label": 0, "category": "customer_service"}
+{"text": "能帮我查一下我上次的购物记录", "label": 0, "category": "customer_service"}
+{"text": "我忘记了我的密码可以", "label": 0, "category": "customer_service"}
+{"text": "这个尺码对我来说有点", "label": 0, "category": "customer_service"}
+{"text": "请问你们的实体店在", "label": 0, "category": "customer_service"}
+{"text": "你能为我推荐一些适合", "label": 0, "category": "customer_service"}
+{"text": "我想取消我的会员资格", "label": 0, "category": "customer_service"}
+{"text": "我的包裹已经延迟了三天", "label": 0, "category": "customer_service"}
+{"text": "能否帮我预约下周三", "label": 0, "category": "customer_service"}
+{"text": "我对你们新推出的智能手表", "label": 0, "category": "customer_service"}
+{"text": "请问有没有学生优惠", "label": 0, "category": "customer_service"}
+{"text": "我想知道如何设置", "label": 0, "category": "customer_service"}
+{"text": "这个产品的颜色看起来和", "label": 0, "category": "customer_service"}
+{"text": "能否提供一下你们的营业", "label": 0, "category": "customer_service"}
+{"text": "我在使用软件的过程中", "label": 0, "category": "customer_service"}
+{"text": "请问你们的售后服务是否", "label": 0, "category": "customer_service"}
+{"text": "我需要一份详细的", "label": 0, "category": "customer_service"}
+{"text": "我想了解一下你们的退换货", "label": 0, "category": "customer_service"}
+{"text": "请问我应该如何正确测量尺寸以", "label": 0, "category": "customer_service"}
+{"text": "我对你们公司的企业文化非常", "label": 0, "category": "interview"}
+{"text": "我可以提供一些我过去项目的", "label": 0, "category": "interview"}
+{"text": "请问面试过程中需要准备", "label": 0, "category": "interview"}
+{"text": "我的背景可能与职位描述不完全", "label": 0, "category": "interview"}
+{"text": "我想了解一下这个职位的晋升", "label": 0, "category": "interview"}
+{"text": "请问公司对员工有哪些", "label": 0, "category": "interview"}
+{"text": "我希望能了解更多关于团队日常", "label": 0, "category": "interview"}
+{"text": "我对贵公司的发展战略", "label": 0, "category": "interview"}
+{"text": "我的技术专长主要集中在", "label": 0, "category": "interview"}
+{"text": "请问贵公司是否支持远程或", "label": 0, "category": "interview"}
+{"text": "我想了解一下这个行业的", "label": 0, "category": "interview"}
+{"text": "我认为我的沟通能力和解决问题的", "label": 0, "category": "interview"}
+{"text": "请问您能描述一下团队", "label": 0, "category": "interview"}
+{"text": "我希望能够在职业生涯中", "label": 0, "category": "interview"}
+{"text": "我能否了解一下公司对这个", "label": 0, "category": "interview"}
+{"text": "请问公司在行业中的竞争", "label": 0, "category": "interview"}
+{"text": "我对这个领域充满热情并且", "label": 0, "category": "interview"}
+{"text": "请问贵公司的国际业务", "label": 0, "category": "interview"}
+{"text": "我希望能在实际工作中", "label": 0, "category": "interview"}
+{"text": "请问课堂上讲的那个公式", "label": 0, "category": "education"}
+{"text": "我对这个理论概念的应用场景", "label": 0, "category": "education"}
+{"text": "能推荐一些能帮助理解这个", "label": 0, "category": "education"}
+{"text": "请问期末考试会涵盖哪些", "label": 0, "category": "education"}
+{"text": "我在完成作业时遇到了", "label": 0, "category": "education"}
+{"text": "能否再详细讲解一下这个实验", "label": 0, "category": "education"}
+{"text": "我想了解一下如何提高我的", "label": 0, "category": "education"}
+{"text": "请问有没有针对这门课程的", "label": 0, "category": "education"}
+{"text": "我想知道如何更有效地准备", "label": 0, "category": "education"}
+{"text": "能否解释一下为什么这两个", "label": 0, "category": "education"}
+{"text": "我对这个研究方向很", "label": 0, "category": "education"}
+{"text": "请问教授有没有推荐的", "label": 0, "category": "education"}
+{"text": "我在理解这个数学问题时", "label": 0, "category": "education"}
+{"text": "我想请教一下如何改进", "label": 0, "category": "education"}
+{"text": "请问有没有针对这个课题的", "label": 0, "category": "education"}
+{"text": "我对这个历史事件的背景和", "label": 0, "category": "education"}
+{"text": "能否分享一些应对考试", "label": 0, "category": "education"}
+{"text": "我想了解更多关于这个学科", "label": 0, "category": "education"}
+{"text": "量子信息技术在通信安全领域的", "label": 0, "category": "academic"}
+{"text": "细粒度的权限控制系统能有效", "label": 0, "category": "academic"}
+{"text": "基于注意力机制的模型在序列", "label": 0, "category": "academic"}
+{"text": "合成生物学的伦理边界需要", "label": 0, "category": "academic"}
+{"text": "人机交互设计应当充分考虑", "label": 0, "category": "academic"}
+{"text": "新型半导体材料的研发突破了", "label": 0, "category": "academic"}
+{"text": "城市智能交通系统通过大数据", "label": 0, "category": "academic"}
+{"text": "人工智能辅助创作引发了", "label": 0, "category": "academic"}
+{"text": "气候变化对全球生态系统产生的", "label": 0, "category": "academic"}
+{"text": "分子标记技术为物种起源研究", "label": 0, "category": "academic"}
+{"text": "非侵入式脑成像技术揭示了", "label": 0, "category": "academic"}
+{"text": "数据驱动的精准医疗模型需要", "label": 0, "category": "academic"}
+{"text": "数学物理中的几何方法统一了", "label": 0, "category": "academic"}
+{"text": "量子计算在优化问题求解上", "label": 0, "category": "academic"}
+{"text": "生物启发的算法为复杂工程", "label": 0, "category": "academic"}
+{"text": "前沿纳米材料在可持续能源", "label": 0, "category": "academic"}
+{"text": "网络空间安全需要构建多层次的", "label": 0, "category": "academic"}
+{"text": "星际探测任务的通信延迟问题", "label": 0, "category": "academic"}
+{"text": "认知科学的多元研究方法揭示了", "label": 0, "category": "academic"}
+{"text": "机器学习模型解释性与性能之间", "label": 0, "category": "academic"}
+{"text": "元宇宙概念的实现依赖", "label": 0, "category": "academic"}
+{"text": "社会信任机制在分布式经济", "label": 0, "category": "academic"}
+{"text": "深度学习在小样本场景下的", "label": 0, "category": "academic"}
+{"text": "太赫兹通信技术为下一代", "label": 0, "category": "academic"}
+{"text": "信息物理融合系统在工业自动化中", "label": 0, "category": "academic"}
+{"text": "气候工程干预措施可能引发", "label": 0, "category": "academic"}
+{"text": "非结构化知识的符号化表示", "label": 0, "category": "academic"}
+{"text": "人工合成的蛋白质结构实现了", "label": 0, "category": "academic"}
+{"text": "量子力学解释世界的方式", "label": 0, "category": "academic"}
+{"text": "边缘智能装置通过本地计算", "label": 0, "category": "academic"}
+{"text": "Quantum coherence maintenance remains one of the fundamental", "label": 0, "category": "academic"}
+{"text": "The interaction between epigenetic mechanisms and", "label": 0, "category": "academic"}
+{"text": "Neuroplasticity demonstrates the remarkable ability of", "label": 0, "category": "academic"}
+{"text": "Theoretical frameworks in contemporary cognitive linguistics suggest", "label": 0, "category": "academic"}
+{"text": "The emergent properties of complex adaptive systems", "label": 0, "category": "academic"}
+{"text": "The anthropogenic impact on biogeochemical cycles", "label": 0, "category": "academic"}
+{"text": "Advancements in quantum field theory have revealed", "label": 0, "category": "academic"}
+{"text": "Contemporary political polarization has been exacerbated by", "label": 0, "category": "academic"}
+{"text": "Paleoclimatological data extracted from ice cores", "label": 0, "category": "academic"}
+{"text": "The theoretical underpinnings of consciousness remain", "label": 0, "category": "academic"}
+{"text": "Immunological memory exhibits remarkable specificity and", "label": 0, "category": "academic"}
+{"text": "The mathematics of optimal transport theory has", "label": 0, "category": "academic"}
+{"text": "The construction of ethical frameworks for artificial", "label": 0, "category": "academic"}
+{"text": "Topological data analysis provides mathematical tools for", "label": 0, "category": "academic"}
+{"text": "The entanglement of quantum particles enables", "label": 0, "category": "academic"}
+{"text": "Dynamical systems theory offers mathematical frameworks for", "label": 0, "category": "academic"}
+{"text": "The microbiome demonstrates complex ecological interactions with", "label": 0, "category": "academic"}
+{"text": "Game theoretic approaches to evolutionary biology have", "label": 0, "category": "academic"}
+{"text": "The paradoxical relationship between quantum mechanics and", "label": 0, "category": "academic"}
+{"text": "Behavioral economics challenges rational choice theory by", "label": 0, "category": "academic"}
+{"text": "The anthropology of scientific practice examines how", "label": 0, "category": "academic"}
+{"text": "Neuroimaging techniques reveal that bilingualism reconfigures", "label": 0, "category": "academic"}
+{"text": "Cryptographic protocols leveraging zeroknowledge proofs enable", "label": 0, "category": "academic"}
+{"text": "The evolutionary arms race between hosts and", "label": 0, "category": "academic"}
+{"text": "The hypothetical technological singularity represents a", "label": 0, "category": "academic"}
+{"text": "Contemporary cosmological models must reconcile", "label": 0, "category": "academic"}
+{"text": "Nonequilibrium thermodynamics extends classical principles to", "label": 0, "category": "academic"}
+{"text": "Archaeological evidence increasingly suggests that human", "label": 0, "category": "academic"}
+{"text": "Tensorial mathematical frameworks provide essential tools for", "label": 0, "category": "academic"}
+{"text": "The extended evolutionary synthesis incorporates", "label": 0, "category": "academic"}
+{"text": "I strongly believe that interdisciplinary collaboration can", "label": 0, "category": "professional"}
+{"text": "The recent software update seems to have fixed", "label": 0, "category": "professional"}
+{"text": "Could you elaborate on how your approach differs from", "label": 0, "category": "professional"}
+{"text": "Im concerned about the environmental impact of this", "label": 0, "category": "professional"}
+{"text": "The data suggests a correlation between these", "label": 0, "category": "professional"}
+{"text": "Ive been researching this topic extensively and", "label": 0, "category": "professional"}
+{"text": "Our team has developed a new protocol that", "label": 0, "category": "professional"}
+{"text": "The complexity of this ecosystem makes it difficult to", "label": 0, "category": "professional"}
+{"text": "Im trying to optimize my workflow and would", "label": 0, "category": "professional"}
+{"text": "The preliminary results are promising but we need to", "label": 0, "category": "professional"}
+{"text": "Could you provide more details about the implementation", "label": 0, "category": "professional"}
+{"text": "Im interested in exploring the ethical implications of", "label": 0, "category": "professional"}
+{"text": "The proposed solution addresses the immediate concern but", "label": 0, "category": "professional"}
+{"text": "Im excited about the potential applications of this", "label": 0, "category": "professional"}
+{"text": "We need to carefully consider the privacy implications before", "label": 0, "category": "professional"}
+{"text": "The literature review reveals significant gaps in our", "label": 0, "category": "professional"}
+{"text": "Im having trouble reconciling these conflicting theories could", "label": 0, "category": "professional"}
+{"text": "The user interface design needs refinement to", "label": 0, "category": "professional"}
+{"text": "Im fascinated by the cultural variations in how", "label": 0, "category": "professional"}
+{"text": "The financial projections look optimistic but have you", "label": 0, "category": "professional"}
+{"text": "Could you walk me through the decisionmaking process that", "label": 0, "category": "professional"}
+{"text": "Im looking for feedback on my draft proposal", "label": 0, "category": "professional"}
+{"text": "The regulatory framework creates certain constraints that", "label": 0, "category": "professional"}
+{"text": "Im curious about how this technology might", "label": 0, "category": "professional"}
+{"text": "The statistical analysis revealed some unexpected", "label": 0, "category": "professional"}
+{"text": "Have you considered alternative explanations for the", "label": 0, "category": "professional"}
+{"text": "Im concerned that our current approach doesnt", "label": 0, "category": "professional"}
+{"text": "The historical context is crucial for understanding why", "label": 0, "category": "professional"}
+{"text": "Could you share some best practices for implementing", "label": 0, "category": "professional"}
+{"text": "Im intrigued by the theoretical framework youve", "label": 0, "category": "professional"}
+{"text": "The case studies demonstrate both the potential and", "label": 0, "category": "professional"}
+{"text": "Have you explored how cultural factors might", "label": 0, "category": "professional"}
+{"text": "Im trying to balance efficiency with thoroughness in", "label": 0, "category": "professional"}
+{"text": "The competitive landscape has changed significantly since", "label": 0, "category": "professional"}
+{"text": "Could you elaborate on how you measured the", "label": 0, "category": "professional"}
+{"text": "Im particularly interested in the longterm sustainability of", "label": 0, "category": "professional"}
+{"text": "The technical specifications need to be aligned with", "label": 0, "category": "professional"}
+{"text": "Have you considered the scalability challenges as", "label": 0, "category": "professional"}
+{"text": "Im analyzing the trends to identify patterns that", "label": 0, "category": "professional"}
+{"text": "The crossfunctional team approach helped us address", "label": 0, "category": "professional"}
+{"text": "Could you explain the rationale behind this", "label": 0, "category": "professional"}
+{"text": "Im working to improve the reproducibility of", "label": 0, "category": "professional"}
+{"text": "The qualitative findings offer context that", "label": 0, "category": "professional"}
+{"text": "Have you integrated feedback from diverse stakeholder", "label": 0, "category": "professional"}
+{"text": "Im assessing the risk factors that could", "label": 0, "category": "professional"}
+{"text": "The iterative design process allowed us to", "label": 0, "category": "professional"}
+{"text": "Could you discuss the tradeoffs involved in", "label": 0, "category": "professional"}
+{"text": "Theoretical quantum networks could transform secure", "label": 0, "category": "academic"}
+{"text": "Gravitational wave astronomy provides unprecedented insights into", "label": 0, "category": "academic"}
+{"text": "Multifunctional metamaterials demonstrate programmable responses to", "label": 0, "category": "academic"}
+{"text": "Biodegradable electronics represent a promising solution to", "label": 0, "category": "academic"}
+{"text": "Contemporary cryptographic protocols increasingly rely on", "label": 0, "category": "academic"}
+{"text": "Neuromorphic computing architectures mimic biological neural", "label": 0, "category": "academic"}
+{"text": "Advanced statistical mechanics reveals emergent properties in", "label": 0, "category": "academic"}
+{"text": "Experimental verification of topological insulator properties confirms", "label": 0, "category": "academic"}
+{"text": "Bioengineered scaffolds with precise microarchitectures guide", "label": 0, "category": "academic"}
+{"text": "Quantum supremacy demonstrations highlight both the", "label": 0, "category": "academic"}
+{"text": "Large language models exhibit emergent capabilities not", "label": 0, "category": "academic"}
+{"text": "Photonic integrated circuits offer promising platforms for", "label": 0, "category": "academic"}
+{"text": "Precision genome editing technologies raise profound", "label": 0, "category": "academic"}
+{"text": "Computational fluid dynamics simulations reveal previously", "label": 0, "category": "academic"}
+{"text": "Reinforcement learning algorithms demonstrate remarkable", "label": 0, "category": "academic"}
+{"text": "Synthetic biology approaches enable the creation of", "label": 0, "category": "academic"}
+{"text": "Mathematical models of infectious disease transmission incorporate", "label": 0, "category": "academic"}
+{"text": "Atmospheric carbon capture technologies must achieve", "label": 0, "category": "academic"}
+{"text": "嘘", "label": 0, "category": "silence_request"}
+{"text": "嘘安静", "label": 0, "category": "silence_request"}
+{"text": "请停止", "label": 0, "category": "silence_request"}
+{"text": "我不想听了", "label": 0, "category": "silence_request"}
+{"text": "我需要安静", "label": 0, "category": "silence_request"}
+{"text": "请别说", "label": 0, "category": "silence_request"}
+{"text": "够了停下吧谢谢", "label": 0, "category": "silence_request"}
+{"text": "你别再说了", "label": 0, "category": "silence_request"}
+{"text": "我们停止聊天", "label": 0, "category": "silence_request"}
+{"text": "停我想安静", "label": 0, "category": "silence_request"}
+{"text": "能不说话吗", "label": 0, "category": "silence_request"}
+{"text": "能不能别继续回复我了", "label": 0, "category": "silence_request"}
+{"text": "你先暂停", "label": 0, "category": "silence_request"}
+{"text": "先别说话", "label": 0, "category": "silence_request"}
+{"text": "你先等一下", "label": 0, "category": "silence_request"}
+{"text": "闭嘴", "label": 0, "category": "silence_request"}
+{"text": "先停一停", "label": 0, "category": "silence_request"}
+{"text": "先别继续说话", "label": 0, "category": "silence_request"}
+{"text": "停止说话稍等片刻", "label": 0, "category": "silence_request"}
+{"text": "我们不说话了吧", "label": 0, "category": "silence_request"}
+{"text": "暂时不要说话", "label": 0, "category": "silence_request"}
+{"text": "你先等等说话", "label": 0, "category": "silence_request"}
+{"text": "我需要停止对话", "label": 0, "category": "silence_request"}
+{"text": "等一会再说话", "label": 0, "category": "silence_request"}
+{"text": "说话停止", "label": 0, "category": "silence_request"}
+{"text": "我需要一些时间请保持沉默", "label": 0, "category": "silence_request"}
+{"text": "请不要再说了", "label": 0, "category": "silence_request"}
+{"text": "暂停", "label": 0, "category": "silence_request"}
+{"text": "请不要回应我", "label": 0, "category": "silence_request"}
+{"text": "安静我需要独处的时间", "label": 0, "category": "silence_request"}
+{"text": "不要继续回答我保持沉默", "label": 0, "category": "silence_request"}
+{"text": "闭嘴吧我对这个不感兴趣", "label": 0, "category": "silence_request"}
+{"text": "先停我现在不想聊天", "label": 0, "category": "silence_request"}
+{"text": "可以闭嘴吗我不想听了", "label": 0, "category": "silence_request"}
+{"text": "你先停一下", "label": 0, "category": "silence_request"}
+{"text": "好吵啊我需要安静", "label": 0, "category": "silence_request"}
+{"text": "请你结束这次对话", "label": 0, "category": "silence_request"}
+{"text": "请不要继续再回复我了", "label": 0, "category": "silence_request"}
+{"text": "你安静下别打扰我", "label": 0, "category": "silence_request"}
+{"text": "请暂停", "label": 0, "category": "silence_request"}
+{"text": "别再说了", "label": 0, "category": "silence_request"}
+{"text": "别说了让我静静", "label": 0, "category": "silence_request"}
+{"text": "我想一个人静一静", "label": 0, "category": "silence_request"}
+{"text": "请不要再回复我", "label": 0, "category": "silence_request"}
+{"text": "我需要一点安静", "label": 0, "category": "silence_request"}
+{"text": "我理解了请停止说话", "label": 0, "category": "silence_request"}
+{"text": "听的我头疼让我静一静", "label": 0, "category": "silence_request"}
+{"text": "安静让我自己先想想", "label": 0, "category": "silence_request"}
+{"text": "不要再说了好吗", "label": 0, "category": "silence_request"}
+{"text": "我希望能暂停对话", "label": 0, "category": "silence_request"}
+{"text": "我希望你能停止回复我", "label": 0, "category": "silence_request"}
+{"text": "我需要暂时不进行对话", "label": 0, "category": "silence_request"}
+{"text": "让我静静不想聊天了", "label": 0, "category": "silence_request"}
+{"text": "我希望能暂停一下我们的对话", "label": 0, "category": "silence_request"}
+{"text": "我想你暂时停止", "label": 0, "category": "silence_request"}
+{"text": "请理解我想暂停这个对话", "label": 0, "category": "silence_request"}
+{"text": "停止你的回答", "label": 0, "category": "silence_request"}
+{"text": "不要再说任何话了", "label": 0, "category": "silence_request"}
+{"text": "你可以安静吗", "label": 0, "category": "silence_request"}
+{"text": "请你别说话了", "label": 0, "category": "silence_request"}
+{"text": "不要再继续回应了", "label": 0, "category": "silence_request"}
+{"text": "你能不说话吗", "label": 0, "category": "silence_request"}
+{"text": "请别再发言", "label": 0, "category": "silence_request"}
+{"text": "请停止发言", "label": 0, "category": "silence_request"}
+{"text": "我希望你能安静", "label": 0, "category": "silence_request"}
+{"text": "请停止你现在的说话", "label": 0, "category": "silence_request"}
+{"text": "我们能都保持安静吗", "label": 0, "category": "silence_request"}
+{"text": "我现在不想听你说话", "label": 0, "category": "silence_request"}
+{"text": "我们都别说话了", "label": 0, "category": "silence_request"}
+{"text": "请不要再说任何话", "label": 0, "category": "silence_request"}
+{"text": "我需要你保持沉默", "label": 0, "category": "silence_request"}
+{"text": "请别再发言了", "label": 0, "category": "silence_request"}
+{"text": "我想安静一下", "label": 0, "category": "silence_request"}
+{"text": "保持安静谢谢", "label": 0, "category": "silence_request"}
+{"text": "我希望你能暂时不说话", "label": 0, "category": "silence_request"}
+{"text": "保持沉默感谢", "label": 0, "category": "silence_request"}
+{"text": "停下来你现在说的话我想思考", "label": 0, "category": "silence_request"}
+{"text": "请给我一些时间思考你不要说话", "label": 0, "category": "silence_request"}
+{"text": "能不说话吗我需要安静的环境来集中注意力", "label": 0, "category": "silence_request"}
+{"text": "我想要你一段时间的沉默", "label": 0, "category": "silence_request"}
+{"text": "我想要你一段时间的安静", "label": 0, "category": "silence_request"}
+{"text": "请保持安静感谢你的配合", "label": 0, "category": "silence_request"}
+{"text": "让我们都保持安静", "label": 0, "category": "silence_request"}
+{"text": "我们来玩一个游戏谁先说话谁就输了", "label": 0, "category": "silence_request"}
+{"text": "我们来玩一个游戏大家都保持安静", "label": 0, "category": "silence_request"}
+{"text": "可以了我希望你能理解我需要安静", "label": 0, "category": "silence_request"}
+{"text": "我希望你能稍微安静一段时间", "label": 0, "category": "silence_request"}
+{"text": "我想要我们都安静", "label": 0, "category": "silence_request"}
+{"text": "我想要我们都保持沉默", "label": 0, "category": "silence_request"}
+{"text": "好了别说了", "label": 0, "category": "silence_request"}
+{"text": "如果你现在不说话我会很感谢", "label": 0, "category": "silence_request"}
+{"text": "请不要再说任何话了", "label": 0, "category": "silence_request"}
+{"text": "我理解你的意思了你先停下", "label": 0, "category": "silence_request"}
+{"text": "安静安静", "label": 0, "category": "silence_request"}
+{"text": "闭嘴闭嘴", "label": 0, "category": "silence_request"}
+{"text": "烦死了别说了", "label": 0, "category": "silence_request"}
+{"text": "好吵啊你别说话了", "label": 0, "category": "silence_request"}
+{"text": "你能安静一会吗", "label": 0, "category": "silence_request"}
+{"text": "求你了安静一会吧", "label": 0, "category": "silence_request"}
+{"text": "停下来好吗", "label": 0, "category": "silence_request"}
+{"text": "Shh be quiet", "label": 0, "category": "silence_request"}
+{"text": "Shut up", "label": 0, "category": "silence_request"}
+{"text": "ok Shut up", "label": 0, "category": "silence_request"}
+{"text": "Be quiet", "label": 0, "category": "silence_request"}
+{"text": "Be quiet please", "label": 0, "category": "silence_request"}
+{"text": "Silence", "label": 0, "category": "silence_request"}
+{"text": "Stop talking", "label": 0, "category": "silence_request"}
+{"text": "Hush quiet", "label": 0, "category": "silence_request"}
+{"text": "Enough quiet", "label": 0, "category": "silence_request"}
+{"text": "Quiet", "label": 0, "category": "silence_request"}
+{"text": "Zip it", "label": 0, "category": "silence_request"}
+{"text": "Stop", "label": 0, "category": "silence_request"}
+{"text": "Stop please", "label": 0, "category": "silence_request"}
+{"text": "Cut it out", "label": 0, "category": "silence_request"}
+{"text": "Hold your tongue", "label": 0, "category": "silence_request"}
+{"text": "Keep quiet", "label": 0, "category": "silence_request"}
+{"text": "Stop now", "label": 0, "category": "silence_request"}
+{"text": "Stop it", "label": 0, "category": "silence_request"}
+{"text": "Cease talking", "label": 0, "category": "silence_request"}
+{"text": "Shush", "label": 0, "category": "silence_request"}
+{"text": "Stop speaking", "label": 0, "category": "silence_request"}
+{"text": "Close your mouth", "label": 0, "category": "silence_request"}
+{"text": "Dont speak", "label": 0, "category": "silence_request"}
+{"text": "Halt", "label": 0, "category": "silence_request"}
+{"text": "Be silent", "label": 0, "category": "silence_request"}
+{"text": "Mute yourself", "label": 0, "category": "silence_request"}
+{"text": "ok stop please", "label": 0, "category": "silence_request"}
+{"text": "Enough quiet", "label": 0, "category": "silence_request"}
+{"text": "Clam up", "label": 0, "category": "silence_request"}
+{"text": "Not another word", "label": 0, "category": "silence_request"}
+{"text": "Quiet down", "label": 0, "category": "silence_request"}
+{"text": "Shut your mouth", "label": 0, "category": "silence_request"}
+{"text": "Pipe down", "label": 0, "category": "silence_request"}
+{"text": "Stop yapping", "label": 0, "category": "silence_request"}
+{"text": "Please stop talking", "label": 0, "category": "silence_request"}
+{"text": "Could you be quiet please", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop speaking now", "label": 0, "category": "silence_request"}
+{"text": "Its time to be silent", "label": 0, "category": "silence_request"}
+{"text": "I really need some quiet", "label": 0, "category": "silence_request"}
+{"text": "Can you please hold your tongue", "label": 0, "category": "silence_request"}
+{"text": "Lets have some silence now", "label": 0, "category": "silence_request"}
+{"text": "Id appreciate it if you stopped talking", "label": 0, "category": "silence_request"}
+{"text": "I need you to zip it for a moment", "label": 0, "category": "silence_request"}
+{"text": "This conversation needs to end now", "label": 0, "category": "silence_request"}
+{"text": "Im asking you to stop talking", "label": 0, "category": "silence_request"}
+{"text": "Your silence would be appreciated", "label": 0, "category": "silence_request"}
+{"text": "Can you please stop your noise", "label": 0, "category": "silence_request"}
+{"text": "I need you to be quiet now", "label": 0, "category": "silence_request"}
+{"text": "Please stop running your mouth", "label": 0, "category": "silence_request"}
+{"text": "Can we have some peace and quiet", "label": 0, "category": "silence_request"}
+{"text": "Its time to stop talking", "label": 0, "category": "silence_request"}
+{"text": "Please stop your incessant talking", "label": 0, "category": "silence_request"}
+{"text": "I need you to hush now", "label": 0, "category": "silence_request"}
+{"text": "end this conversation here", "label": 0, "category": "silence_request"}
+{"text": "Id like you to stop speaking", "label": 0, "category": "silence_request"}
+{"text": "Please hold off on the talking", "label": 0, "category": "silence_request"}
+{"text": "Its time for some quiet", "label": 0, "category": "silence_request"}
+{"text": "I need you to be quiet please", "label": 0, "category": "silence_request"}
+{"text": "Can you please stop your prattling", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop your jabbering", "label": 0, "category": "silence_request"}
+{"text": "Please stop your yapping", "label": 0, "category": "silence_request"}
+{"text": "Lets take a break from this discussion", "label": 0, "category": "silence_request"}
+{"text": "I need you to be silent for a while", "label": 0, "category": "silence_request"}
+{"text": "stop talking its getting overwhelming", "label": 0, "category": "silence_request"}
+{"text": "Could you please stop your blabbering", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop your chattering", "label": 0, "category": "silence_request"}
+{"text": "Its time to stop your waffling", "label": 0, "category": "silence_request"}
+{"text": "I need you to hold off on your comments for now", "label": 0, "category": "silence_request"}
+{"text": "Can you please stop your nattering", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop your gabbing", "label": 0, "category": "silence_request"}
+{"text": "Please stop your gossiping", "label": 0, "category": "silence_request"}
+{"text": "Could you please stop your yakking", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop your jabber", "label": 0, "category": "silence_request"}
+{"text": "Please stop your babble", "label": 0, "category": "silence_request"}
+{"text": "Can you please stop your prattle", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop your noise", "label": 0, "category": "silence_request"}
+{"text": "Please stop your chatter", "label": 0, "category": "silence_request"}
+{"text": "Could you please stop your blabber", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop your ramble", "label": 0, "category": "silence_request"}
+{"text": "Can you please stop your natter", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop your gab", "label": 0, "category": "silence_request"}
+{"text": "Please stop your gossip", "label": 0, "category": "silence_request"}
+{"text": "please stop talking for a moment", "label": 0, "category": "silence_request"}
+{"text": "I would appreciate it if you could be quiet now", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop speaking immediately", "label": 0, "category": "silence_request"}
+{"text": "Please refrain from talking any further", "label": 0, "category": "silence_request"}
+{"text": "It is important that you stop talking right now", "label": 0, "category": "silence_request"}
+{"text": "I need some silence please stop talking", "label": 0, "category": "silence_request"}
+{"text": "Lets take a break from this conversation", "label": 0, "category": "silence_request"}
+{"text": "Id appreciate it if you could stop talking now", "label": 0, "category": "silence_request"}
+{"text": "Please stop talking and listen for a moment", "label": 0, "category": "silence_request"}
+{"text": "please stop your incessant talking", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop speaking and be quiet", "label": 0, "category": "silence_request"}
+{"text": "Its time to end this conversation", "label": 0, "category": "silence_request"}
+{"text": "I would like you to stop talking now", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop talking its too noisy", "label": 0, "category": "silence_request"}
+{"text": "Please stop talking I need to concentrate", "label": 0, "category": "silence_request"}
+{"text": "I need you to stop talking and be silent", "label": 0, "category": "silence_request"}
+{"text": "Please stop talking I need to think", "label": 0, "category": "silence_request"}
+{"text": "Could you please stop talking its too much noise", "label": 0, "category": "silence_request"}

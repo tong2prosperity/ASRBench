@@ -18,17 +18,23 @@ def parser():
     p = argparse.ArgumentParser(description="ASRBench 客户数据集评测")
     commands = p.add_subparsers(dest="command", required=True)
     v = commands.add_parser("validate", parents=[common], help="导入并校验数据")
-    v.add_argument("manifest")
+    v.add_argument("manifest", nargs="?")
+    v.add_argument("--kind", choices=["asr", "eot"], default="asr")
+    v.add_argument("--builtin-eot", action="store_true")
     v.add_argument("--audio-root")
     r = commands.add_parser("run", parents=[common], help="执行多模型评测")
     source = r.add_mutually_exclusive_group(required=True)
     source.add_argument("--manifest")
     source.add_argument("--dataset-id")
+    source.add_argument("--builtin-eot", action="store_true")
     r.add_argument("--audio-root")
     r.add_argument("--models", nargs="+", required=True)
-    r.add_argument("--mode", choices=["batch", "stream"], default="batch")
+    r.add_argument("--mode", choices=["batch", "stream", "eot"], default="batch")
     r.add_argument("--concurrency", type=int)
     r.add_argument("--limit", type=int)
+    r.add_argument("--prompt-file")
+    r.add_argument("--system-prompt-file")
+    r.add_argument("--label-policy", choices=["original", "stop_is_complete"])
     web = commands.add_parser("serve", parents=[common], help="启动本地网页")
     web.add_argument("--port", type=int, default=8765)
     for name in ("resume", "retry"):
@@ -45,7 +51,16 @@ async def execute(args):
     service = BenchService(load_config(args.config), args.db)
     try:
         if args.command == "validate":
-            d = await service.import_dataset(args.manifest, args.audio_root)
+            if args.builtin_eot:
+                if args.manifest:
+                    raise ValueError("内置数据与外部清单不能同时指定")
+                d = await service.import_builtin_eot()
+            elif args.manifest:
+                d = await service.import_dataset(
+                    args.manifest, args.audio_root, args.kind
+                )
+            else:
+                raise ValueError("请指定清单路径或 --builtin-eot")
             print(
                 json.dumps(
                     {k: v for k, v in d.items() if k != "samples"},
@@ -70,14 +85,35 @@ async def execute(args):
             return 0
         if args.command == "run":
             did = args.dataset_id
-            if args.manifest:
-                dataset = await service.import_dataset(args.manifest, args.audio_root)
+            if args.builtin_eot and args.mode != "eot":
+                raise ValueError("内置 EOT 数据请使用 --mode eot")
+            if args.manifest or args.builtin_eot:
+                dataset = (
+                    await service.import_builtin_eot()
+                    if args.builtin_eot
+                    else await service.import_dataset(
+                        args.manifest,
+                        args.audio_root,
+                        "eot" if args.mode == "eot" else "asr",
+                    )
+                )
                 if dataset["errors"]:
                     print(json.dumps(dataset["errors"], ensure_ascii=False, indent=2))
                     return 1
                 did = dataset["id"]
             run = service.create_run(
-                did, args.models, args.mode, args.concurrency, args.limit
+                did,
+                args.models,
+                args.mode,
+                args.concurrency,
+                args.limit,
+                prompt_template=Path(args.prompt_file).read_text(encoding="utf-8")
+                if args.prompt_file
+                else None,
+                system_prompt=Path(args.system_prompt_file).read_text(encoding="utf-8")
+                if args.system_prompt_file
+                else None,
+                label_policy=args.label_policy,
             )
             rid = run["id"]
             task = service.schedule(rid)
@@ -161,6 +197,7 @@ async def legacy(argv):
             p["profile_id"]
             for p in cfg["models"]
             if p.get("enabled", True)
+            and p["provider"] != "eot_chat"
             and (
                 not args.provider
                 or p["profile_id"] == args.provider

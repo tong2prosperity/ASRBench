@@ -75,3 +75,6 @@ config*.yaml
 *.db.lock
 *.sqlite.lock
 *.sqlite3.lock
+
+# Bundled EOT base annotations under asrbench/resources/eot are intentional source assets.
+# Historical EOT results and customer datasets stay in ignored runtime/data directories.

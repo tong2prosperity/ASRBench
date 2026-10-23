@@ -187,12 +187,13 @@ wheels = [
 
 [[package]]
 name = "asrbench"
-version = "0.2.0"
+version = "0.3.0"
 source = { editable = "." }
 dependencies = [
     { name = "dashscope" },
     { name = "fastapi" },
     { name = "filelock" },
+    { name = "httpx" },
     { name = "jieba" },
     { name = "jiwer" },
     { name = "pydub" },
@@ -222,6 +223,7 @@ requires-dist = [
     { name = "datasets", marker = "extra == 'experiments'", specifier = ">=4.8.4" },
     { name = "fastapi", specifier = ">=0.161.1" },
     { name = "filelock", specifier = ">=3.25.2" },
+    { name = "httpx", specifier = ">=0.28.1" },
     { name = "jieba", specifier = ">=0.42" },
     { name = "jiwer", specifier = ">=3.0" },
     { name = "pydub", specifier = ">=0.25" },

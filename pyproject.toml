@@ -1,7 +1,7 @@
 [project]
 name = "asrbench"
-version = "0.2.0"
-description = "ASR benchmarking framework for Chinese speech recognition providers"
+version = "0.3.0"
+description = "ASR and semantic end-of-turn benchmarking with a local web interface"
 authors = [
     { name = "trevorlink", email = "lvpidadiao@hotmail.com" }
 ]
@@ -19,6 +19,7 @@ dependencies = [
     "uvicorn[standard]>=0.54.0",
     "python-dotenv>=1.2.4",
     "filelock>=3.25.2",
+    "httpx>=0.28.1",
 ]
 
 [project.optional-dependencies]

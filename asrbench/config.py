@@ -17,7 +17,15 @@ SECRET_KEYS = {
     "token",
     "authorization",
 }
-PROVIDERS = ("volcengine", "funasr", "qwen_asr", "paraformer", "tencent", "tencent_v2")
+PROVIDERS = (
+    "volcengine",
+    "funasr",
+    "qwen_asr",
+    "paraformer",
+    "tencent",
+    "tencent_v2",
+    "eot_chat",
+)
 STREAMING = {"tencent", "tencent_v2"}
 
 
@@ -102,7 +110,11 @@ def public_profiles(cfg):
     return [
         dict(
             redact(p),
-            modes=["batch", "stream"] if p["provider"] in STREAMING else ["batch"],
+            modes=["eot"]
+            if p["provider"] == "eot_chat"
+            else ["batch", "stream"]
+            if p["provider"] in STREAMING
+            else ["batch"],
         )
         for p in cfg["models"]
         if p.get("enabled", True)

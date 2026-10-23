@@ -107,6 +107,22 @@ def export_report(report, rows, format, events=None):
             "final_reason",
             "error",
         ]
+        if report["mode"] == "eot":
+            fields = [
+                "profile_id",
+                "sample_id",
+                "attempt_id",
+                "status",
+                "input_text",
+                "category",
+                "source_label",
+                "label",
+                "pred",
+                "correct",
+                "raw_output",
+                "request_elapsed_ms",
+                "error",
+            ]
         writer = csv.DictWriter(out, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()
         for row in rows:
@@ -123,6 +139,11 @@ def export_report(report, rows, format, events=None):
         return "\ufeff" + out.getvalue(), "text/csv; charset=utf-8"
     if format != "md":
         raise ValueError("导出格式必须为 json、csv 或 md")
+
+    if report["mode"] == "eot":
+        from .eot import markdown_report
+
+        return markdown_report(report), "text/markdown; charset=utf-8"
 
     def val(v, pct=False):
         return "N/A" if v is None else f"{v * 100:.2f}%" if pct else f"{v:.2f}"
